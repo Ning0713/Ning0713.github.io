@@ -16,6 +16,7 @@ const {
 
 const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isHomePage = pathname === '/';
 ---
 
 <!doctype html>
@@ -36,7 +37,7 @@ const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
       })();
     </script>
   </head>
-  <body>
+  <body class:list={[isHomePage ? 'is-home-page' : 'is-inner-page']}>
     <div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10">
       <header class="site-header" data-site-header data-scrolled="false">
         <div class="site-header-shell">

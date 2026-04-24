@@ -10,7 +10,6 @@ import { formatDate } from '../lib/content';
 interface Props {
   title: string;
   description: string;
-  eyebrow: string;
   pagination: BlogPaginationResult;
   collections: BlogCollectionOverview[];
   tags: BlogTagOverview[];
@@ -23,7 +22,6 @@ interface Props {
 const {
   title,
   description,
-  eyebrow,
   pagination,
   collections,
   tags,
@@ -47,9 +45,7 @@ const nextCollection =
 
 <BaseLayout title={pageTitle} description={description}>
   <header class="mb-12 border-b border-line/80 pb-8">
-    <p class="text-sm tracking-[0.08em] text-muted">{eyebrow}</p>
-
-    <div class="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
       <div class="max-w-4xl">
         <div class="flex flex-wrap items-center gap-3">
           <h1 class="blog-display-title text-5xl leading-none text-ink sm:text-6xl">{title}</h1>
@@ -131,18 +127,6 @@ const nextCollection =
             </div>
           )}
         </div>
-        <p class="mt-5 max-w-3xl text-base leading-8 text-muted sm:text-lg">{description}</p>
-      </div>
-
-      <div class="text-sm text-muted lg:text-right">
-        {currentTag ? (
-          <p>标签页</p>
-        ) : (
-          <a href="/collection" class="inline-flex items-center gap-2 hover:text-ink">
-            <span>查看全部分类</span>
-            <span aria-hidden="true">→</span>
-          </a>
-        )}
       </div>
     </div>
 
