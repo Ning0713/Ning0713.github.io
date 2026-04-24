@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionCard from '../../components/CollectionCard.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../../consts';
+import { dedupeEntriesBySlug, sortByDateDesc } from '../../lib/content';
+
+const entries = dedupeEntriesBySlug(await getCollection('academic', ({ data }) => !data.draft)).sort(sortByDateDesc);
+---
+
+<BaseLayout title={`Academic | ${SITE_TITLE}`} description="Research experience, publications, and scholarly notes.">
+  <PageHeader
+    eyebrow="Academic"
+    title="Research, papers, and scholarly practice."
+    description="A dedicated collection for research experience, publication notes, lab work, and academic milestones."
+  />
+
+  {entries.length > 0 ? (
+    <div class="grid gap-5">
+      {entries.map((entry) => (
+        <CollectionCard
+          href={`/academic/${entry.slug}`}
+          title={entry.data.title}
+          description={entry.data.description}
+          date={entry.data.date}
+          tags={entry.data.tags}
+          meta={entry.data.institution ?? entry.data.period}
+        />
+      ))}
+    </div>
+  ) : (
+    <EmptyState
+      title="Academic route is ready"
+      description="Add MD or MDX entries under src/content/academic to publish research notes and experience records."
+    />
+  )}
+</BaseLayout>

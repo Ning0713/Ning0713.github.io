@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BlogExplorer from '../../../components/BlogExplorer.astro';
+import {
+  buildBlogPaginationLinks,
+  getBlogCollectionOverview,
+  getBlogTagOverview,
+  getBlogTagPageHref,
+  paginateBlogPosts,
+  sortBlogPosts,
+} from '../../../lib/blog';
+
+export async function getStaticPaths() {
+  const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+  const tags = getBlogTagOverview(allPosts);
+
+  return tags.map((tag) => ({
+    params: { tag: encodeURIComponent(tag.tag) },
+    props: { tag: tag.tag },
+  }));
+}
+
+const { tag } = Astro.props;
+const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+const posts = allPosts.filter((post) => post.data.tags.some((entry) => entry === tag));
+const pagination = paginateBlogPosts(posts, 1);
+const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (page) =>
+  getBlogTagPageHref(tag, page),
+);
+---
+
+<BlogExplorer
+  title={`#${tag}`}
+  description={`Posts tagged with ${tag}. Use collections and tags on the right to continue exploring the blog.`}
+  eyebrow="标签"
+  pagination={pagination}
+  paginationLinks={paginationLinks}
+  collections={getBlogCollectionOverview(allPosts)}
+  tags={getBlogTagOverview(allPosts)}
+  currentTag={tag}
+/>

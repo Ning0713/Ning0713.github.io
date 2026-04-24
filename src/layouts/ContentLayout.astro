@@ -1,0 +1,72 @@
+---
+import type { MarkdownHeading } from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { SITE_TITLE } from '../consts';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags?: string[];
+  collectionLabel?: string;
+  headings?: MarkdownHeading[];
+}
+
+const { title, description, date, tags = [], collectionLabel, headings = [] } = Astro.props;
+const tocItems = headings.filter((heading) => heading.depth >= 1 && heading.depth <= 4);
+const hasToc = tocItems.length > 0;
+---
+
+<BaseLayout title={`${title} | ${SITE_TITLE}`} description={description}>
+  <article class="mx-auto w-full max-w-6xl">
+    <div class="lg:grid lg:grid-cols-[minmax(0,44rem)_16rem] lg:gap-12">
+      <div>
+        <header class="mb-10 border-b border-line/80 pb-8">
+          {collectionLabel && (
+            <p class="eyebrow-label">
+              {collectionLabel}
+            </p>
+          )}
+          <h1 class="mt-4 font-serif text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+            {title}
+          </h1>
+          <p class="mt-4 max-w-reading text-lg leading-8 text-muted">{description}</p>
+          <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted">
+            <time datetime={date.toISOString()}>{formatDate(date)}</time>
+            {tags.length > 0 && (
+              <>
+                <span aria-hidden="true">/</span>
+                <ul class="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <li class="rounded-full border border-line/70 px-3 py-1 text-xs text-muted">
+                      #{tag}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          <slot name="meta" />
+        </header>
+
+        {hasToc && (
+          <div class="mb-10 lg:hidden">
+            <TableOfContents items={tocItems} />
+          </div>
+        )}
+
+        <div class="content-prose prose prose-slate max-w-none dark:prose-invert">
+          <slot />
+        </div>
+      </div>
+
+      {hasToc && (
+        <aside class="hidden lg:block lg:sticky lg:top-32 lg:self-start">
+          <TableOfContents items={tocItems} />
+        </aside>
+      )}
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,32 @@
+<button
+  type="button"
+  data-theme-toggle
+  class="theme-toggle-button"
+  aria-label="Toggle color theme"
+>
+  <span class="theme-toggle-kicker">Theme</span>
+  <span class="theme-toggle-value" data-theme-label>Dark</span>
+</button>
+
+<script is:inline>
+  const root = document.documentElement;
+  const button = document.querySelector('[data-theme-toggle]');
+  const label = button?.querySelector('[data-theme-label]');
+
+  const syncThemeLabel = () => {
+    const isDark = root.classList.contains('dark');
+    if (label) {
+      label.textContent = isDark ? 'Light' : 'Dark';
+    }
+    button?.setAttribute('aria-pressed', String(isDark));
+  };
+
+  syncThemeLabel();
+
+  button?.addEventListener('click', () => {
+    const shouldUseDark = !root.classList.contains('dark');
+    root.classList.toggle('dark', shouldUseDark);
+    localStorage.setItem('theme', shouldUseDark ? 'dark' : 'light');
+    syncThemeLabel();
+  });
+</script>

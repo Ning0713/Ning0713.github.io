@@ -1,0 +1,113 @@
+---
+import type { GitHubContributionCalendar, GitHubContributionLevel } from '../lib/github';
+
+interface Props {
+  data: GitHubContributionCalendar;
+}
+
+const { data } = Astro.props;
+const cellSizeRem = 0.72;
+const cellGapRem = 0.16;
+
+function getWeekOffset(weekIndex: number) {
+  return `${weekIndex * (cellSizeRem + cellGapRem)}rem`;
+}
+
+function getGridWidth(totalWeeks: number) {
+  if (totalWeeks <= 0) {
+    return `${cellSizeRem}rem`;
+  }
+
+  return `${totalWeeks * cellSizeRem + (totalWeeks - 1) * cellGapRem}rem`;
+}
+
+function getLevelClass(level: GitHubContributionLevel) {
+  switch (level) {
+    case 'FOURTH_QUARTILE':
+      return 'bg-[#196127]';
+    case 'THIRD_QUARTILE':
+      return 'bg-[#239a3b]';
+    case 'SECOND_QUARTILE':
+      return 'bg-[#7bc96f]';
+    case 'FIRST_QUARTILE':
+      return 'bg-[#c6e48b]';
+    default:
+      return 'bg-[#ebedf0] dark:bg-stone-700';
+  }
+}
+
+const hasCalendar = data.weeks.length > 0;
+---
+
+<section class="w-full">
+  <article class="surface-card w-full rounded-[2rem] border border-line/80 p-6 shadow-card sm:p-7">
+    {hasCalendar ? (
+      <>
+        <div class="overflow-x-auto pb-1">
+          <div class="mx-auto w-max">
+            <div class="relative mb-2 h-5" style={`width: ${getGridWidth(data.weeks.length)};`}>
+              {data.months.map((month) => (
+                <span
+                  class="absolute top-0 text-xs font-normal leading-none text-black/70 dark:text-ink/70"
+                  style={`left: ${getWeekOffset(month.startWeekIndex)};`}
+                >
+                  {month.label}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex" style={`gap: ${cellGapRem}rem;`}>
+              {data.weeks.map((week) => (
+                <div class="grid grid-rows-7" style={`gap: ${cellGapRem}rem;`}>
+                  {week.contributionDays.map((day) => (
+                    <span
+                      class:list={[
+                        'rounded-[0.22rem]',
+                        getLevelClass(day.contributionLevel),
+                      ]}
+                      style={`width: ${cellSizeRem}rem; height: ${cellSizeRem}rem;`}
+                      title={`${day.date}: ${day.contributionCount} contributions`}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 flex flex-col gap-4 text-sm text-black dark:text-ink sm:flex-row sm:items-center sm:justify-between">
+          <p class="font-normal">
+            {data.totalContributions.toLocaleString()} contributions in {data.rangeLabel}
+          </p>
+
+          <div class="flex items-center gap-1.5">
+            <span class="font-normal">Less</span>
+            <span class="h-3 w-3 rounded-[0.22rem] bg-[#ebedf0] dark:bg-stone-700"></span>
+            <span class="h-3 w-3 rounded-[0.22rem] bg-[#c6e48b]"></span>
+            <span class="h-3 w-3 rounded-[0.22rem] bg-[#7bc96f]"></span>
+            <span class="h-3 w-3 rounded-[0.22rem] bg-[#239a3b]"></span>
+            <span class="h-3 w-3 rounded-[0.22rem] bg-[#196127]"></span>
+            <span class="font-normal">More</span>
+          </div>
+        </div>
+      </>
+    ) : (
+      <div class="space-y-3">
+        <p class="text-base font-normal text-black dark:text-ink">
+          GitHub contribution data is not configured yet.
+        </p>
+        <p class="text-sm font-normal leading-7 text-black/70 dark:text-ink/70">
+          {data.error}
+        </p>
+        <a
+          href={data.profileUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex rounded-2xl border border-line/80 px-4 py-2 text-sm text-black transition hover:border-accent/50 hover:text-ink dark:text-ink"
+        >
+          Visit GitHub Profile
+        </a>
+      </div>
+    )}
+  </article>
+</section>

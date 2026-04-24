@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="surface-card rounded-3xl border border-dashed border-line/80 p-8 text-center">
+  <p class="eyebrow-label">Coming Soon</p>
+  <h2 class="mt-3 text-2xl font-bold text-ink">{title}</h2>
+  <p class="mt-3 leading-7 text-muted">{description}</p>
+</div>

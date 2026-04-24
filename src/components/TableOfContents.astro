@@ -1,0 +1,229 @@
+---
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface TocTreeItem extends TocItem {
+  href: string;
+  children: TocTreeItem[];
+}
+
+interface Props {
+  items?: TocItem[];
+  title?: string;
+}
+
+const { items = [], title = 'Contents' } = Astro.props;
+
+const normalizedItems = items
+  .filter((item): item is TocItem => Boolean(item?.slug && item?.text))
+  .map((item) => ({
+    depth: item.depth,
+    slug: item.slug,
+    text: item.text,
+    href: `#${item.slug}`,
+  }));
+
+const tocTree: TocTreeItem[] = [];
+const stack: TocTreeItem[] = [];
+
+for (const item of normalizedItems) {
+  const node: TocTreeItem = {
+    ...item,
+    children: [],
+  };
+
+  while (stack.length > 0 && item.depth <= stack[stack.length - 1].depth) {
+    stack.pop();
+  }
+
+  if (stack.length === 0) {
+    tocTree.push(node);
+  } else {
+    stack[stack.length - 1].children.push(node);
+  }
+
+  stack.push(node);
+}
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+
+const renderTree = (nodes: TocTreeItem[]): string =>
+  `<ol class="toc-list">${nodes
+    .map(
+      (node) =>
+        `<li class="toc-item" data-depth="${node.depth}">
+          <a href="${escapeHtml(node.href)}" class="toc-link" data-toc-link data-toc-slug="${escapeHtml(node.slug)}">
+            ${escapeHtml(node.text)}
+          </a>
+          ${node.children.length > 0 ? renderTree(node.children) : ''}
+        </li>`,
+    )
+    .join('')}</ol>`;
+
+const tocHtml = renderTree(tocTree);
+---
+
+{
+  tocTree.length > 0 && (
+    <nav class="toc-panel" data-toc aria-label={title}>
+      <p class="toc-title">{title}</p>
+      <div class="toc-shell" set:html={tocHtml} />
+    </nav>
+  )
+}
+
+<script is:inline>
+  (() => {
+    const tocNodes = document.querySelectorAll('[data-toc]');
+    for (const toc of tocNodes) {
+      if (!(toc instanceof HTMLElement)) {
+        continue;
+      }
+
+      const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
+
+      if (links.length === 0) {
+        continue;
+      }
+
+      const pairs = links
+        .map((link) => {
+          const slug = link.dataset.tocSlug;
+          if (!slug) {
+            return null;
+          }
+
+          const target = document.getElementById(slug);
+          if (!(target instanceof HTMLElement)) {
+            return null;
+          }
+
+          return { link, target };
+        })
+        .filter(Boolean);
+
+      if (pairs.length === 0) {
+        continue;
+      }
+
+      const setActive = (slug) => {
+        for (const { link } of pairs) {
+          link.dataset.active = String(link.dataset.tocSlug === slug);
+        }
+      };
+
+      const visibleIds = new Set();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!(entry.target instanceof HTMLElement)) {
+              continue;
+            }
+
+            if (entry.isIntersecting) {
+              visibleIds.add(entry.target.id);
+            } else {
+              visibleIds.delete(entry.target.id);
+            }
+          }
+
+          const activePair =
+            pairs.find(({ target }) => visibleIds.has(target.id)) ??
+            pairs.find(({ target }) => target.getBoundingClientRect().top >= 0) ??
+            pairs[pairs.length - 1];
+
+          if (activePair) {
+            setActive(activePair.target.id);
+          }
+        },
+        {
+          rootMargin: '-16% 0px -66% 0px',
+          threshold: [0, 1],
+        },
+      );
+
+      for (const { target } of pairs) {
+        observer.observe(target);
+      }
+
+      setActive(pairs[0].target.id);
+    }
+  })();
+</script>
+
+<style>
+  .toc-panel {
+    padding-top: 0.15rem;
+    font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  }
+
+  .toc-title {
+    margin: 0 0 0.95rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-ink) / 0.86);
+  }
+
+  .toc-shell :global(.toc-list) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc-shell :global(.toc-item) + :global(.toc-item) {
+    margin-top: 0.12rem;
+  }
+
+  .toc-shell :global(.toc-item > .toc-list) {
+    margin-top: 0.14rem;
+    margin-left: 0.95rem;
+    padding-left: 0.45rem;
+  }
+
+  .toc-shell :global(.toc-link) {
+    display: block;
+    padding: 0.44rem 0.82rem;
+    color: rgb(var(--color-muted));
+    font-size: 0.8rem;
+    line-height: 1.42;
+    font-weight: 400;
+    border-radius: 9999px;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .toc-shell :global(.toc-link:hover),
+  .toc-shell :global(.toc-link[data-active='true']) {
+    color: rgb(var(--color-ink));
+    background: rgb(var(--color-card) / 0.96);
+    box-shadow: 0 14px 34px -26px rgba(15, 23, 42, 0.32);
+  }
+
+  .toc-shell :global(.toc-item[data-depth='1'] > .toc-link) {
+    font-size: 0.84rem;
+    color: rgb(var(--color-ink) / 0.88);
+  }
+
+  .toc-shell :global(.toc-item[data-depth='2'] > .toc-link) {
+    font-size: 0.79rem;
+  }
+
+  .toc-shell :global(.toc-item[data-depth='3'] > .toc-link),
+  .toc-shell :global(.toc-item[data-depth='4'] > .toc-link) {
+    font-size: 0.76rem;
+    opacity: 0.92;
+  }
+</style>

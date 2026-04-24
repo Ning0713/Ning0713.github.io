@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { BLOG_CATEGORY_META } from '../../consts';
+import { dedupeEntriesBySlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = dedupeEntriesBySlug(await getCollection('blog', ({ data }) => !data.draft));
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const category = BLOG_CATEGORY_META[post.data.category];
+---
+
+<ContentLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  tags={post.data.tags}
+  collectionLabel={category.label}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>

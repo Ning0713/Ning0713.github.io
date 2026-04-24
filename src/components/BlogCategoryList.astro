@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CollectionCard from './CollectionCard.astro';
+import EmptyState from './EmptyState.astro';
+import PageHeader from './PageHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BLOG_CATEGORY_ITEMS, BLOG_CATEGORY_META, SITE_TITLE } from '../consts';
+
+interface Props {
+  category: keyof typeof BLOG_CATEGORY_META;
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { category, posts } = Astro.props;
+const meta = BLOG_CATEGORY_META[category];
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+---
+
+<BaseLayout title={`${meta.label} | ${SITE_TITLE}`} description={meta.description}>
+  <PageHeader eyebrow="Blog Category" title={meta.label} description={meta.description} />
+
+  <div class="mb-8 flex flex-wrap gap-3">
+    {BLOG_CATEGORY_ITEMS.map((item) => {
+      const href = `/blog/category/${item.slug}`;
+      const isActive = pathname === href || (item.slug === 'technical' && pathname === '/blog');
+      return (
+        <a
+          href={href}
+          class:list={[
+            'rounded-full border border-line/80 px-4 py-2 text-sm text-muted hover:border-accent/50 hover:text-ink',
+            isActive && 'border-accent/50 bg-line/50 text-ink',
+          ]}
+        >
+          {item.label}
+        </a>
+      );
+    })}
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="grid gap-5">
+      {posts.map((post) => (
+        <CollectionCard
+          href={`/blog/${post.slug}`}
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  ) : (
+    <EmptyState
+      title="No entries yet"
+      description="This category route is ready. Add MD or MDX files under src/content/blog to populate it."
+    />
+  )}
+</BaseLayout>

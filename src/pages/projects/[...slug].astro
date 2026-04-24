@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { dedupeEntriesBySlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = dedupeEntriesBySlug(await getCollection('projects', ({ data }) => !data.draft));
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content, headings } = await render(project);
+---
+
+<ContentLayout
+  title={project.data.title}
+  description={project.data.description}
+  date={project.data.date}
+  tags={project.data.tags}
+  collectionLabel="Projects"
+  headings={headings}
+>
+  <div slot="meta" class="mt-5 flex flex-wrap gap-3">
+    <span class="rounded-full border border-line/70 px-3 py-1 text-xs uppercase tracking-[0.2em] text-muted">
+      {project.data.status}
+    </span>
+    {project.data.repo && (
+      <a
+        href={project.data.repo}
+        class="rounded-full border border-line/70 px-3 py-1 text-xs uppercase tracking-[0.2em] text-muted hover:border-accent/50 hover:text-ink"
+      >
+        Repository
+      </a>
+    )}
+    {project.data.demo && (
+      <a
+        href={project.data.demo}
+        class="rounded-full border border-line/70 px-3 py-1 text-xs uppercase tracking-[0.2em] text-muted hover:border-accent/50 hover:text-ink"
+      >
+        Live Demo
+      </a>
+    )}
+  </div>
+  <Content />
+</ContentLayout>

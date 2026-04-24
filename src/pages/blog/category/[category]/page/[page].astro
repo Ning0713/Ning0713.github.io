@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BlogExplorer from '../../../../../components/BlogExplorer.astro';
+import { BLOG_CATEGORY_ITEMS, BLOG_CATEGORY_META } from '../../../../../consts';
+import {
+  buildBlogPaginationLinks,
+  getBlogCollectionOverview,
+  getBlogCategoryPageHref,
+  getBlogTagOverview,
+  paginateBlogPosts,
+  sortBlogPosts,
+} from '../../../../../lib/blog';
+
+type BlogCategory = keyof typeof BLOG_CATEGORY_META;
+
+export async function getStaticPaths() {
+  const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+
+  return BLOG_CATEGORY_ITEMS.flatMap((item) => {
+    const categoryPosts = allPosts.filter((post) => post.data.category === item.slug);
+    const { totalPages } = paginateBlogPosts(categoryPosts, 1);
+
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => ({
+      params: {
+        category: item.slug,
+        page: String(index + 2),
+      },
+    }));
+  });
+}
+
+const category = Astro.params.category as BlogCategory;
+const page = Number(Astro.params.page ?? '1');
+const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+const posts = allPosts.filter((post) => post.data.category === category);
+const pagination = paginateBlogPosts(posts, page);
+const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (targetPage) =>
+  getBlogCategoryPageHref(category, targetPage),
+);
+---
+
+<BlogExplorer
+  title={BLOG_CATEGORY_META[category].label}
+  description={BLOG_CATEGORY_META[category].description}
+  eyebrow="栏目"
+  pagination={pagination}
+  paginationLinks={paginationLinks}
+  collections={getBlogCollectionOverview(allPosts)}
+  tags={getBlogTagOverview(allPosts)}
+  currentSectionLabel={BLOG_CATEGORY_META[category].label}
+/>
