@@ -23,29 +23,26 @@ const hasToc = tocItems.length > 0;
   <article class="mx-auto w-full max-w-6xl">
     <div class="lg:grid lg:grid-cols-[minmax(0,44rem)_16rem] lg:gap-12">
       <div>
-        <header class="mb-10 border-b border-line/80 pb-8">
+        <header class="mb-9 border-b border-line/80 pb-7">
           {collectionLabel && (
-            <p class="eyebrow-label">
+            <p class="content-meta-pill w-fit">
               {collectionLabel}
             </p>
           )}
-          <h1 class="mt-4 font-serif text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+          <h1 class="content-detail-title mt-4 text-3xl font-medium leading-tight text-ink sm:text-4xl">
             {title}
           </h1>
-          <p class="mt-4 max-w-reading text-lg leading-8 text-muted">{description}</p>
-          <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-muted">
-            <time datetime={date.toISOString()}>{formatDate(date)}</time>
+          <p class="mt-4 max-w-reading text-sm leading-7 text-muted sm:text-base">{description}</p>
+          <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-muted">
+            <time class="content-meta-pill" datetime={date.toISOString()}>{formatDate(date)}</time>
             {tags.length > 0 && (
-              <>
-                <span aria-hidden="true">/</span>
-                <ul class="flex flex-wrap gap-2">
-                  {tags.map((tag) => (
-                    <li class="rounded-full border border-line/70 px-3 py-1 text-xs text-muted">
-                      #{tag}
-                    </li>
-                  ))}
-                </ul>
-              </>
+              <ul class="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <li class="content-meta-pill">
+                    #{tag}
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
           <slot name="meta" />
@@ -70,3 +67,23 @@ const hasToc = tocItems.length > 0;
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .content-detail-title {
+    font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    letter-spacing: -0.035em;
+  }
+
+  .content-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    border: 1px solid rgb(var(--color-line) / 0.78);
+    border-radius: 9999px;
+    background: rgb(var(--color-card) / 0.72);
+    padding: 0.35rem 0.85rem;
+    font-size: 0.78rem;
+    line-height: 1;
+    color: rgb(var(--color-muted));
+  }
+</style>

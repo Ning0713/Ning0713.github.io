@@ -8,18 +8,25 @@ interface Props {
 const { title, description, eyebrow } = Astro.props;
 ---
 
-<header class="mb-10 space-y-4 border-b border-line/80 pb-8">
+<header class="mb-8 space-y-3 border-b border-line/80 pb-6">
   {eyebrow && (
     <p class="eyebrow-label">
       {eyebrow}
     </p>
   )}
   <div class="max-w-3xl space-y-3">
-    <h1 class="font-serif text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+    <h1 class="page-header-title text-3xl font-medium leading-tight text-ink sm:text-4xl">
       {title}
     </h1>
-    <p class="text-base leading-8 text-muted sm:text-lg">
+    <p class="text-sm leading-7 text-muted sm:text-base">
       {description}
     </p>
   </div>
 </header>
+
+<style>
+  .page-header-title {
+    font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    letter-spacing: -0.035em;
+  }
+</style>

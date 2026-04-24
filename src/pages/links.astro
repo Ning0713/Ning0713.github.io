@@ -29,20 +29,39 @@ const links = [
     description="A quiet page for mutual links, favorite resources, and projects that shaped this website."
   />
 
-  <div class="grid gap-5">
+  <div class="grid gap-3">
     {links.map((link) => (
       <a
         href={link.href}
-        class="surface-card group rounded-3xl border border-line/80 p-6 shadow-card transition duration-300 hover:-translate-y-1 hover:border-accent/50"
+        class="link-preview-card group flex items-center justify-between gap-5 rounded-[1.4rem] border border-line/80 bg-card/72 px-5 py-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45"
       >
-        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 class="text-xl font-bold text-ink group-hover:text-accent">{link.name}</h2>
-            <p class="mt-2 leading-7 text-muted">{link.note}</p>
-          </div>
-          <span class="font-mono text-xs uppercase tracking-[0.24em] text-muted">Visit</span>
+        <div class="min-w-0">
+          <h2 class="link-preview-title text-xl font-medium leading-tight text-ink transition group-hover:text-accent sm:text-2xl">{link.name}</h2>
+          <p class="mt-1 text-sm leading-6 text-muted">{link.note}</p>
         </div>
+        <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink transition group-hover:translate-x-1 group-hover:text-accent">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.22 15.78a.75.75 0 0 1 0-1.06L11.94 10 7.22 5.28a.75.75 0 0 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
       </a>
     ))}
   </div>
 </BaseLayout>
+
+<style>
+  .link-preview-title {
+    font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    letter-spacing: -0.03em;
+  }
+</style>
