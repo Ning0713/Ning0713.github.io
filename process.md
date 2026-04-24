@@ -1,68 +1,104 @@
 # Process
 
-## 继承上下文
-
-以下内容来自此前对话的项目交接摘要，精确时间未记录，作为当前阶段的基线参考：
+## 当前项目概况
 
 - 项目路径：`F:\All 资源集合\Coding 代码\开发工程 Engine\Ning0713.github.io`
-- 技术栈：Astro + Tailwind CSS + MDX
-- 当前首页为定制版个人博客首页，包含头像卡片、About、Education、Statistics、GitHub 热力图
-- 导航顺序固定为：Blog / Projects / Academic / Links / About
-- Blog 为一级下拉导航，子项为：Technical / Life and Talk / Journal
-- 内容集合已配置为：`blog`、`academic`、`projects`
-- 多层内容路由已切换为 `[...,slug]` 形式，可承接更深目录层级
-- GitHub 热力图已改为按 `2026` 全年生成，构建时从 GitHub GraphQL API 获取
-- 统计逻辑当前为：`Total Words` 统计 `blog + projects + academic` 的标题、描述和正文，`Total Posts` 统计 `blog`
-- 已知说明：PowerShell 里中文偶尔乱码可能只是终端显示问题，不一定是源码损坏
+- 技术栈：Astro 5 + Tailwind CSS + MDX/Markdown + KaTeX
+- 参考目标：继续向 `https://axi404.top/` 的极客/学者型个人网站靠拢
+- 线上目标：GitHub Pages 用户站点 `https://ning0713.github.io`
+- 当前 Git 分支：`main`
+- 首次本地提交：`9858760 Initial Astro personal site`
 
-## 时间线
+## 当前功能状态
 
-- 2026-04-23 21:02 +08:00：恢复此前代理会话，重新接管当前项目上下文。
-- 2026-04-23 21:02 +08:00：确认本仓库当前目录下不存在 `process.md`，决定单独新建一份持续开发记录。
-- 2026-04-23 21:03 +08:00：收到新需求，准备实现“页面下滑时导航栏自动缩小并跟随”的交互效果。
-- 2026-04-23 21:04 +08:00：定位到主导航位于 `src/layouts/BaseLayout.as![alt text](image.png)tro`，全局样式入口位于 `src/styles/global.css`。
-- 2026-04-23 21:05 +08:00：确定实现方案为“页头吸顶 + 滚动阈值切换紧凑态 + CSS 过渡动画”，尽量不打乱现有首页与内容页结构。
-- 2026-04-23 21:05 +08:00：开始修改 `BaseLayout.astro` 与 `global.css`，并把本文件作为后续持续追加的开发过程日志。
-- 2026-04-23 21:06 +08:00：导航栏滚动缩小逻辑已接入，当前行为为页面滚动超过约 `28px` 后进入紧凑吸顶状态。
-- 2026-04-23 21:06 +08:00：执行 `npm run build`，结果通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-23 21:14 +08:00：根据新需求，将黑白主题切换按钮并入主导航栏同一排，不再单独放在导航下方。
-- 2026-04-23 21:14 +08:00：进一步收窄滚动后的吸顶导航，减小紧凑态的内边距、按钮尺寸与整体宽度。
-- 2026-04-23 21:16 +08:00：再次执行 `npm run build`，结果通过，当前构建状态仍为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-23 21:17 +08:00：优化导航缩略动画，让外层胶囊的水平收缩比内部文字和按钮略慢一点，形成“两侧后跟”的视觉节奏。
-- 2026-04-23 21:51 +08:00：进一步放慢导航缩略触发，加入进入/退出延迟与上下阈值缓冲，减少顶部附近滚动时的闪烁感。
-- 2026-04-23 21:58 +08:00：将主题切换按钮压回主导航统一视觉，弱化其独立卡片感，使其成为导航栏内部的一项。
-- 2026-04-23 21:58 +08:00：导航缩略速度回调到较快版本，并把紧凑态最大宽度继续收窄，以增强左右两边被挤压进去的感觉。
-- 2026-04-23 22:01 +08:00：修正主题按钮与主导航不平齐的问题，桌面端导航改为单行不换行，并为紧凑态回补少量横向空间。
-- 2026-04-23 22:04 +08:00：修正短页面（如 Blog 分类页）滚动到底部时的导航闪烁，改为“快速进入 + 更低退出阈值”的缓冲判定，避免在临界滚动距离反复切换。
-- 2026-04-23 22:07 +08:00：开始重构 blog 列表布局，参考 `axi404.top/blog/research` 的信息架构，引入“文章区 + Collections + Tags”的双栏展示。
-- 2026-04-23 22:07 +08:00：补充 blog 数据辅助逻辑与路由能力，准备支持分类分页、标签页、页码信息，以及文章卡片中的 tag 跳转。
-- 2026-04-23 22:23 +08:00：blog 新布局与分类/tag 路由已接通，`npm run build` 通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-23 22:24 +08:00：继续参考原站设计，重做 blog 页头与文章列表文字层级，弱化厚重卡片感，并将 `collection` 统一改称“分类”。
-- 2026-04-23 22:24 +08:00：新增独立的 `/collection` 页面，作为 blog 分类总览入口，结构参考 `axi404.top/collection`。
-- 2026-04-23 22:31 +08:00：新一版 blog 视觉与 `/collection` 页面构建通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-23 22:33 +08:00：将 blog“栏目”与内容“分类”正式拆开；`Technical / Life and Talk / Journal` 保留为博客栏目，新增独立 `collection` 字段用于你自定义的内容分类。
-- 2026-04-23 22:33 +08:00：当前已将 `Happy-LLM` 文章归入“深度学习”，并让右侧分类区与 `/collection` 页面改为基于该自定义分类生成。
-- 2026-04-23 22:40 +08:00：清理 blog 新组件中的冗余 import，准备恢复构建时的 `0 hints` 状态。
-- 2026-04-23 22:40 +08:00：栏目/分类拆分后的 blog 与 `/collection` 路由构建通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-24 11:01 +08:00：重新对照 `https://axi404.top/` 当前结构，确认下一阶段优先补齐“内容页右侧目录 + About 章节化”这类更接近原站骨架的能力。
-- 2026-04-24 11:05 +08:00：新增通用 `src/components/TableOfContents.astro`，支持多级目录、桌面端 sticky 展示与滚动高亮，准备复用到内容详情页和静态说明页。
-- 2026-04-24 11:08 +08:00：升级 `src/layouts/ContentLayout.astro` 为“正文 + 目录”双栏结构，并让 `blog`、`projects`、`academic` 详情页通过 Astro `render()` 自动读取 headings 生成目录。
-- 2026-04-24 11:12 +08:00：重构 `src/pages/about.astro` 为章节化长页，加入 Introduction / Current Focus / Tool Stack / Site Notes / License 目录入口，进一步贴近参考站的学者型页面组织方式。
-- 2026-04-24 11:34 +08:00：按新需求继续收紧目录样式，缩小 TOC 字号与行高，并将 `ContentLayout` 目录深度放宽到 `h4`；`TableOfContents.astro` 同步改为真正的树形嵌套渲染，让小标题缩进到大标题层级内。
-- 2026-04-24 11:42 +08:00：新增 `src/lib/remark-content-fixes.mjs` 的兼容处理，开始接管 md 内容里的 Obsidian 图片语法、内联数学公式和块级 `$$...$$` 公式，缓解参考笔记直接迁移进 Astro 后的渲染错乱。
-- 2026-04-24 11:56 +08:00：定位到 `Happy-LLM` 文章页存在“相同 slug 条目覆盖新渲染结果”的现象，为 `src/lib/content.ts` 增加按 `slug` 去重能力，并让首页、列表页与 `[...,slug]` 内容页统一走去重后的集合数据。
-- 2026-04-24 11:56 +08:00：同步修正 `Happy-LLM` 文章中一处最容易触发 Markdown 强调误解析的公式表达，当前构建产物已确认输出为 `math-block`，目录嵌套也已在 `dist` 中验证生效。
-- 2026-04-24 11:56 +08:00：再次执行 `npm run build`，结果通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
-- 2026-04-24 12:08 +08:00：根据新反馈，正式安装并接入 `remark-math + rehype-katex + katex`，将公式渲染从兼容占位方案切换为标准数学排版管线。
-- 2026-04-24 12:08 +08:00：同步收窄 `remark-content-fixes.mjs` 的职责，只继续处理 Obsidian 图片语法，不再自行接管数学公式，避免和 KaTeX 解析冲突。
-- 2026-04-24 12:08 +08:00：按参考图重做目录视觉，移除层级竖线，改成无分隔线的缩进结构与当前项圆角高亮；同时把正文区与目录区字体统一为微软雅黑，并去掉正文标题/强调文字的加粗。
-- 2026-04-24 12:09 +08:00：发现普通 `npm run build` 后个别页面仍命中旧产物缓存，导致 `dist` 与源码、`.astro/data-store` 不一致；最终通过提权执行 `astro build --force` 清空 Astro/Vite 缓存后，公式与目录样式全部刷新到最新版本。
-- 2026-04-24 12:09 +08:00：强制重建后重新确认 `Happy-LLM` 页面中的原始下标公式已由 KaTeX 正常渲染，目录标题与目录项字重也切换到更轻的版本。
-- 2026-04-25 00:25 +08:00：开始准备 GitHub Pages 部署链路，新增 `.gitignore` 排除 `.env`、`node_modules`、`.astro` 与 `dist`，避免敏感信息和构建产物进入 Git 历史。
-- 2026-04-25 00:25 +08:00：新增 `.github/workflows/deploy.yml`，使用 GitHub Actions + `withastro/action` 自动构建并发布到 GitHub Pages；本地执行 `npm run build` 通过，当前构建状态为 `0 errors / 0 warnings / 0 hints`。
+- 首页已定制，包含头像卡片、About、Education、Statistics、GitHub 贡献热力图。
+- 主导航顺序固定为：Blog / Projects / Academic / Links / About。
+- Blog 是一级下拉导航，栏目为：Technical / Life and Talk / Journal。
+- 内容集合已配置：`blog`、`academic`、`projects`。
+- 多层内容路由使用 `[...,slug]`，可承接更深目录。
+- Blog 已支持栏目页、标签页、分页、自定义 collection 分类页。
+- 自定义内容分类字段为 `collection`，当前 `Happy-LLM` 文章归入“深度学习”。
+- 内容详情页已使用“正文 + 右侧目录”双栏布局。
+- `about.astro` 已改为章节化长页。
+- 目录组件支持树形嵌套、滚动高亮、桌面 sticky、移动端正文前展示。
+- Markdown 数学公式已接入 `remark-math + rehype-katex + katex`。
+- `remark-content-fixes.mjs` 目前主要处理 Obsidian 图片语法，不再自行接管公式。
+- GitHub 贡献热力图按 2026 年生成，依赖 `GITHUB_USERNAME`、`GITHUB_TOKEN`、`GITHUB_CONTRIBUTION_YEAR`。
 
-## 记录规则
+## 关键文件
 
-- 后续继续开发时，优先在本文件按时间追加关键改动、问题定位、实现方案和验证结果。
-- 若后续需求只影响局部页面，也记录对应文件路径，方便快速回溯。
-- 若出现用户口头确认的重要设计约束，也同步补记到本文件，避免下一次对话丢失上下文。
+- `astro.config.mjs`：Astro 集成、KaTeX、站点 URL、Markdown 处理链。
+- `src/layouts/BaseLayout.astro`：全站基础布局、导航、主题切换、滚动吸顶导航。
+- `src/layouts/ContentLayout.astro`：文章/项目/学术详情页正文与目录双栏布局。
+- `src/components/TableOfContents.astro`：目录树、目录样式、滚动高亮。
+- `src/components/BlogExplorer.astro`：Blog 列表主界面。
+- `src/lib/blog.ts`：Blog 分页、分类、标签、collection 汇总逻辑。
+- `src/lib/content.ts`：日期排序、slug 去重等通用内容工具。
+- `src/lib/github.ts`：GitHub GraphQL 贡献热力图数据获取。
+- `src/lib/remark-content-fixes.mjs`：Obsidian 图片语法兼容处理。
+- `src/content/config.ts`：内容集合 schema。
+- `.github/workflows/deploy.yml`：GitHub Pages 自动部署工作流。
+- `.gitignore`：已忽略 `.env`、`node_modules`、`dist`、`.astro`。
+
+## 部署状态
+
+- 本地已初始化 Git，并完成首个提交。
+- 本地 `npm run build` 已通过，结果为 `0 errors / 0 warnings / 0 hints`。
+- `.github/workflows/deploy.yml` 已创建，使用 GitHub Actions + `withastro/action` 部署 Astro 站点。
+- GitHub Pages 如果出现 `Build with Jekyll`，说明 Pages 仍在使用默认 branch/Jekyll 构建，需要到仓库 `Settings -> Pages -> Build and deployment -> Source` 改为 `GitHub Actions`。
+- 正确运行时，Actions 页面应看到 `Deploy to GitHub Pages`，而不是 `pages build and deployment` 里的 `Build with Jekyll`。
+- 后续常规发布流程：
+
+```powershell
+npm run build
+git status
+git add .
+git commit -m "Update site"
+git push
+```
+
+## GitHub Pages 必要设置
+
+- 仓库名应为：`Ning0713.github.io`
+- Pages Source 应设置为：`GitHub Actions`
+- Actions Secret 建议添加：
+
+```text
+Name: GH_CONTRIBUTION_TOKEN
+Value: GitHub Personal Access Token
+```
+
+- `.env` 中曾出现真实 GitHub token。不要提交 `.env`；若 token 曾暴露，建议在 GitHub 里 revoke 并重新生成。
+
+## 已知问题与处理经验
+
+- PowerShell 显示中文路径或中文文件名时可能乱码，不一定代表源码损坏。
+- Astro/Vite 偶尔会命中旧缓存，导致 `dist` 与源码不一致；必要时执行强制构建：
+
+```powershell
+.\node_modules\.bin\astro.cmd build --force
+```
+
+- 文章详情页曾出现相同 slug 内容覆盖问题，已通过 `dedupeEntriesBySlug` 在集合入口处去重。
+- `Happy-LLM` 文章中过去有公式被 Markdown 强调语法误解析的问题；当前已改用 KaTeX 标准链路。
+- 如果 Git commit 触发 GPG 错误，可临时使用：
+
+```powershell
+git -c commit.gpgsign=false commit -m "Update site"
+```
+
+## 压缩时间线
+
+- 2026-04-23：建立 Astro + Tailwind 个人站基础结构，完成首页、导航、主题切换、滚动吸顶导航。
+- 2026-04-23：重构 Blog 信息架构，接入栏目、标签、分页、自定义 collection 分类与 `/collection` 页面。
+- 2026-04-24：对照 `axi404.top` 增加详情页右侧目录、章节化 About 页和更接近参考站的长文布局。
+- 2026-04-24：收紧目录字号与行距，改为树形嵌套；处理 Markdown 渲染问题。
+- 2026-04-24：安装并接入 `remark-math + rehype-katex + katex`，公式渲染切换到标准 KaTeX 管线。
+- 2026-04-25：新增 `.gitignore` 和 GitHub Pages Actions 工作流，初始化 Git 仓库并完成首个提交。
+
+## 下一步建议
+
+- 确认 GitHub Pages Source 已切到 `GitHub Actions`。
+- 在 GitHub Actions 中确认 `Deploy to GitHub Pages` 成功运行。
+- 访问 `https://ning0713.github.io` 检查首页、Blog 详情页、目录、公式、图片占位和深层路由。
+- 继续完善 Projects 和 Academic 列表页，使其更接近参考站的信息架构。
