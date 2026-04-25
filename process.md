@@ -98,7 +98,4 @@ git -c commit.gpgsign=false commit -m "Update site"
 
 ## 下一步建议
 
-- 确认 GitHub Pages Source 已切到 `GitHub Actions`。
-- 在 GitHub Actions 中确认 `Deploy to GitHub Pages` 成功运行。
-- 访问 `https://ning0713.github.io` 检查首页、Blog 详情页、目录、公式、图片占位和深层路由。
 - 继续完善 Projects 和 Academic 列表页，使其更接近参考站的信息架构。

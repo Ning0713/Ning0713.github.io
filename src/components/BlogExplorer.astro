@@ -159,25 +159,25 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
     </div>
   </header>
 
-  <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_15.5rem] lg:items-start">
-    <div class="space-y-8">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,48rem)_minmax(18rem,1fr)] lg:items-start">
+    <div class="space-y-7">
       {hasPosts ? (
-        <ul class="blog-post-list space-y-4">
+        <ul class="blog-post-list space-y-3.5">
           {pagination.posts.map((post: CollectionEntry<'blog'>) => (
             <li>
-              <article class="blog-post-card group/card relative overflow-hidden rounded-[2rem] border border-line/80 bg-card/72 p-5 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45 sm:p-6">
-                <a href={`/blog/${post.slug}`} class="block pr-10">
+              <article class="blog-post-card group/card relative overflow-hidden rounded-[1.45rem] border border-line/80 bg-card/72 p-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45 sm:p-5">
+                <a href={`/blog/${post.slug}`} class="block pr-8">
                   <time class="blog-post-date text-xs leading-6 text-muted" datetime={post.data.date.toISOString()}>
                     {formatDate(post.data.date)}
                   </time>
 
-                  <h2 class="blog-post-title mt-2 text-xl font-medium leading-snug text-ink transition group-hover/card:text-accent sm:text-2xl">
+                  <h2 class="blog-post-title mt-1.5 text-lg font-medium leading-snug text-ink transition group-hover/card:text-accent sm:text-xl">
                     {post.data.title}
                   </h2>
-                  <p class="mt-2 max-w-reading text-sm leading-7 text-muted sm:text-base">
+                  <p class="mt-1.5 max-w-reading text-sm leading-6 text-muted">
                     {post.data.description}
                   </p>
-                  <div class="mt-3 inline-flex items-center gap-2 text-sm italic text-muted">
+                  <div class="mt-2.5 inline-flex items-center gap-2 text-xs italic text-muted">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -193,7 +193,7 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
                     <span>{getReadingMinutes(post)} min read</span>
                   </div>
 
-                  <span class="blog-card-arrow absolute right-5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-ink transition group-hover/card:translate-x-1 group-hover/card:text-accent">
+                  <span class="blog-card-arrow absolute right-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-ink transition group-hover/card:translate-x-1 group-hover/card:text-accent">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -210,7 +210,7 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
                   </span>
                 </a>
 
-                <div class="mt-5 flex flex-wrap gap-2">
+                <div class="mt-4 flex flex-wrap gap-2">
                   <a
                     href={`/collection/${encodeURIComponent(post.data.collection)}`}
                     class="blog-pill-button"
@@ -283,24 +283,43 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
       </section>
     </div>
 
-    <aside class="blog-sidebar space-y-9 lg:sticky lg:top-32">
+    <aside class="blog-sidebar space-y-8 lg:sticky lg:top-32">
       <section class="border-t border-line/80 pt-5">
         <div class="flex items-center justify-between gap-3">
           <h2 class="blog-side-heading">Collections</h2>
           <a href="/collection" class="text-xs text-muted hover:text-ink">All →</a>
         </div>
 
-        <div class="mt-4 flex flex-wrap gap-2">
+        <div class="mt-4 space-y-2">
           {collections.map((collection) => (
             <a
               href={collection.href}
               class:list={[
-                'blog-collection-pill inline-flex items-center gap-2 rounded-full border border-line/75 px-3.5 py-2 text-sm transition hover:-translate-y-0.5 hover:border-accent/45 hover:text-ink',
-                currentCollection === collection.label ? 'border-accent/45 bg-line/45 text-ink' : 'text-muted',
+                'blog-sidebar-collection-card group/collection flex items-center justify-between gap-4 rounded-[1.05rem] border border-line/75 bg-card/70 px-4 py-3 transition hover:-translate-y-0.5 hover:border-accent/45 hover:bg-line/25',
+                currentCollection === collection.label && 'border-accent/45 bg-line/35',
               ]}
             >
-              <span>{collection.label}</span>
-              <span class="text-xs text-muted/80">{collection.count}</span>
+              <div class="min-w-0">
+                <h3 class="truncate text-base font-medium leading-tight text-ink transition group-hover/collection:text-accent">
+                  {collection.label}
+                </h3>
+                <p class="mt-1 text-xs leading-5 text-muted">{collection.count} posts in this collection.</p>
+              </div>
+              <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-ink transition group-hover/collection:translate-x-1 group-hover/collection:text-accent">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.22 15.78a.75.75 0 0 1 0-1.06L11.94 10 7.22 5.28a.75.75 0 0 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
             </a>
           ))}
         </div>
@@ -366,6 +385,7 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
   }
 
   .blog-post-title,
+  .blog-sidebar-collection-card h3,
   .blog-side-heading {
     font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     letter-spacing: -0.03em;
@@ -381,7 +401,7 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
     content: '';
     position: absolute;
     inset: 0 0 0 auto;
-    width: 42%;
+    width: 38%;
     pointer-events: none;
     background:
       radial-gradient(circle at right center, rgb(var(--color-line) / 0.38), transparent 62%),
@@ -397,12 +417,12 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
   .blog-pill-button {
     display: inline-flex;
     align-items: center;
-    min-height: 2.35rem;
+    min-height: 2.05rem;
     border: 1px solid rgb(var(--color-line) / 0.78);
     border-radius: 9999px;
     background: rgb(var(--color-paper) / 0.68);
-    padding: 0.45rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.38rem 0.86rem;
+    font-size: 0.8rem;
     line-height: 1;
     color: rgb(var(--color-muted));
     transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
