@@ -66,6 +66,15 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
   const words = countReadableWords([post.data.title, post.data.description, post.body ?? ''].join(' '));
   return Math.max(1, Math.ceil(words / 420));
 };
+
+const displayPosts = pagination.posts.map((post) => {
+  const cover = post.data.cover?.trim() ?? '';
+  return {
+    post,
+    cover,
+    hasCover: cover.length > 0,
+  };
+});
 ---
 
 <BaseLayout title={pageTitle} description={description}>
@@ -163,10 +172,26 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
     <div class="space-y-7">
       {hasPosts ? (
         <ul class="blog-post-list space-y-3.5">
-          {pagination.posts.map((post: CollectionEntry<'blog'>) => (
+          {displayPosts.map(({ post, cover, hasCover }) => (
             <li>
-              <article class="blog-post-card group/card relative overflow-hidden rounded-[1.45rem] border border-line/80 bg-card/72 p-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45 sm:p-5">
-                <a href={`/blog/${post.slug}`} class="block pr-8">
+              <article
+                class:list={[
+                  'blog-post-card group/card relative overflow-hidden rounded-[1.45rem] border border-line/80 bg-card/72 p-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45 sm:p-5',
+                  hasCover && 'blog-post-card-with-cover pt-24 sm:pt-5',
+                ]}
+              >
+                {hasCover && (
+                  <img
+                    src={cover}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    class="blog-cover-image"
+                  />
+                )}
+
+                <a href={`/blog/${post.slug}`} class:list={['block pr-8', hasCover && 'sm:max-w-[72%]']}>
                   <time class="blog-post-date text-xs leading-6 text-muted" datetime={post.data.date.toISOString()}>
                     {formatDate(post.data.date)}
                   </time>
@@ -409,9 +434,33 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
     opacity: 0.72;
   }
 
+  .blog-post-card-with-cover::before {
+    display: none;
+  }
+
   .blog-post-card > * {
     position: relative;
     z-index: 1;
+  }
+
+  .blog-cover-image {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 0;
+    width: 58%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 260ms ease, transform 360ms ease;
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.16) 18%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.16) 18%, black 100%);
+  }
+
+  .blog-post-card-with-cover:hover .blog-cover-image {
+    opacity: 0.68;
+    transform: scale(1.015);
   }
 
   .blog-pill-button {
@@ -446,5 +495,15 @@ const getReadingMinutes = (post: CollectionEntry<'blog'>) => {
   .blog-page-number {
     min-width: 1.35rem;
     justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .blog-cover-image {
+      inset: 0 0 auto 0;
+      width: 100%;
+      height: 9rem;
+      mask-image: linear-gradient(to top, transparent 0%, rgb(0 0 0 / 0.2) 28%, black 100%);
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, rgb(0 0 0 / 0.2) 28%, black 100%);
+    }
   }
  </style>
