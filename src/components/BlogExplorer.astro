@@ -191,7 +191,25 @@ const displayPosts = pagination.posts.map((post) => {
                   />
                 )}
 
-                <a href={`/blog/${post.slug}`} class:list={['block pr-8', hasCover && 'max-w-[72%] max-sm:max-w-none']}>
+                <a href={`/blog/${post.slug}`} class="blog-card-stretched-link" aria-label={`Read ${post.data.title}`}>
+                  <span class="blog-card-arrow absolute right-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-ink transition group-hover/card:translate-x-1 group-hover/card:text-accent">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="h-5 w-5"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.22 15.78a.75.75 0 0 1 0-1.06L11.94 10 7.22 5.28a.75.75 0 0 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </a>
+
+                <div class:list={['blog-card-content pointer-events-none pr-8', hasCover && 'max-w-[72%] max-sm:max-w-none']}>
                   <time class="blog-post-date text-xs leading-6 text-muted" datetime={post.data.date.toISOString()}>
                     {formatDate(post.data.date)}
                   </time>
@@ -217,25 +235,9 @@ const displayPosts = pagination.posts.map((post) => {
                     </svg>
                     <span>{getReadingMinutes(post)} min read</span>
                   </div>
+                </div>
 
-                  <span class="blog-card-arrow absolute right-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-ink transition group-hover/card:translate-x-1 group-hover/card:text-accent">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      class="h-5 w-5"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.22 15.78a.75.75 0 0 1 0-1.06L11.94 10 7.22 5.28a.75.75 0 0 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06 0Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </span>
-                </a>
-
-                <div class="mt-4 flex flex-wrap gap-2">
+                <div class="blog-card-actions mt-4 flex flex-wrap gap-2">
                   <a
                     href={`/collection/${encodeURIComponent(post.data.collection)}`}
                     class="blog-pill-button"
@@ -441,6 +443,29 @@ const displayPosts = pagination.posts.map((post) => {
   .blog-post-card > * {
     position: relative;
     z-index: 1;
+  }
+
+  .blog-card-stretched-link {
+    display: block;
+    position: absolute !important;
+    inset: 0;
+    z-index: 2 !important;
+    border-radius: inherit;
+  }
+
+  .blog-card-stretched-link:focus-visible {
+    outline: 2px solid rgb(var(--color-accent) / 0.62);
+    outline-offset: -5px;
+  }
+
+  .blog-card-content {
+    position: relative;
+    z-index: 3;
+  }
+
+  .blog-card-actions {
+    position: relative;
+    z-index: 4;
   }
 
   .blog-cover-image {

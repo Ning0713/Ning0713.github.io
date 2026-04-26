@@ -99,3 +99,48 @@ git -c commit.gpgsign=false commit -m "Update site"
 ## 下一步建议
 
 - 继续完善 Projects 和 Academic 列表页，使其更接近参考站的信息架构。
+
+## 2026-04-26 本轮对话记录
+
+- 参考来源：继续参考 `https://axi404.top/`、主题指南 `https://theme.axi404.top/blog/axi-theme-basics`，以及本地原作者仓库 `F:\All 资源集合\Coding 代码\开发工程 Engine\Axi-Theme`。
+- 主页保持现状：后续参考 Axi-Theme 改动时，不主动改动当前已实现的主页。
+- Blog 列表页继续向 Axi 风格靠拢：文章卡片改为更窄的双栏布局，左侧文章列表、右侧 Collections / Tags；卡片、标签、collection 入口都采用胶囊或圆角卡片形式。
+- Blog 文章卡片已支持 `cover` frontmatter 字段，用于列表卡片右侧背景图。推荐写法是直接使用图床直链，例如 `https://i.ibb.co/...jpg`。
+- Pixiv 这类页面链接，例如 `https://www.pixiv.net/artworks/140368429`，不能直接作为 `cover` 图片使用；需要先下载/授权确认后上传到 ImgBB 等图床，再使用实际图片直链。
+- PicGo Windows 安装包应选择 `PicGo-2.5.3-x64.exe`；`.blockmap` 是更新元数据，`AppImage` 是 Linux 版本。
+- 当前示例文章 `src/content/blog/technical/章节疑难点(1) Transformer 架构.md` 使用了：
+
+```md
+cover: https://i.ibb.co/pvsdp7LP/20260426165138.jpg
+```
+
+- 文章卡片封面图已改为绝对定位填充在卡片右侧，不再把卡片撑高；移动端会退化为顶部横向封面。
+- 本轮最后修改：文章卡片的“进入文章”点击范围已从原来的文字/箭头区域扩大到整张卡片最右侧和封面区域；标签与 collection 胶囊仍保留自己的独立点击链接。
+- 文章详情页目录已调整：目录行距进一步压缩；上级目录标题右侧有小三角按钮；默认打开文章时子目录全部收束，点击三角可展开/折叠。
+- 本轮验证：已运行 `npm.cmd run build`，结果为 `0 errors / 0 warnings / 0 hints`，共生成 14 个页面。
+- 部署、提交、push 由用户自己完成；Codex 只负责本地修改和验证，不主动发布。
+
+## 下一次对话背景信息
+
+- 工作目录：`F:\All 资源集合\Coding 代码\开发工程 Engine\Ning0713.github.io`
+- 优先查看文件：
+  - `src/components/BlogExplorer.astro`：Blog 列表、文章卡片、封面图、collection/tag 胶囊入口。
+  - `src/components/TableOfContents.astro`：文章详情页右侧目录、折叠逻辑、目录行距。
+  - `src/content/blog/technical/章节疑难点(1) Transformer 架构.md`：当前用于测试封面图的文章。
+  - `src/content/config.ts`：如果新增 frontmatter 字段，需要先确认 schema。
+- 如果继续调试图片显示，先确认 frontmatter 顶部没有空行，`cover` 是可公网访问的图片直链，并运行 `npm run build` 或强制构建确认 `dist/blog/index.html` 中是否出现对应图片 URL。
+- 如果继续调整文章展示界面，保持“主页不动”，优先改 `BlogExplorer.astro` 及其局部 CSS。
+- 常规验证命令：
+
+```powershell
+npm run build
+```
+
+- 常规发布流程仍然由用户执行：
+
+```powershell
+git status
+git add .
+git commit -m "Update site"
+git push
+```
