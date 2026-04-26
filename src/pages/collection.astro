@@ -23,7 +23,7 @@ const collections = getBlogCollectionOverview(allPosts, postCollections);
       <a
         href={collection.href}
         class:list={[
-          'collection-preview-card group relative flex min-h-[20rem] flex-col justify-between overflow-hidden rounded-[1.05rem] border border-line/80 bg-card/72 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45',
+          'collection-preview-card group relative flex flex-col overflow-hidden rounded-[1.05rem] border border-line/80 bg-card/72 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45',
           collection.cover && 'collection-pill-card-with-cover',
         ]}
       >
@@ -39,7 +39,7 @@ const collections = getBlogCollectionOverview(allPosts, postCollections);
             />
             <div class="collection-preview-overlay">
               <h2 class="collection-card-title line-clamp-2 text-2xl leading-tight text-white">{collection.label}</h2>
-              <p class="mt-2 line-clamp-2 text-sm leading-6 text-white/82">
+              <p class="collection-preview-description mt-2 line-clamp-2 text-sm leading-6">
                 {collection.description ?? `${collection.count} posts in this collection.`}
               </p>
             </div>
@@ -123,6 +123,10 @@ const collections = getBlogCollectionOverview(allPosts, postCollections);
     justify-content: flex-end;
     padding: 1.25rem;
     background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.24) 58%, transparent);
+  }
+
+  .collection-preview-description {
+    color: rgb(255 255 255 / 0.86);
   }
 
   .collection-preview-empty {
