@@ -6,7 +6,7 @@ description: 通过 Happy-LLM 学习LLM的基础内容
 tags: [LLM, transformer]
 category: technical
 collection: 深度学习
-cover: https://i.pximg.net/img-master/img/2026/01/25/19/52/45/140368429_p0_master1200.jpg
+cover: https://i.ibb.co/pvsdp7LP/20260426165138.jpg
 draft: false
 ---
 
