@@ -5,6 +5,7 @@ import { dedupeEntriesBySlug, sortByDateDesc } from './content';
 export const BLOG_PAGE_SIZE = 6;
 
 export type BlogPost = CollectionEntry<'blog'>;
+export type BlogPostCollection = CollectionEntry<'postCollections'>;
 export type BlogCategory = keyof typeof BLOG_CATEGORY_META;
 
 export interface BlogPaginationResult {
@@ -21,6 +22,10 @@ export interface BlogCollectionOverview {
   label: string;
   count: number;
   href: string;
+  description?: string;
+  cover?: string;
+  bloglist?: string[];
+  source?: 'content' | 'frontmatter';
 }
 
 export interface BlogTagOverview {
@@ -90,7 +95,72 @@ export function getBlogCategoryOverview(posts: BlogPost[]): BlogCollectionOvervi
   }));
 }
 
-export function getBlogCollectionOverview(posts: BlogPost[]): BlogCollectionOverview[] {
+function cleanCollectionId(value: string) {
+  return value
+    .trim()
+    .replace(/\\/g, '/')
+    .replace(/\.(md|mdx)$/i, '')
+    .replace(/\/index$/i, '');
+}
+
+function normalizeLookupValue(value: string) {
+  let decoded = value.trim();
+
+  try {
+    decoded = decodeURIComponent(decoded);
+  } catch {
+    decoded = value.trim();
+  }
+
+  return cleanCollectionId(decoded).toLowerCase();
+}
+
+function buildPostLookup(posts: BlogPost[]) {
+  const lookup = new Map<string, BlogPost>();
+
+  for (const post of posts) {
+    const keys = [
+      post.id,
+      post.slug,
+      post.data.title,
+      cleanCollectionId(post.id),
+      cleanCollectionId(post.slug),
+    ];
+
+    for (const key of keys) {
+      const normalized = normalizeLookupValue(key);
+
+      if (normalized && !lookup.has(normalized)) {
+        lookup.set(normalized, post);
+      }
+    }
+  }
+
+  return lookup;
+}
+
+function isPostInCollection(post: BlogPost, collection: BlogCollectionOverview) {
+  const postCollection = normalizeLookupValue(post.data.collection ?? '');
+  return postCollection === normalizeLookupValue(collection.label) || postCollection === normalizeLookupValue(collection.slug);
+}
+
+export function getPostsForBlogCollection(collection: BlogCollectionOverview, posts: BlogPost[]) {
+  const references = collection.bloglist ?? [];
+
+  if (references.length > 0) {
+    const lookup = buildPostLookup(posts);
+    return references
+      .map((reference) => lookup.get(normalizeLookupValue(reference)))
+      .filter((post): post is BlogPost => Boolean(post));
+  }
+
+  return posts.filter((post) => isPostInCollection(post, collection));
+}
+
+export function getBlogCollectionOverview(
+  posts: BlogPost[],
+  contentCollections: BlogPostCollection[] = [],
+): BlogCollectionOverview[] {
   const counts = new Map<string, number>();
 
   for (const post of posts) {
@@ -98,7 +168,36 @@ export function getBlogCollectionOverview(posts: BlogPost[]): BlogCollectionOver
     counts.set(collection, (counts.get(collection) ?? 0) + 1);
   }
 
-  return [...counts.entries()]
+  const definedCollections = contentCollections
+    .filter((collection) => !collection.data.draft)
+    .map((collection) => {
+      const slug = cleanCollectionId(collection.id);
+      const overview: BlogCollectionOverview = {
+        slug,
+        label: collection.data.title,
+        count: 0,
+        href: getBlogCollectionPageHref(slug),
+        description: collection.data.description,
+        cover: collection.data.cover,
+        bloglist: collection.data.bloglist,
+        source: 'content',
+      };
+
+      return {
+        ...overview,
+        count: getPostsForBlogCollection(overview, posts).length,
+      };
+    });
+
+  const definedCollectionKeys = new Set(
+    definedCollections.flatMap((collection) => [
+      normalizeLookupValue(collection.slug),
+      normalizeLookupValue(collection.label),
+    ]),
+  );
+
+  const fallbackCollections = [...counts.entries()]
+    .filter(([collection]) => !definedCollectionKeys.has(normalizeLookupValue(collection)))
     .sort((left, right) => {
       const countDiff = right[1] - left[1];
       if (countDiff !== 0) {
@@ -112,7 +211,10 @@ export function getBlogCollectionOverview(posts: BlogPost[]): BlogCollectionOver
       label: collection,
       count,
       href: getBlogCollectionPageHref(collection),
+      source: 'frontmatter' as const,
     }));
+
+  return [...definedCollections, ...fallbackCollections];
 }
 
 export function getBlogTagOverview(posts: BlogPost[]): BlogTagOverview[] {

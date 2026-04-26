@@ -1,33 +1,44 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogExplorer from '../../components/BlogExplorer.astro';
-import { getBlogCollectionOverview, buildBlogPaginationLinks, getBlogCollectionPageHref, getBlogTagOverview, paginateBlogPosts, sortBlogPosts } from '../../lib/blog';
+import {
+  buildBlogPaginationLinks,
+  getBlogCollectionOverview,
+  getBlogCollectionPageHref,
+  getBlogTagOverview,
+  getPostsForBlogCollection,
+  paginateBlogPosts,
+  sortBlogPosts,
+} from '../../lib/blog';
 
 export async function getStaticPaths() {
   const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
-  const collections = getBlogCollectionOverview(allPosts);
+  const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
+  const collections = getBlogCollectionOverview(allPosts, postCollections);
 
   return collections.map((collection) => ({
-    params: { collection: encodeURIComponent(collection.label) },
-    props: { collectionName: collection.label },
+    params: { collection: encodeURIComponent(collection.slug) },
+    props: { collectionInfo: collection },
   }));
 }
 
-const { collectionName } = Astro.props;
+const { collectionInfo } = Astro.props;
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
-const posts = allPosts.filter((post) => post.data.collection === collectionName);
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
+const collections = getBlogCollectionOverview(allPosts, postCollections);
+const posts = getPostsForBlogCollection(collectionInfo, allPosts);
 const pagination = paginateBlogPosts(posts, 1);
 const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (page) =>
-  getBlogCollectionPageHref(collectionName, page),
+  getBlogCollectionPageHref(collectionInfo.slug, page),
 );
 ---
 
 <BlogExplorer
-  title={collectionName}
-  description={`${collectionName} 分类下的文章归档。`}
+  title={collectionInfo.label}
+  description={collectionInfo.description ?? `${collectionInfo.label} 分类下的文章归档。`}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(allPosts)}
+  collections={collections}
   tags={getBlogTagOverview(allPosts)}
-  currentCollection={collectionName}
+  currentCollection={collectionInfo.label}
 />

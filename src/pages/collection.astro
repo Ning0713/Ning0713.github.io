@@ -5,7 +5,8 @@ import { SITE_TITLE } from '../consts';
 import { getBlogCollectionOverview, sortBlogPosts } from '../lib/blog';
 
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
-const collections = getBlogCollectionOverview(allPosts);
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
+const collections = getBlogCollectionOverview(allPosts, postCollections);
 ---
 
 <BaseLayout title={`分类 | ${SITE_TITLE}`} description="按主题整理的博客分类入口。">
@@ -21,11 +22,29 @@ const collections = getBlogCollectionOverview(allPosts);
     {collections.map((collection) => (
       <a
         href={collection.href}
-        class="collection-pill-card group flex items-center justify-between gap-5 rounded-[1.4rem] border border-line/80 bg-card/72 px-5 py-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45"
+        class:list={[
+          'collection-pill-card group relative flex min-h-[8.25rem] items-center justify-between gap-5 overflow-hidden rounded-[1.4rem] border border-line/80 bg-card/72 px-5 py-4 shadow-card transition duration-300 hover:-translate-y-0.5 hover:border-accent/45',
+          collection.cover && 'collection-pill-card-with-cover',
+        ]}
       >
+        {collection.cover && (
+          <img
+            src={collection.cover}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            class="collection-pill-cover"
+          />
+        )}
         <div class="min-w-0">
           <h2 class="collection-card-title truncate text-xl leading-tight text-ink sm:text-2xl">{collection.label}</h2>
-          <p class="mt-1 text-sm leading-6 text-muted">{collection.count} posts in this collection.</p>
+          <p class="mt-1 line-clamp-2 text-sm leading-6 text-muted">
+            {collection.description ?? `${collection.count} posts in this collection.`}
+          </p>
+          <span class="mt-3 inline-flex rounded-full border border-line/75 bg-paper/70 px-3 py-1 text-xs text-muted">
+            {collection.count} posts
+          </span>
         </div>
         <span class="collection-card-arrow inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink transition group-hover:translate-x-1 group-hover:text-accent">
           <svg
@@ -53,5 +72,46 @@ const collections = getBlogCollectionOverview(allPosts);
     font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     font-weight: 500;
     letter-spacing: -0.05em;
+  }
+
+  .collection-pill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 42%;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at right center, rgb(var(--color-line) / 0.34), transparent 62%),
+      linear-gradient(90deg, rgb(var(--color-card) / 0), rgb(var(--color-line) / 0.16));
+    opacity: 0.78;
+  }
+
+  .collection-pill-card-with-cover::before {
+    display: none;
+  }
+
+  .collection-pill-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .collection-pill-cover {
+    position: absolute !important;
+    inset: 0 0 0 auto;
+    z-index: 0 !important;
+    width: 52%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    opacity: 0.42;
+    pointer-events: none;
+    transition: opacity 260ms ease, transform 360ms ease;
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.2) 20%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.2) 20%, black 100%);
+  }
+
+  .collection-pill-card:hover .collection-pill-cover {
+    opacity: 0.62;
+    transform: scale(1.015);
   }
 </style>

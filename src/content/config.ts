@@ -19,6 +19,17 @@ const blog = defineCollection({
   }),
 });
 
+const postCollections = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    cover: z.string().optional(),
+    bloglist: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const academic = defineCollection({
   type: 'content',
   schema: baseSchema.extend({
@@ -40,6 +51,7 @@ const projects = defineCollection({
 
 export const collections = {
   blog,
+  postCollections,
   academic,
   projects,
 };

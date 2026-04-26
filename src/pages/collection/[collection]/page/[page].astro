@@ -1,42 +1,53 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogExplorer from '../../../../components/BlogExplorer.astro';
-import { getBlogCollectionOverview, buildBlogPaginationLinks, getBlogCollectionPageHref, getBlogTagOverview, paginateBlogPosts, sortBlogPosts } from '../../../../lib/blog';
+import {
+  buildBlogPaginationLinks,
+  getBlogCollectionOverview,
+  getBlogCollectionPageHref,
+  getBlogTagOverview,
+  getPostsForBlogCollection,
+  paginateBlogPosts,
+  sortBlogPosts,
+} from '../../../../lib/blog';
 
 export async function getStaticPaths() {
   const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
-  const collections = getBlogCollectionOverview(allPosts);
+  const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
+  const collections = getBlogCollectionOverview(allPosts, postCollections);
 
   return collections.flatMap((collection) => {
-    const posts = allPosts.filter((post) => post.data.collection === collection.label);
+    const posts = getPostsForBlogCollection(collection, allPosts);
     const { totalPages } = paginateBlogPosts(posts, 1);
 
     return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => ({
       params: {
-        collection: encodeURIComponent(collection.label),
+        collection: encodeURIComponent(collection.slug),
         page: String(index + 2),
       },
-      props: { collectionName: collection.label },
+      props: { collectionInfo: collection },
     }));
   });
 }
 
-const { collectionName } = Astro.props;
+const { collectionInfo } = Astro.props;
 const page = Number(Astro.params.page ?? '1');
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
-const posts = allPosts.filter((post) => post.data.collection === collectionName);
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
+const collections = getBlogCollectionOverview(allPosts, postCollections);
+const posts = getPostsForBlogCollection(collectionInfo, allPosts);
 const pagination = paginateBlogPosts(posts, page);
 const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (targetPage) =>
-  getBlogCollectionPageHref(collectionName, targetPage),
+  getBlogCollectionPageHref(collectionInfo.slug, targetPage),
 );
 ---
 
 <BlogExplorer
-  title={collectionName}
-  description={`${collectionName} 分类下的文章归档。`}
+  title={collectionInfo.label}
+  description={collectionInfo.description ?? `${collectionInfo.label} 分类下的文章归档。`}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(allPosts)}
+  collections={collections}
   tags={getBlogTagOverview(allPosts)}
-  currentCollection={collectionName}
+  currentCollection={collectionInfo.label}
 />

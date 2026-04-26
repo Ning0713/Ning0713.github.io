@@ -207,7 +207,7 @@ def attention(query, key, value, dropout=None):
 我们假设当前的输入张量形状为 `(Batch, Seq_Len, Dim)`，也就是 `(批次大小, 句子长度, 词向量维度)`。我来为你逐行拆解这段代码里的核心函数：
 
 1. 获取缩放因子：`query.size(-1)`
-```Python
+```python
 d_k = query.size(-1) 
 ```
 
@@ -216,7 +216,7 @@ d_k = query.size(-1)
 
 2. 矩阵转置：`key.transpose(-2, -1)`
 
-```Python
+```python
 key.transpose(-2, -1)
 ```
 
@@ -227,7 +227,7 @@ key.transpose(-2, -1)
 
 3. 批量矩阵乘法：`torch.matmul(...)`
 
-```Python
+```python
 scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
 ```
 
@@ -238,7 +238,7 @@ scores = torch.matmul(query, key.transpose(-2, -1)) / math.sqrt(d_k)
 
  4. 归一化分配：`scores.softmax(dim=-1)`
  
-```Python
+```python
 p_attn = scores.softmax(dim=-1)
 ```
 
@@ -246,7 +246,7 @@ p_attn = scores.softmax(dim=-1)
 - **原理解析**：`scores` 的形状是 `(Batch, Seq_Len, Seq_Len)`。`dim=-1` 意味着我们在每一行（也就是针对每一个具体的 Query 词）去横向比较它对所有 Key 词的得分，并把它们压缩成相加等于 1 的权重比例。
 
 5. 随机失活：`dropout(p_attn)`
-```Python
+```python
 if dropout is not None:
     p_attn = dropout(p_attn)
 ```
@@ -364,7 +364,7 @@ $$V = X \cdot W^V$$
 
 
 Mask 矩阵维度一般为 (1, seq_len, seq_len)
-```Python
+```python
 scores = scores + mask[:, :seqlen, :seqlen]
 ```
 
@@ -374,7 +374,7 @@ scores = scores + mask[:, :seqlen, :seqlen]
     - 对于过去和现在的词（下三角）：原始分数 $+ 0 =$ **分数不变**。
     - 对于未来的词（上三角）：原始分数 $+ (-\infty) =$ **$-\infty$**。
 
-```Python
+```python
 scores = F.softmax(scores.float(), dim=-1).type_as(xq)
 ```
 
@@ -623,7 +623,7 @@ _(翻译：32 句话，8 个独立的专家头，每个头都算出了一张 5x5
 $$Mask \rightarrow (1, 1, 5, 5)$$
 **第三步：完美叠加（相加）**
 
-```Python
+```python
 scores = scores + mask
 ```
 
@@ -1198,7 +1198,7 @@ class Encoder(nn.Module):
 ```
 
  第一部分：初始化 `__init__` 
-```Python
+```python
 def __init__(self, args):
     super(Encoder, self).__init__() 
     # 一个 Encoder 由 N 个 Encoder Layer 组成
@@ -1219,7 +1219,7 @@ def __init__(self, args):
 
 第二部分：前向传播 `forward` 
 
-```Python
+```python
 def forward(self, x):
     "分别通过 N 层 Encoder Layer"
     for layer in self.layers:
@@ -1262,7 +1262,7 @@ print(P)
 由于 Transformer 的自注意力机制是同时处理所有词的（并行计算），分不清“我爱你”和“你爱我”的区别。这段代码的作用，就是**为句子里的每一个物理位置，生成一个独一无二的向量**，让模型能够感知到词汇的先后顺序。
 
  1. 参数与矩阵初始化
-```Python
+```python
 def PositionEncoding(seq_len, d_model, n=10000):
     P = np.zeros((seq_len, d_model))
 ```
@@ -1274,7 +1274,7 @@ def PositionEncoding(seq_len, d_model, n=10000):
 
 2. 双重循环（定位与计算）
 
-```Python
+```python
 for k in range(seq_len):
     for i in np.arange(int(d_model/2)):
 ```
@@ -1284,7 +1284,7 @@ for k in range(seq_len):
 
  3. 核心数学公式：计算频率分母
 
-```Python
+```python
         denominator = np.power(n, 2*i/d_model)
 ```
 这行代码在计算论文公式里的分母部分：$10000^{2i / d_{model}}$。
@@ -1292,7 +1292,7 @@ for k in range(seq_len):
 - 分母越大，后续计算出来的波形**频率就越低（波长越长）**。
 
  4. 正余弦交替赋值
-```Python
+```python
 
         P[k, 2*i] = np.sin(k/denominator)
         P[k, 2*i+1] = np.cos(k/denominator)
@@ -1306,7 +1306,7 @@ for k in range(seq_len):
 - **后面的维度（比如第 510、511 维）**：频率极低，像水表最左边走得极慢的大齿轮。位置 `k` 走过几十个词，它的值才发生微小的变化。模型通过它来感知**句子的宏观长度和远距离依赖**。
 ![位置编码](https://i.ibb.co/C5jvwLp8/20260426160910-7.png)
 
-```Python
+```python
 P = PositionEncoding(seq_len=4, d_model=4, n=100)
 ```
 生成了一个 4 个词、每个词 4 维的模型。
@@ -1394,7 +1394,7 @@ class PositionalEncoding(nn.Module):
 
 这段代码在模型被创建的那一刻运行，它的目标是**一次性把最大长度的绝对位置编码全部算好，存起来备用**。
 
-```Python
+```python
 pe = torch.zeros(args.block_size, args.n_embd)
 position = torch.arange(0, args.block_size).unsqueeze(1)
 ```
@@ -1402,7 +1402,7 @@ position = torch.arange(0, args.block_size).unsqueeze(1)
 - **`pe`**：造一张 2048 行、512 列的全零空白表格。
 - **`position`**：生成一个从 0 到 2047 的列向量。形状是 `(2048, 1)`。这就是那个 $pos$ 变量。
 
-```Python
+```python
 div_term = torch.exp(
     torch.arange(0, args.n_embd, 2) * -(math.log(10000.0) / args.n_embd)
 )
@@ -1421,7 +1421,7 @@ $$e^{-\frac{2i}{d_{model}} \cdot \ln(10000)} = e^{\ln(10000^{-\frac{2i}{d_{model
 
 **张量广播**
 
-```Python
+```python
 pe[:, 0::2] = torch.sin(position * div_term)
 pe[:, 1::2] = torch.cos(position * div_term)
 ```
@@ -1432,7 +1432,7 @@ pe[:, 1::2] = torch.cos(position * div_term)
 
 **打包备用**
 
-```Python
+```python
 pe = pe.unsqueeze(0)
 self.register_buffer("pe", pe)
 ```

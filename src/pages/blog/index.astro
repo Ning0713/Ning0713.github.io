@@ -13,6 +13,7 @@ import {
 
 const category = 'technical';
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
 const posts = allPosts.filter((post) => post.data.category === category);
 const pagination = paginateBlogPosts(posts, 1);
 const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (page) =>
@@ -25,7 +26,7 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   description={BLOG_CATEGORY_META[category].description}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(posts)}
+  collections={getBlogCollectionOverview(posts, postCollections)}
   tags={getBlogTagOverview(posts)}
   currentSectionLabel={BLOG_CATEGORY_META[category].label}
 />

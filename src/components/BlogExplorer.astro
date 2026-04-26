@@ -330,7 +330,12 @@ const displayPosts = pagination.posts.map((post) => {
                 <h3 class="truncate text-base font-medium leading-tight text-ink transition group-hover/collection:text-accent">
                   {collection.label}
                 </h3>
-                <p class="mt-1 text-xs leading-5 text-muted">{collection.count} posts in this collection.</p>
+                <p class="mt-1 line-clamp-2 text-xs leading-5 text-muted">
+                  {collection.description ?? `${collection.count} posts in this collection.`}
+                </p>
+                {collection.description && (
+                  <p class="mt-1 text-[0.68rem] leading-4 text-muted/70">{collection.count} posts</p>
+                )}
               </div>
               <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-ink transition group-hover/collection:translate-x-1 group-hover/collection:text-accent">
                 <svg

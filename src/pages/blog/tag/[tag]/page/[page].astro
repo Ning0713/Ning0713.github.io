@@ -31,6 +31,7 @@ export async function getStaticPaths() {
 const { tag } = Astro.props;
 const page = Number(Astro.params.page ?? '1');
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
 const posts = allPosts.filter((post) => post.data.tags.some((entry) => entry === tag));
 const pagination = paginateBlogPosts(posts, page);
 const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (targetPage) =>
@@ -43,7 +44,7 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   description={`Posts tagged with ${tag}. Use collections and tags on the right to continue exploring the blog.`}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(allPosts)}
+  collections={getBlogCollectionOverview(allPosts, postCollections)}
   tags={getBlogTagOverview(allPosts)}
   currentTag={tag}
 />

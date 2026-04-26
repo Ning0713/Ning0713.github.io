@@ -32,6 +32,7 @@ export async function getStaticPaths() {
 const category = Astro.params.category as BlogCategory;
 const page = Number(Astro.params.page ?? '1');
 const allPosts = sortBlogPosts(await getCollection('blog', ({ data }) => !data.draft));
+const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
 const posts = allPosts.filter((post) => post.data.category === category);
 const pagination = paginateBlogPosts(posts, page);
 const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, pagination.page, (targetPage) =>
@@ -44,7 +45,7 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   description={BLOG_CATEGORY_META[category].description}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(posts)}
+  collections={getBlogCollectionOverview(posts, postCollections)}
   tags={getBlogTagOverview(posts)}
   currentSectionLabel={BLOG_CATEGORY_META[category].label}
 />
