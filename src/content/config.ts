@@ -23,6 +23,7 @@ const postCollections = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    slug: z.string().optional(),
     description: z.string().optional(),
     cover: z.string().optional(),
     bloglist: z.array(z.string()).default([]),

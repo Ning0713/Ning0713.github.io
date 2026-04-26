@@ -66,8 +66,7 @@ export function getBlogCategoryPageHref(category: BlogCategory, page = 1) {
 }
 
 export function getBlogCollectionPageHref(collection: string, page = 1) {
-  const encodedCollection = encodeURIComponent(collection);
-  return page === 1 ? `/collection/${encodedCollection}` : `/collection/${encodedCollection}/page/${page}`;
+  return page === 1 ? `/collection/${collection}` : `/collection/${collection}/page/${page}`;
 }
 
 export function getBlogTagPageHref(tag: string, page = 1) {
@@ -172,11 +171,12 @@ export function getBlogCollectionOverview(
     .filter((collection) => !collection.data.draft)
     .map((collection) => {
       const slug = cleanCollectionId(collection.id);
+      const routeSlug = cleanCollectionId(collection.data.slug ?? slug);
       const overview: BlogCollectionOverview = {
-        slug,
+        slug: routeSlug,
         label: collection.data.title,
         count: 0,
-        href: getBlogCollectionPageHref(slug),
+        href: getBlogCollectionPageHref(routeSlug),
         description: collection.data.description,
         cover: collection.data.cover,
         bloglist: collection.data.bloglist,

@@ -16,10 +16,14 @@ export async function getStaticPaths() {
   const postCollections = await getCollection('postCollections', ({ data }) => !data.draft);
   const collections = getBlogCollectionOverview(allPosts, postCollections);
 
-  return collections.map((collection) => ({
-    params: { collection: encodeURIComponent(collection.slug) },
-    props: { collectionInfo: collection },
-  }));
+  return collections.flatMap((collection) => {
+    const pathSegments = [...new Set([collection.slug, collection.label])];
+
+    return pathSegments.map((pathSegment) => ({
+      params: { collection: pathSegment },
+      props: { collectionInfo: collection },
+    }));
+  });
 }
 
 const { collectionInfo } = Astro.props;
@@ -41,4 +45,9 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   collections={collections}
   tags={getBlogTagOverview(allPosts)}
   currentCollection={collectionInfo.label}
+  collectionHero={{
+    title: collectionInfo.label,
+    description: collectionInfo.description,
+    cover: collectionInfo.cover,
+  }}
 />

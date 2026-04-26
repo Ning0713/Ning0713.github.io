@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import EmptyState from './EmptyState.astro';
 import { BLOG_CATEGORY_ITEMS, SITE_TITLE } from '../consts';
 import type { BlogCollectionOverview, BlogPaginationResult, BlogTagOverview } from '../lib/blog';
-import { getBlogCategoryPageHref, getBlogTagPageHref } from '../lib/blog';
+import { getBlogCategoryPageHref, getBlogCollectionPageHref, getBlogTagPageHref } from '../lib/blog';
 import { formatDate } from '../lib/content';
 import { countReadableWords } from '../lib/stats';
 
@@ -18,6 +18,11 @@ interface Props {
   currentSectionLabel?: string;
   currentCollection?: string;
   currentTag?: string;
+  collectionHero?: {
+    title: string;
+    description?: string;
+    cover?: string;
+  };
 }
 
 const {
@@ -30,6 +35,7 @@ const {
   currentSectionLabel,
   currentCollection,
   currentTag,
+  collectionHero,
 } = Astro.props;
 
 const pageTitle = `${title} | ${SITE_TITLE}`;
@@ -75,13 +81,52 @@ const displayPosts = pagination.posts.map((post) => {
     hasCover: cover.length > 0,
   };
 });
+
+const getCollectionHref = (collectionName: string) =>
+  collections.find((collection) => collection.label === collectionName || collection.slug === collectionName)?.href ??
+  getBlogCollectionPageHref(collectionName);
 ---
 
 <BaseLayout title={pageTitle} description={description}>
-  <header class="blog-index-header -mt-2 mb-8 border-b border-line/80 pb-5">
+  {collectionHero && (
+    <section class:list={['collection-detail-hero -mt-1 mb-7', collectionHero.cover && 'collection-detail-hero-with-cover']}>
+      {collectionHero.cover ? (
+        <img
+          src={collectionHero.cover}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          decoding="async"
+          class="collection-detail-hero-image"
+        />
+      ) : (
+        <div class="collection-detail-hero-empty" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-12 w-12">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 8-9-5-9 5 9 5 9-5Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="m3 8 9 5 9-5M3 12l9 5 9-5M3 16l9 5 9-5" />
+          </svg>
+        </div>
+      )}
+
+      <div class="collection-detail-hero-overlay">
+        <h1 class="collection-detail-hero-title">{collectionHero.title}</h1>
+        {collectionHero.description && (
+          <p class="collection-detail-hero-description">{collectionHero.description}</p>
+        )}
+      </div>
+    </section>
+  )}
+
+  <header class:list={['blog-index-header -mt-2 mb-8 border-b border-line/80 pb-5', collectionHero && 'blog-index-header-compact']}>
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex flex-wrap items-center gap-3">
-        <h1 class="blog-display-title text-3xl leading-none text-ink sm:text-4xl">{title}</h1>
+        {collectionHero ? (
+          <p class="text-xs leading-5 text-muted">
+            Page {pagination.page} of {pagination.totalPages} · Showing {pagination.startIndex}-{pagination.endIndex} of {pagination.totalPosts}
+          </p>
+        ) : (
+          <h1 class="blog-display-title text-3xl leading-none text-ink sm:text-4xl">{title}</h1>
+        )}
 
         {(currentCollection || currentCategoryIndex >= 0) && (
           <div class="flex items-center gap-1.5 pt-0.5">
@@ -162,9 +207,13 @@ const displayPosts = pagination.posts.map((post) => {
         )}
       </div>
 
-      <p class="text-xs leading-5 text-muted sm:text-right">
-        Page {pagination.page} of {pagination.totalPages} · Showing {pagination.startIndex}-{pagination.endIndex} of {pagination.totalPosts}
-      </p>
+      {collectionHero ? (
+        <a href="/collection" class="text-xs leading-5 text-muted hover:text-ink">All Collections →</a>
+      ) : (
+        <p class="text-xs leading-5 text-muted sm:text-right">
+          Page {pagination.page} of {pagination.totalPages} · Showing {pagination.startIndex}-{pagination.endIndex} of {pagination.totalPosts}
+        </p>
+      )}
     </div>
   </header>
 
@@ -239,7 +288,7 @@ const displayPosts = pagination.posts.map((post) => {
 
                 <div class="blog-card-actions mt-4 flex flex-wrap gap-2">
                   <a
-                    href={`/collection/${encodeURIComponent(post.data.collection)}`}
+                    href={getCollectionHref(post.data.collection)}
                     class="blog-pill-button"
                   >
                     {post.data.collection}
@@ -427,6 +476,74 @@ const displayPosts = pagination.posts.map((post) => {
     font-size: 1rem;
     font-weight: 500;
     color: rgb(var(--color-ink));
+  }
+
+  .blog-index-header-compact {
+    margin-top: 0;
+    padding-bottom: 1rem;
+  }
+
+  .collection-detail-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 17rem;
+    border: 1px solid rgb(var(--color-line) / 0.8);
+    border-radius: 1.35rem;
+    background: rgb(var(--color-card) / 0.76);
+    box-shadow: var(--shadow-card);
+  }
+
+  .collection-detail-hero-image {
+    display: block;
+    width: 100%;
+    height: clamp(17rem, 38vw, 24rem);
+    object-fit: cover;
+    filter: brightness(0.74);
+    transition: transform 420ms ease, filter 260ms ease;
+  }
+
+  .collection-detail-hero:hover .collection-detail-hero-image {
+    transform: scale(1.018);
+    filter: brightness(0.82);
+  }
+
+  .collection-detail-hero-empty {
+    display: flex;
+    min-height: 17rem;
+    align-items: center;
+    justify-content: center;
+    color: rgb(var(--color-muted));
+    background:
+      radial-gradient(circle at 18% 12%, rgb(var(--color-accent) / 0.12), transparent 32%),
+      linear-gradient(135deg, rgb(var(--color-card) / 0.9), rgb(var(--color-line) / 0.2));
+  }
+
+  .collection-detail-hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.35rem;
+    color: white;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.76), rgb(0 0 0 / 0.28) 48%, transparent);
+  }
+
+  .collection-detail-hero-title {
+    max-width: 42rem;
+    font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .collection-detail-hero-description {
+    margin-top: 0.6rem;
+    max-width: 38rem;
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: rgb(255 255 255 / 0.86);
   }
 
   .blog-post-card::before {

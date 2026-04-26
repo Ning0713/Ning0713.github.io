@@ -19,14 +19,17 @@ export async function getStaticPaths() {
   return collections.flatMap((collection) => {
     const posts = getPostsForBlogCollection(collection, allPosts);
     const { totalPages } = paginateBlogPosts(posts, 1);
+    const pathSegments = [...new Set([collection.slug, collection.label])];
 
-    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => ({
-      params: {
-        collection: encodeURIComponent(collection.slug),
-        page: String(index + 2),
-      },
-      props: { collectionInfo: collection },
-    }));
+    return pathSegments.flatMap((pathSegment) =>
+      Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => ({
+        params: {
+          collection: pathSegment,
+          page: String(index + 2),
+        },
+        props: { collectionInfo: collection },
+      })),
+    );
   });
 }
 
@@ -50,4 +53,9 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   collections={collections}
   tags={getBlogTagOverview(allPosts)}
   currentCollection={collectionInfo.label}
+  collectionHero={{
+    title: collectionInfo.label,
+    description: collectionInfo.description,
+    cover: collectionInfo.cover,
+  }}
 />
