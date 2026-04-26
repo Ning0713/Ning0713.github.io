@@ -182,17 +182,19 @@ const isHomePage = pathname === '/';
           return;
         }
 
-        const compactAt = 28;
-        const expandAt = 12;
+        const compactAt = 96;
+        const expandAt = 48;
         let ticking = false;
         let isCompact = false;
 
+        const getScrollY = () => window.scrollY || document.documentElement.scrollTop || 0;
+
         const getNextState = () => {
           if (isCompact) {
-            return window.scrollY > expandAt;
+            return getScrollY() > expandAt;
           }
 
-          return window.scrollY > compactAt;
+          return getScrollY() > compactAt;
         };
 
         const syncHeaderState = () => {
@@ -217,7 +219,7 @@ const isHomePage = pathname === '/';
           });
         };
 
-        isCompact = window.scrollY > compactAt;
+        isCompact = getScrollY() > compactAt;
         header.dataset.scrolled = String(isCompact);
         syncHeaderState();
         window.addEventListener('scroll', requestSync, { passive: true });

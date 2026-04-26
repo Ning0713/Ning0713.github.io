@@ -116,16 +116,16 @@ h6 {
 
 .site-header {
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   position: sticky;
   top: 1rem;
   z-index: 40;
+  min-height: 6.25rem;
   margin-bottom: 3rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid rgb(var(--color-line) / 0.8);
   transition:
-    margin-bottom 220ms ease,
-    padding-bottom 220ms ease,
     border-color 220ms ease;
 }
 
@@ -290,8 +290,8 @@ h6 {
 }
 
 .site-header[data-scrolled='true'] {
-  margin-bottom: 2rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
   border-bottom-color: transparent;
 }
 
