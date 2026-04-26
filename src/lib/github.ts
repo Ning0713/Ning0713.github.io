@@ -198,7 +198,7 @@ function normalizeContributionCalendar(
 
 export async function getGitHubContributionCalendar() {
   const username = import.meta.env.GITHUB_USERNAME ?? DEFAULT_USERNAME;
-  const token = import.meta.env.GITHUB_TOKEN;
+  const token = import.meta.env.GH_CONTRIBUTION_TOKEN ?? import.meta.env.GITHUB_TOKEN;
   const targetYear = Number(import.meta.env.GITHUB_CONTRIBUTION_YEAR ?? DEFAULT_CONTRIBUTION_YEAR);
   const profileUrl = `https://github.com/${username}`;
 
@@ -210,7 +210,7 @@ export async function getGitHubContributionCalendar() {
       rangeLabel: formatRangeLabel(targetYear),
       weeks: [],
       months: [],
-      error: 'Set GITHUB_USERNAME and GITHUB_TOKEN in .env to load GitHub contributions.',
+      error: 'Set GH_CONTRIBUTION_TOKEN in .env or GitHub Actions Secrets to load GitHub contributions.',
     } satisfies GitHubContributionCalendar;
   }
 

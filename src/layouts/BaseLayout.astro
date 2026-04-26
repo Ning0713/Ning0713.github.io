@@ -3,6 +3,7 @@ import '../styles/global.css';
 import 'katex/dist/katex.min.css';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import { BLOG_CATEGORY_ITEMS, NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../consts';
+import { getBlogCategoryPageHref } from '../lib/blog';
 
 interface Props {
   title?: string;
@@ -97,10 +98,14 @@ const isHomePage = pathname === '/';
 
                               <div class="absolute right-0 z-20 mt-2 w-52 rounded-2xl border border-line/80 bg-paper/95 p-2 text-black shadow-card backdrop-blur dark:text-ink">
                                 {BLOG_CATEGORY_ITEMS.map((blogItem) => {
-                                  const categoryHref = `/blog/category/${blogItem.slug}`;
+                                  const categoryHref = getBlogCategoryPageHref(blogItem.slug);
                                   const categoryActive =
-                                    pathname === categoryHref ||
-                                    (blogItem.slug === 'technical' && pathname === '/blog');
+                                    blogItem.slug === 'technical'
+                                      ? pathname === '/blog' ||
+                                        pathname.startsWith('/blog/page/') ||
+                                        pathname === '/blog/category/technical' ||
+                                        pathname.startsWith('/blog/category/technical/')
+                                      : pathname === categoryHref || pathname.startsWith(`${categoryHref}/`);
                                   return (
                                     <a
                                       href={categoryHref}

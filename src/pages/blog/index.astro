@@ -25,7 +25,7 @@ const paginationLinks = buildBlogPaginationLinks(pagination.totalPages, paginati
   description={BLOG_CATEGORY_META[category].description}
   pagination={pagination}
   paginationLinks={paginationLinks}
-  collections={getBlogCollectionOverview(allPosts)}
-  tags={getBlogTagOverview(allPosts)}
+  collections={getBlogCollectionOverview(posts)}
+  tags={getBlogTagOverview(posts)}
   currentSectionLabel={BLOG_CATEGORY_META[category].label}
 />

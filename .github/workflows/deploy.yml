@@ -25,7 +25,7 @@ jobs:
         uses: withastro/action@v6
         env:
           GITHUB_USERNAME: Ning0713
-          GITHUB_TOKEN: ${{ secrets.GH_CONTRIBUTION_TOKEN }}
+          GH_CONTRIBUTION_TOKEN: ${{ secrets.GH_CONTRIBUTION_TOKEN }}
           GITHUB_CONTRIBUTION_YEAR: "2026"
 
   deploy:
