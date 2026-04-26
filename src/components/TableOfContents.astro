@@ -56,16 +56,27 @@ const escapeHtml = (value: string) =>
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
 
-const renderTree = (nodes: TocTreeItem[]): string =>
-  `<ol class="toc-list">${nodes
+const renderTree = (nodes: TocTreeItem[], isChildList = false): string =>
+  `<ol class="${isChildList ? 'toc-list toc-children' : 'toc-list'}"${isChildList ? ' hidden' : ''}>${nodes
     .map(
-      (node) =>
-        `<li class="toc-item" data-depth="${node.depth}">
-          <a href="${escapeHtml(node.href)}" class="toc-link" data-toc-link data-toc-slug="${escapeHtml(node.slug)}">
-            ${escapeHtml(node.text)}
-          </a>
-          ${node.children.length > 0 ? renderTree(node.children) : ''}
-        </li>`,
+      (node) => {
+        const hasChildren = node.children.length > 0;
+        return `<li class="toc-item" data-depth="${node.depth}"${hasChildren ? ' data-toc-branch data-collapsed="true"' : ''}>
+          <div class="toc-row">
+            <a href="${escapeHtml(node.href)}" class="toc-link" data-toc-link data-toc-slug="${escapeHtml(node.slug)}">
+              ${escapeHtml(node.text)}
+            </a>
+            ${
+              hasChildren
+                ? `<button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle ${escapeHtml(node.text)}" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>`
+                : ''
+            }
+          </div>
+          ${hasChildren ? renderTree(node.children, true) : ''}
+        </li>`;
+      },
     )
     .join('')}</ol>`;
 
@@ -90,6 +101,31 @@ const tocHtml = renderTree(tocTree);
       }
 
       const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
+      const toggleButtons = Array.from(toc.querySelectorAll('[data-toc-toggle]')).filter(
+        (button) => button instanceof HTMLButtonElement,
+      );
+
+      for (const button of toggleButtons) {
+        button.addEventListener('click', () => {
+          const branch = button.closest('[data-toc-branch]');
+          if (!(branch instanceof HTMLElement)) {
+            return;
+          }
+
+          const childList = Array.from(branch.children).find((child) =>
+            child instanceof HTMLOListElement && child.classList.contains('toc-children')
+          );
+
+          if (!(childList instanceof HTMLOListElement)) {
+            return;
+          }
+
+          const nextExpanded = button.getAttribute('aria-expanded') !== 'true';
+          button.setAttribute('aria-expanded', String(nextExpanded));
+          branch.dataset.collapsed = String(!nextExpanded);
+          childList.hidden = !nextExpanded;
+        });
+      }
 
       if (links.length === 0) {
         continue;
@@ -182,27 +218,75 @@ const tocHtml = renderTree(tocTree);
   }
 
   .toc-shell :global(.toc-item) + :global(.toc-item) {
-    margin-top: 0.12rem;
+    margin-top: 0.06rem;
   }
 
   .toc-shell :global(.toc-item > .toc-list) {
-    margin-top: 0.14rem;
-    margin-left: 0.95rem;
-    padding-left: 0.45rem;
+    margin-top: 0.08rem;
+    margin-left: 0.82rem;
+    padding-left: 0.36rem;
+  }
+
+  .toc-shell :global(.toc-row) {
+    display: flex;
+    align-items: center;
+    gap: 0.22rem;
+    min-width: 0;
   }
 
   .toc-shell :global(.toc-link) {
     display: block;
-    padding: 0.44rem 0.82rem;
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: 0.34rem 0.58rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: rgb(var(--color-muted));
     font-size: 0.8rem;
-    line-height: 1.42;
+    line-height: 1.3;
     font-weight: 400;
     border-radius: 9999px;
     transition:
       color 180ms ease,
       background-color 180ms ease,
       box-shadow 180ms ease;
+  }
+
+  .toc-shell :global(.toc-toggle) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 1.35rem;
+    height: 1.35rem;
+    border: 0;
+    border-radius: 9999px;
+    color: rgb(var(--color-muted));
+    background: transparent;
+    cursor: pointer;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .toc-shell :global(.toc-toggle:hover) {
+    color: rgb(var(--color-ink));
+    background: rgb(var(--color-card) / 0.86);
+  }
+
+  .toc-shell :global(.toc-toggle-icon) {
+    width: 0;
+    height: 0;
+    border-top: 0.25rem solid transparent;
+    border-bottom: 0.25rem solid transparent;
+    border-left: 0.32rem solid currentColor;
+    transform: translateX(0.04rem);
+    transition: transform 180ms ease;
+  }
+
+  .toc-shell :global(.toc-toggle[aria-expanded='true'] .toc-toggle-icon) {
+    transform: translateY(0.04rem) rotate(90deg);
   }
 
   .toc-shell :global(.toc-link:hover),
@@ -212,18 +296,18 @@ const tocHtml = renderTree(tocTree);
     box-shadow: 0 14px 34px -26px rgba(15, 23, 42, 0.32);
   }
 
-  .toc-shell :global(.toc-item[data-depth='1'] > .toc-link) {
-    font-size: 0.84rem;
+  .toc-shell :global(.toc-item[data-depth='1'] > .toc-row > .toc-link) {
+    font-size: 0.82rem;
     color: rgb(var(--color-ink) / 0.88);
   }
 
-  .toc-shell :global(.toc-item[data-depth='2'] > .toc-link) {
-    font-size: 0.79rem;
+  .toc-shell :global(.toc-item[data-depth='2'] > .toc-row > .toc-link) {
+    font-size: 0.77rem;
   }
 
-  .toc-shell :global(.toc-item[data-depth='3'] > .toc-link),
-  .toc-shell :global(.toc-item[data-depth='4'] > .toc-link) {
-    font-size: 0.76rem;
+  .toc-shell :global(.toc-item[data-depth='3'] > .toc-row > .toc-link),
+  .toc-shell :global(.toc-item[data-depth='4'] > .toc-row > .toc-link) {
+    font-size: 0.74rem;
     opacity: 0.92;
   }
 </style>
