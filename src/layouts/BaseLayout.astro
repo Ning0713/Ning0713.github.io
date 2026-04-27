@@ -45,7 +45,7 @@ const isHomePage = pathname === '/';
       <div
         id="highlight-gradient"
         class="site-highlight-gradient"
-        style={`background-image: linear-gradient(${highlightColor} 0%, ${highlightColor} 34%, transparent 100%);`}
+        style={`background-image: linear-gradient(${highlightColor} 0%, ${highlightColor} 14%, transparent 100%);`}
         aria-hidden="true"
       />
     )}
@@ -239,13 +239,13 @@ const isHomePage = pathname === '/';
     </script>
     <style>
       .site-highlight-gradient {
-        position: fixed;
+        position: absolute;
         inset: 0 0 auto 0;
         z-index: 0;
-        height: 100vh;
+        height: min(34rem, 56vh);
         width: 100%;
         pointer-events: none;
-        opacity: 0.46;
+        opacity: 0.5;
         background-repeat: no-repeat;
       }
     </style>
