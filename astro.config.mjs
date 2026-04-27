@@ -13,6 +13,7 @@ export default defineConfig({
   site: 'https://ning0713.github.io',
   build: {
     format: 'directory',
+    assets: 'assets',
   },
   integrations: [
     mdx({
