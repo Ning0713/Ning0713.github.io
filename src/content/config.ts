@@ -12,6 +12,7 @@ const baseSchema = z.object({
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
   coverSource: z.string().url().optional(),
+  coverColor: z.string().optional(),
 });
 
 const blog = defineCollection({

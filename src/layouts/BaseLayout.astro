@@ -8,11 +8,13 @@ import { getBlogCategoryPageHref } from '../lib/blog';
 interface Props {
   title?: string;
   description?: string;
+  highlightColor?: string;
 }
 
 const {
   title = SITE_TITLE,
   description = SITE_DESCRIPTION,
+  highlightColor,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, SITE_URL).toString();
@@ -39,7 +41,16 @@ const isHomePage = pathname === '/';
     </script>
   </head>
   <body class:list={[isHomePage ? 'is-home-page' : 'is-inner-page']}>
-    <div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10">
+    {highlightColor && (
+      <div
+        id="highlight-gradient"
+        class="site-highlight-gradient"
+        style={`background-image: linear-gradient(${highlightColor}, transparent);`}
+        aria-hidden="true"
+      />
+    )}
+
+    <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10">
       <header class="site-header" data-site-header data-scrolled="false">
         <div class="site-header-shell">
           <div class="site-header-row">
@@ -226,5 +237,16 @@ const isHomePage = pathname === '/';
         window.addEventListener('resize', requestSync);
       })();
     </script>
+    <style>
+      .site-highlight-gradient {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 0;
+        height: 100vh;
+        width: 100%;
+        pointer-events: none;
+        opacity: 0.25;
+      }
+    </style>
   </body>
 </html>
