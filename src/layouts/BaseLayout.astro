@@ -242,10 +242,18 @@ const isHomePage = pathname === '/';
         position: fixed;
         inset: 0 0 auto 0;
         z-index: 0;
-        height: 100vh;
+        height: min(42rem, 86vh);
         width: 100%;
         pointer-events: none;
-        opacity: 0.25;
+        opacity: 0.34;
+        background-repeat: no-repeat;
+        mask-image: linear-gradient(
+          to bottom,
+          rgb(0 0 0 / 1) 0%,
+          rgb(0 0 0 / 0.9) 34%,
+          rgb(0 0 0 / 0.42) 70%,
+          transparent 100%
+        );
       }
     </style>
   </body>
