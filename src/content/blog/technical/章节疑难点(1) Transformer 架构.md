@@ -1,11 +1,15 @@
 ---
 title: Happy-LLM 章节疑难点(1) Transformer 架构
 date: 2026-03-31
+updatedDate: 2026-03-31
 description: 通过 Happy-LLM 学习LLM的基础内容
 tags: [LLM, transformer]
 category: technical
 collection: 深度学习
 cover: https://i.ibb.co/pvsdp7LP/image.jpg
+coverAlt: Transformer 架构文章头图
+coverSource: https://www.pixiv.net/artworks/140368429
+coverColor: '#fedc4f'
 draft: false
 ---
 
