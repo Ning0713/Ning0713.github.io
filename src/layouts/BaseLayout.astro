@@ -45,7 +45,7 @@ const isHomePage = pathname === '/';
       <div
         id="highlight-gradient"
         class="site-highlight-gradient"
-        style={`background-image: linear-gradient(${highlightColor} 0%, ${highlightColor} 50%, transparent 100%);`}
+        style={`background-image: linear-gradient(${highlightColor} 0%, rgb(var(--color-paper) / 0.94) 50%, transparent 100%);`}
         aria-hidden="true"
       />
     )}
@@ -81,22 +81,22 @@ const isHomePage = pathname === '/';
                           <div
                             class:list={[
                               'site-blog-nav-wrap inline-flex items-center rounded-full border border-line/80',
-                              isBlogSection && 'site-blog-nav-active bg-white/15 text-white',
+                              isBlogSection && 'site-blog-nav-active bg-line/52 text-ink',
                             ]}
                           >
                             <a
                               href="/blog"
-                              class="site-blog-link pl-3 pr-1.5 py-1.5 hover:text-white"
+                              class="site-blog-link pl-3 pr-1.5 py-1.5 hover:text-ink"
                             >
                               {item.label}
                             </a>
                             <details class="blog-nav-dropdown group relative">
-                              <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center px-1.5 py-1.5 hover:text-white">
+                              <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center px-1.5 py-1.5 hover:text-ink">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
-                                  class="site-blog-chevron h-4 w-4 text-white transition group-open:rotate-180"
+                                  class="site-blog-chevron h-4 w-4 text-ink transition group-open:rotate-180"
                                   aria-hidden="true"
                                 >
                                   <path
@@ -140,8 +140,8 @@ const isHomePage = pathname === '/';
                         <a
                           href={item.href}
                           class:list={[
-                            'site-nav-link rounded-full px-3 py-1.5 hover:text-white',
-                            isActive && 'site-nav-link-active bg-white/15 text-white',
+                            'site-nav-link rounded-full px-3 py-1.5 hover:text-ink',
+                            isActive && 'site-nav-link-active bg-line/52 text-ink',
                           ]}
                         >
                           {item.label}
