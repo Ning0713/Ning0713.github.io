@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 import { BLOG_CATEGORY_META } from '../../consts';
 import { dedupeEntriesBySlug } from '../../lib/content';
+import { countReadableWords } from '../../lib/stats';
 
 export async function getStaticPaths() {
   const posts = dedupeEntriesBySlug(await getCollection('blog', ({ data }) => !data.draft));
@@ -16,14 +17,23 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 const category = BLOG_CATEGORY_META[post.data.category];
+const readingMinutes = Math.max(
+  1,
+  Math.ceil(countReadableWords([post.data.title, post.data.description, post.body ?? ''].join(' ')) / 420),
+);
 ---
 
 <ContentLayout
   title={post.data.title}
   description={post.data.description}
   date={post.data.date}
+  updatedDate={post.data.updatedDate}
   tags={post.data.tags}
   collectionLabel={category.label}
+  cover={post.data.cover}
+  coverAlt={post.data.coverAlt ?? post.data.title}
+  coverSource={post.data.coverSource}
+  readingMinutes={readingMinutes}
   headings={headings}
 >
   <Content />

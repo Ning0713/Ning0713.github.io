@@ -3,50 +3,157 @@ import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import { SITE_TITLE } from '../consts';
+import { getBlogTagPageHref } from '../lib/blog';
 import { formatDate } from '../lib/content';
 
 interface Props {
   title: string;
   description: string;
   date: Date;
+  updatedDate?: Date;
   tags?: string[];
   collectionLabel?: string;
+  cover?: string;
+  coverAlt?: string;
+  coverSource?: string;
+  readingMinutes?: number;
   headings?: MarkdownHeading[];
 }
 
-const { title, description, date, tags = [], collectionLabel, headings = [] } = Astro.props;
+const {
+  title,
+  description,
+  date,
+  updatedDate,
+  tags = [],
+  collectionLabel,
+  cover,
+  coverAlt,
+  coverSource,
+  readingMinutes,
+  headings = [],
+} = Astro.props;
 const tocItems = headings.filter((heading) => heading.depth >= 1 && heading.depth <= 4);
 const hasToc = tocItems.length > 0;
+const coverUrl = cover?.trim() ?? '';
+const hasArticleHero = coverUrl.length > 0;
+const coverAltText = coverAlt?.trim() || title;
 ---
 
 <BaseLayout title={`${title} | ${SITE_TITLE}`} description={description}>
   <article class="mx-auto w-full max-w-6xl">
     <div class="lg:grid lg:grid-cols-[minmax(0,44rem)_16rem] lg:gap-12">
       <div>
-        <header class="mb-9 border-b border-line/80 pb-7">
-          {collectionLabel && (
-            <p class="content-meta-pill w-fit">
-              {collectionLabel}
-            </p>
-          )}
-          <h1 class="content-detail-title mt-4 text-3xl font-medium leading-tight text-ink sm:text-4xl">
-            {title}
-          </h1>
-          <p class="mt-4 max-w-reading text-sm leading-7 text-muted sm:text-base">{description}</p>
-          <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-muted">
-            <time class="content-meta-pill" datetime={date.toISOString()}>{formatDate(date)}</time>
-            {tags.length > 0 && (
-              <ul class="flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <li class="content-meta-pill">
-                    #{tag}
-                  </li>
-                ))}
-              </ul>
+        {hasArticleHero ? (
+          <header class="article-hero mb-9">
+            <div class="article-hero-image-frame">
+              <img
+                src={coverUrl}
+                alt={coverAltText}
+                class="article-hero-cover"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <img
+                src={coverUrl}
+                alt=""
+                class="article-hero-blur"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+                aria-hidden="true"
+                data-article-hero-blur
+              />
+            </div>
+
+            <div class="article-hero-meta">
+              <time class="article-hero-meta-item" datetime={date.toISOString()}>
+                <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4M16 2v4M3.5 9.5h17M5.5 4h13A2.5 2.5 0 0 1 21 6.5v12A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5v-12A2.5 2.5 0 0 1 5.5 4Z" />
+                </svg>
+                <span>{formatDate(date)}</span>
+                {updatedDate && (
+                  <span class="article-hero-update">
+                    / Update {formatDate(updatedDate)}
+                  </span>
+                )}
+              </time>
+
+              {readingMinutes && (
+                <span class="article-hero-meta-item">
+                  <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2" />
+                  </svg>
+                  <span>{readingMinutes} min read</span>
+                </span>
+              )}
+
+              <span class="article-hero-meta-item">
+                <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 1 0 9 9 6 6 0 0 1-9-9Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 4v4M21 6h-4" />
+                </svg>
+                {coverSource ? (
+                  <a href={coverSource} target="_blank" rel="noreferrer" class="article-hero-meta-link">
+                    Hero Image
+                  </a>
+                ) : (
+                  <span>Hero Image</span>
+                )}
+              </span>
+
+              {tags.length > 0 && (
+                <span class="article-hero-meta-item article-hero-tags">
+                  <svg class="article-hero-icon article-hero-hash-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path stroke-linecap="round" d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17" />
+                  </svg>
+                  {tags.map((tag, index) => (
+                    <Fragment>
+                      <a href={getBlogTagPageHref(tag)} class="article-hero-meta-link">{tag}</a>
+                      {index < tags.length - 1 && <span class="article-hero-tag-separator">/</span>}
+                    </Fragment>
+                  ))}
+                </span>
+              )}
+            </div>
+
+            <h1 class="article-hero-title">
+              {title}
+            </h1>
+            <blockquote class="article-hero-description">
+              <q>{description}</q>
+            </blockquote>
+            <slot name="meta" />
+            <div class="article-hero-divider" aria-hidden="true"></div>
+          </header>
+        ) : (
+          <header class="mb-9 border-b border-line/80 pb-7">
+            {collectionLabel && (
+              <p class="content-meta-pill w-fit">
+                {collectionLabel}
+              </p>
             )}
-          </div>
-          <slot name="meta" />
-        </header>
+            <h1 class="content-detail-title mt-4 text-3xl font-medium leading-tight text-ink sm:text-4xl">
+              {title}
+            </h1>
+            <p class="mt-4 max-w-reading text-sm leading-7 text-muted sm:text-base">{description}</p>
+            <div class="mt-5 flex flex-wrap items-center gap-2 text-sm text-muted">
+              <time class="content-meta-pill" datetime={date.toISOString()}>{formatDate(date)}</time>
+              {tags.length > 0 && (
+                <ul class="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <li class="content-meta-pill">
+                      #{tag}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <slot name="meta" />
+          </header>
+        )}
 
         {hasToc && (
           <div class="mb-10 lg:hidden">
@@ -86,4 +193,179 @@ const hasToc = tocItems.length > 0;
     line-height: 1;
     color: rgb(var(--color-muted));
   }
+
+  .article-hero {
+    color: rgb(var(--color-ink));
+  }
+
+  .article-hero-image-frame {
+    position: relative;
+    width: min(100%, 65ch);
+    margin-bottom: 1.45rem;
+  }
+
+  .article-hero-cover,
+  .article-hero-blur {
+    max-height: min(27rem, 58vh);
+    object-fit: contain;
+  }
+
+  .article-hero-cover {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.2rem;
+    box-shadow: 0 18px 55px -36px rgba(15, 23, 42, 0.46);
+  }
+
+  .article-hero-blur {
+    position: absolute;
+    inset-inline-end: 0;
+    top: 1rem;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    filter: blur(24px);
+    opacity: 0.56;
+    transform: scale(1.015);
+    transition: opacity 240ms ease;
+  }
+
+  .article-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 1.35rem;
+    color: rgb(var(--color-muted));
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .article-hero-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .article-hero-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: 0 0 auto;
+    opacity: 0.82;
+  }
+
+  .article-hero-hash-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .article-hero-update {
+    white-space: nowrap;
+  }
+
+  .article-hero-tags {
+    flex-wrap: wrap;
+  }
+
+  .article-hero-meta-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .article-hero-meta-link:hover {
+    color: rgb(var(--color-accent));
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+
+  .article-hero-tag-separator {
+    opacity: 0.72;
+  }
+
+  .article-hero-title {
+    margin-top: 1.55rem;
+    font-family: 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+  }
+
+  .article-hero-description {
+    margin-top: 0.85rem;
+    border-left: 0;
+    padding-left: 0;
+    color: rgb(var(--color-muted));
+    font-size: 0.96rem;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .article-hero-description q {
+    quotes: '“' '”' '‘' '’';
+  }
+
+  .article-hero-divider {
+    margin-top: 1.35rem;
+    width: min(12rem, 42%);
+    border-top: 1px solid rgb(var(--color-line) / 0.85);
+  }
+
+  @media (max-width: 640px) {
+    .article-hero-image-frame {
+      margin-bottom: 1.15rem;
+    }
+
+    .article-hero-title {
+      font-size: 1.85rem;
+    }
+
+    .article-hero-meta {
+      gap: 0.45rem 0.9rem;
+      font-size: 0.82rem;
+    }
+  }
 </style>
+
+<script>
+  const blurImage = document.querySelector('[data-article-hero-blur]') as HTMLImageElement | null;
+
+  if (blurImage) {
+    const viewportHeight = window.innerHeight;
+    const thresholds = [viewportHeight / 9, (viewportHeight * 2) / 9, (viewportHeight * 3) / 9];
+    let ticking = false;
+
+    const syncBlurOpacity = () => {
+      const scrollDistance = window.scrollY || document.documentElement.scrollTop || 0;
+
+      if (scrollDistance >= thresholds[2]) {
+        blurImage.style.opacity = '0.16';
+      } else if (scrollDistance >= thresholds[1]) {
+        blurImage.style.opacity = '0.3';
+      } else if (scrollDistance >= thresholds[0]) {
+        blurImage.style.opacity = '0.44';
+      } else {
+        blurImage.style.opacity = '0.56';
+      }
+
+      ticking = false;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) {
+          return;
+        }
+
+        ticking = true;
+        window.requestAnimationFrame(syncBlurOpacity);
+      },
+      { passive: true },
+    );
+  }
+</script>

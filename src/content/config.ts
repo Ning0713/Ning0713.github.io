@@ -5,10 +5,13 @@ export const blogCategories = ['technical', 'life-and-talk', 'journal'] as const
 const baseSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
+  updatedDate: z.coerce.date().optional(),
   description: z.string(),
   tags: z.array(z.string()).default([]),
   draft: z.boolean().default(false),
   cover: z.string().optional(),
+  coverAlt: z.string().optional(),
+  coverSource: z.string().url().optional(),
 });
 
 const blog = defineCollection({
