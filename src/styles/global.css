@@ -47,22 +47,22 @@ body.is-home-page::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
-  height: 13rem;
+  height: 100vh;
   z-index: -1;
   pointer-events: none;
   background:
     linear-gradient(
       to bottom,
-      rgb(var(--color-top-gradient-start) / 0.22) 0%,
-      rgb(var(--color-top-gradient-end) / 0.16) 55%,
+      rgb(var(--color-top-gradient-start) / 0.34) 0%,
+      rgb(var(--color-top-gradient-end) / 0.24) 18%,
       rgb(var(--color-paper) / 0) 100%
     ),
-    radial-gradient(circle at left top, rgb(var(--color-top-gradient-start) / 0.68), transparent 58%),
-    radial-gradient(circle at right top, rgb(var(--color-top-gradient-end) / 0.62), transparent 56%),
+    radial-gradient(ellipse at left top, rgb(var(--color-top-gradient-start) / 0.46), transparent 66%),
+    radial-gradient(ellipse at right top, rgb(var(--color-top-gradient-end) / 0.42), transparent 66%),
     linear-gradient(
       90deg,
-      rgb(var(--color-top-gradient-start) / 0.34) 0%,
-      rgb(var(--color-top-gradient-end) / 0.34) 100%
+      rgb(var(--color-top-gradient-start) / 0.2) 0%,
+      rgb(var(--color-top-gradient-end) / 0.2) 100%
     );
 }
 
@@ -70,16 +70,16 @@ html.dark body.is-home-page::before {
   background:
     linear-gradient(
       to bottom,
-      rgb(var(--color-top-gradient-start) / 0.14) 0%,
-      rgb(var(--color-top-gradient-end) / 0.1) 55%,
+      rgb(var(--color-top-gradient-start) / 0.18) 0%,
+      rgb(var(--color-top-gradient-end) / 0.14) 18%,
       rgb(var(--color-paper) / 0) 100%
     ),
-    radial-gradient(circle at left top, rgb(var(--color-top-gradient-start) / 0.2), transparent 52%),
-    radial-gradient(circle at right top, rgb(var(--color-top-gradient-end) / 0.18), transparent 50%),
+    radial-gradient(ellipse at left top, rgb(var(--color-top-gradient-start) / 0.22), transparent 64%),
+    radial-gradient(ellipse at right top, rgb(var(--color-top-gradient-end) / 0.2), transparent 64%),
     linear-gradient(
       90deg,
-      rgb(var(--color-top-gradient-start) / 0.12) 0%,
-      rgb(var(--color-top-gradient-end) / 0.12) 100%
+      rgb(var(--color-top-gradient-start) / 0.08) 0%,
+      rgb(var(--color-top-gradient-end) / 0.08) 100%
     );
 }
 
