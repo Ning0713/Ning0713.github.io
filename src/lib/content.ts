@@ -6,9 +6,7 @@ export function dedupeEntriesBySlug<T extends { slug: string }>(entries: T[]) {
   const uniqueEntries = new Map<string, T>();
 
   for (const entry of entries) {
-    if (!uniqueEntries.has(entry.slug)) {
-      uniqueEntries.set(entry.slug, entry);
-    }
+    uniqueEntries.set(entry.slug, entry);
   }
 
   return [...uniqueEntries.values()];
