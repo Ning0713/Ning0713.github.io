@@ -7,7 +7,7 @@ tags: [LLM, transformer]
 category: technical
 collection: 深度学习
 cover: https://i.ibb.co/pvsdp7LP/image.jpg
-coverAlt: Transformer 架构文章头图
+coverAlt: 哥伦比亚
 coverSource: https://www.pixiv.net/artworks/140368429
 coverColor: '#fedc4f'
 draft: false
