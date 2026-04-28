@@ -11,7 +11,7 @@ collection: Unity
 cover: https://i.ibb.co/tPc502kT/20260428152256.jpg
 coverAlt: 预训练语言模型文章头图
 coverSource: https://www.pixiv.net/artworks/143864385
-coverColor: "#3662ee"
+coverColor: "#f389bc"
 draft: false
 ---
 [M_Studio的勇者传说-2022Unity入门](https://space.bilibili.com/370283072/lists/1187255?type=season) 主要是知识点整理笔记
