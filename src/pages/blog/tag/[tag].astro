@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   const tags = getBlogTagOverview(allPosts);
 
   return tags.map((tag) => ({
-    params: { tag: encodeURIComponent(tag.tag) },
+    params: { tag: tag.tag },
     props: { tag: tag.tag },
   }));
 }
