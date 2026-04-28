@@ -8,7 +8,7 @@ tags:
   - 入门学习
 category: technical
 collection: Unity
-cover: https://i.ibb.co/MxGcqLnx/20260426211949.png
+cover: https://i.ibb.co/MxGcqLnx/20260428151059.png
 coverAlt: 空洞骑士
 coverSource: https://wall.alphacoders.com/big.php?i=1361079
 coverColor: "#284892"
