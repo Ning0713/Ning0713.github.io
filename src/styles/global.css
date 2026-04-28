@@ -489,11 +489,12 @@ html.dark .prose {
 }
 
 .prose :where(code):not(:where(pre code)) {
-  @apply rounded-md bg-line/50 px-1.5 py-0.5 font-mono text-sm;
+  @apply rounded-md bg-line/50 px-1.5 py-0.5 text-sm;
+  font-family: Consolas, 'Courier New', monospace;
 }
 
 .prose :where(pre) {
-  @apply rounded-2xl border border-line/70 shadow-card;
+  @apply border border-line/70 shadow-card;
 }
 
 .prose :where(blockquote) {
@@ -502,7 +503,9 @@ html.dark .prose {
 
 .content-prose {
   font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-size: 0.96rem;
   font-weight: 400;
+  line-height: 1.82;
 }
 
 .content-prose :where(p, li, blockquote, figcaption, strong, b, h1, h2, h3, h4, h5, h6) {
@@ -511,6 +514,137 @@ html.dark .prose {
 
 .content-prose :where(strong, b, h1, h2, h3, h4, h5, h6) {
   font-weight: 400;
+}
+
+.content-prose :where(h1, h2, h3, h4, h5, h6) {
+  color: rgb(var(--color-ink));
+  line-height: 1.38;
+  letter-spacing: 0;
+}
+
+.content-prose :where(h1) {
+  margin-top: 2.35rem;
+  margin-bottom: 1rem;
+  font-size: 1.55rem;
+}
+
+.content-prose :where(h2) {
+  margin-top: 2.15rem;
+  margin-bottom: 0.85rem;
+  font-size: 1.34rem;
+}
+
+.content-prose :where(h3) {
+  margin-top: 1.75rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.16rem;
+}
+
+.content-prose :where(h4) {
+  margin-top: 1.55rem;
+  margin-bottom: 0.55rem;
+  font-size: 1.02rem;
+}
+
+.content-prose :where(h5, h6) {
+  margin-top: 1.35rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.94rem;
+}
+
+.content-prose :where(pre) {
+  position: relative;
+  overflow-x: auto;
+  margin: 1.35rem 0;
+  border-radius: 0.85rem;
+  background-color: rgb(248 250 252) !important;
+  padding: 3rem 1.05rem 1.05rem;
+  color: rgb(36 41 46);
+  white-space: pre !important;
+  word-wrap: normal !important;
+}
+
+.content-prose :where(pre)::before {
+  content: '';
+  position: absolute;
+  top: 1.1rem;
+  left: 1rem;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 9999px;
+  background: #ff5f57;
+  box-shadow:
+    1.05rem 0 0 #ffbd2e,
+    2.1rem 0 0 #28c840;
+}
+
+.content-prose :where(pre[data-language])::after {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.88rem;
+  right: 4.85rem;
+  color: rgb(var(--color-muted));
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.72;
+}
+
+.content-prose :where(pre code) {
+  display: block;
+  min-width: max-content;
+  padding: 0;
+  background: transparent;
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.84rem;
+  font-weight: 400;
+  line-height: 1.68;
+  tab-size: 2;
+}
+
+.content-prose :where(pre .line) {
+  min-height: 1.42em;
+}
+
+.content-prose :where(.code-copy-button) {
+  position: absolute;
+  top: 0.68rem;
+  right: 0.78rem;
+  z-index: 2;
+  border: 1px solid rgb(var(--color-line) / 0.8);
+  border-radius: 9999px;
+  background: rgb(var(--color-card) / 0.78);
+  padding: 0.32rem 0.62rem;
+  color: rgb(var(--color-muted));
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.7rem;
+  line-height: 1;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.content-prose :where(.code-copy-button:hover) {
+  border-color: rgb(var(--color-accent) / 0.45);
+  background: rgb(var(--color-line) / 0.36);
+  color: rgb(var(--color-ink));
+}
+
+html.dark .content-prose :where(pre) {
+  background-color: rgb(15 23 42) !important;
+  color: rgb(226 232 240);
+}
+
+html.dark .content-prose :where(pre.astro-code) {
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
+}
+
+html.dark .content-prose :where(pre.astro-code span) {
+  color: var(--shiki-dark) !important;
 }
 
 .content-prose :where(.katex) {
