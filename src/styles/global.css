@@ -594,6 +594,11 @@ html.dark .prose {
   opacity: 0.72;
 }
 
+.content-prose :where(pre[data-language='csharp'])::after,
+.content-prose :where(pre[data-language='cs'])::after {
+  content: 'C#';
+}
+
 .content-prose :where(pre code) {
   display: block;
   min-width: max-content;
