@@ -512,12 +512,14 @@ html.dark .prose {
   font-family: inherit;
 }
 
-.content-prose :where(strong, b, h1, h2, h3, h4, h5, h6) {
-  font-weight: 400;
+.content-prose :where(strong, b) {
+  color: rgb(var(--color-ink));
+  font-weight: 700;
 }
 
 .content-prose :where(h1, h2, h3, h4, h5, h6) {
   color: rgb(var(--color-ink));
+  font-weight: 400;
   line-height: 1.38;
   letter-spacing: 0;
 }
