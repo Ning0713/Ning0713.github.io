@@ -4,12 +4,12 @@ date: 2026-02-01
 updatedDate: 2026-02-01
 description: 通过M_studio的勇者传说学习Unity入门基础
 tags:
-  - LLM
-  - transformer
+  - 游戏引擎
+  - 入门学习
 category: technical
 collection: Unity
 cover: https://i.ibb.co/tPc502kT/20260428152256.jpg
-coverAlt: 预训练语言模型文章头图
+coverAlt: 绯雪
 coverSource: https://www.pixiv.net/artworks/143864385
 coverColor: "#f389bc"
 draft: false
