@@ -4,8 +4,8 @@ date: 2026-02-01
 updatedDate: 2026-02-01
 description: 通过M_studio的勇者传说学习Unity入门基础
 tags:
-  - 游戏引擎
-  - 入门学习
+  - LLM
+  - transformer
 category: technical
 collection: Unity
 cover: https://i.ibb.co/tPc502kT/20260428152256.jpg
@@ -27,11 +27,11 @@ draft: false
 
 在Rigidbody下的Constrains里冻结z轴的旋转.
 Collision Detection设为continuous,以保证以后写代码方便进行探测.
-![[Pasted image 20260219181838.png|300]]
+![](https://i.ibb.co/hFzbK2yL/20260428185521.png)
 
 ### 2.1.2 平台组件的添加
 给Platform添加Composite Collider 2D组件 (若Platform没有Rigidbody2D组件,unity会为你自动添加),使每一个瓦片的碰撞箱结合成一体,并将Rigidboay2D的Body Type设为Static来防止平台掉落。
-![[Pasted image 20260219181927.png|300]]
+![](https://i.ibb.co/JW9NR1mt/20260428185521-1.png)
 
 ## 2.2 创建及配置新输入系统
 
@@ -39,14 +39,14 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 
 Edit/Project Settings/Player/Other Settings
 修改如图所示两个选项
-![[Pasted image 20260220211815.png]]
+![](https://i.ibb.co/ccL3vHxq/20260428185521-2.png)
 
 然后去PackageManager搜索input,下载如下package.
-![[Pasted image 20260220211843.png]]
+![](https://i.ibb.co/hJRR6ZW9/20260428185521-3.png)
 
-为Player添加Player Input组件并创建Input Actions.创建完毕删掉Player Input组件。![[Pasted image 20260220212002.png]]
+为Player添加Player Input组件并创建Input Actions.创建完毕删掉Player Input组件。![](https://i.ibb.co/JwGP827G/20260428185521-4.png)
 在PlayerInputControl中勾选如图所示方框,然后点击Apply.就会生成同名C#脚本.
-![[Pasted image 20260220212032.png|375]]
+![](https://i.ibb.co/9Hv4M7MG/20260428185521-5.png)
 
 
 ### 2.2.2 PlayerController脚本
@@ -98,7 +98,7 @@ private void Update()
 
 ### 2.3.1 人物移动与翻转
  使用速度来驱动物体，创建变量speed并输入值
-![[Pasted image 20260221202457.png]]
+![](https://i.ibb.co/fzDThGKG/20260428185521-6.png)
 
 在FixedUpdate() (持续性的按键情况，而如jump则是当作触发性的事件，减少性能开销) 中执行函数Move()，修改刚体速度，获取刚体组件 
 ```c#
@@ -122,7 +122,7 @@ transform.localScale
 
 ### 2.3.2 人物跳跃
 实现人物跳跃，编辑按键，添加跳跃方法
-![[Pasted image 20260221205023.png]]
+![](https://i.ibb.co/5h4gPch9/20260428185521-7.png)
 
 施加力，纵轴跳跃，编写跳跃代码，注意按键状态和执行时机 
 ```c#
@@ -145,13 +145,13 @@ public float JumpForce;
 将跳跃函数放在Awake()中执行，即给Jump.started注册一个jump事件函数,并且使用force mode的瞬时力方法实现跳跃 
 
 修改gravity scale为4，测试舒适的手感
-![[Pasted image 20260221205318.png|350]]
+![](https://i.ibb.co/HLDvKPYp/20260428185521-8.png)
 
 ## 2.4 环境物理检测
 实现人物跳跃的连续动作，以及如何检测人物周围的物理环境，包括地面和墙面等。同时，还介绍了如何写物理检查代码。
 
 创建一个通用脚本，检测周围的物理环境 
-![[Pasted image 20260223165717.png]]
+![](https://i.ibb.co/Lz4SgvQB/20260428185521-9.png)
 
 使用2D物理检测方法实现物理检测，通过使用overlap circle方法，圆形检测范围判断碰撞箱之间是否接触，赋值给变量。
 ```c#
@@ -161,7 +161,7 @@ public void check()
 }
 ```
 其中设置选取合适的layer
-![[Pasted image 20260223170011.png]]
+![](https://i.ibb.co/gM6cWMxJ/20260428185521-10.png)
 
 
 选择人物脚底中心点作为坐标点，并设置检测范围，通过创建变量来访问组件，限制跳跃次数。 
@@ -181,33 +181,33 @@ private void OnDrawGizmosSelected()
     Gizmos.DrawWireSphere((Vector2)transform.position + transform.localScale*bottomOffset, checkRadius);
 }
 ```
-![[Pasted image 20260223170232.png|156]]![[Pasted image 20260223170246.png|400]]
+![](https://i.ibb.co/WNZbdHtF/20260428185521-11.png)![](https://i.ibb.co/JRBFfphF/20260428185521-12.png)
 
 创建物理材质和避免人物粘在墙上。
-![[Pasted image 20260223170345.png]]
+![](https://i.ibb.co/B2nW8Nh4/20260428185521-13.png)
 ## 2.5 创建人物动画
 ### 2.5.1 人物基本动画
  
 制作人物的动画，也就是制作帧动画。创建新的文件夹保存所有的动画和动画控制器，给它起名叫做animations 
-![[Pasted image 20260224183645.png]]
+![](https://i.ibb.co/ync0PW9M/20260428185521-14.png)
 创建animator控制器，并打开界面
-![[Pasted image 20260224183734.png]]
+![](https://i.ibb.co/Jw3YLpwX/20260428185521-15.png)
 
 将人物动画并添加到animator中，并且调整采样率和播放速度
-![[Pasted image 20260225145815.png]]
+![](https://i.ibb.co/ynmdx791/20260428185521-16.png)
 在这里可以显示采样率，并且改为帧显示。 
 
 创建人物跑动动画并设置播放状态
-![[Pasted image 20260225150333.png]]
+![](https://i.ibb.co/8ngS9jWX/20260428185521-17.png)
 
 在animator中可以连接各个animation，并且设置不同的条件进行状态切换
-![[Pasted image 20260225150414.png]]
+![](https://i.ibb.co/HT0zt2HF/20260428185521-18.png)
 而使用exit time实现动画切换，不需要任何条件 
-![[Pasted image 20260225150439.png]]
+![](https://i.ibb.co/845Sc3B0/20260428185521-19.png)
 在parameters创建条件，以速度条件来切换跑步动画，
-![[Pasted image 20260225151100.png|329]]![[Pasted image 20260225151117.png|350]]
+![](https://i.ibb.co/WWPt8YVM/20260428185521-20.png)![](https://i.ibb.co/6Rn5n6Vf/20260428185521-21.png)
 创建新的C#脚本 PlayerAnimation，获得animator组件的使用权，控制人物动画切换
-![[Pasted image 20260225151242.png|450]]
+![](https://i.ibb.co/N2w1wqzz/20260428185521-22.png)
 
 区分animator和animation的概念，要在脚本中获取animator的组件权限，要创建变量，animator的变量命名为animal缩写。 
 
@@ -240,20 +240,20 @@ private void Awake()
  }
 ```
 完成绑定和相互的操作
-![[Pasted image 20260225152906.png]]
+![](https://i.ibb.co/GhYjY75/20260428185521-23.png)
 
 可以创建走路和跑步的动画，通过条件切换实现
-![[Pasted image 20260225153952.png]]
+![](https://i.ibb.co/yBb8cW9V/20260428185521-24.png)
 
 ### 2.5.2 跳跃动画
 
  使用Blend tree混合来创建多个阶段的动画
- ![[Pasted image 20260225163347.png]]
+ ![](https://i.ibb.co/cS6zmyq6/20260428185521-25.png)
  
   在动画制作中使用float值和列表来添加动画片段和控制其转换速度，创建一个新的float值，名为velocityY。
 
 跳跃的状态转换通过 velocityY 切换
-![[Pasted image 20260225164724.png|400]]
+![](https://i.ibb.co/DDLc135r/20260428185521-26.png)
 使用代码填入控制动画的切换条件变量
 ```c#
 public class PlayerAnimation : MonoBehaviour
@@ -280,28 +280,28 @@ public class PlayerAnimation : MonoBehaviour
 }
 ```
 并且设置animator中的转换过程，其中land可以设置为有速度就强制停止，避免细节落地后的蹲起的时候在跑步。
-![[Pasted image 20260225164848.png]]
+![](https://i.ibb.co/4ZyJNLm7/20260428185521-27.png)
 
 ## 2.6 人物属性与伤害计算
 
 添加敌人，即野猪的不同状态
-![[Pasted image 20260227171557.png]]
+![](https://i.ibb.co/KxJrhdPc/20260428185521-28.png)
 调整野猪的Sorting Layer和Layer，使其与玩家在同一层中,但是优先级小于player
 
 Sorting Layer
-![[Pasted image 20260227171655.png]]
+![](https://i.ibb.co/BVbs1FpR/20260428185521-29.png)
 
 Layer
-![[Pasted image 20260227171702.png]]
+![](https://i.ibb.co/JjRtqNt3/20260428185521-30.png)
 
 设置触发器，实现野猪和玩家互相穿越和穿过过程中发生事情的具体逻辑，即通过触发器检测实现攻击和伤害判定。
-![[Pasted image 20260227171909.png]]\
+![](https://i.ibb.co/C5zrGxhh/20260428185521-31.png)\
 
 给野猪设置两个不同的碰撞体，一个是矩形，一个是胶囊形，调整胶囊大小和方向。
-![[Pasted image 20260227171925.png]]
+![](https://i.ibb.co/tMbLtBhJ/20260428185521-32.png)
 
 同时添加碰撞剔除层，将角色之间的碰撞取消，避免堵塞。 
-![[Pasted image 20260227173208.png|425]]
+![](https://i.ibb.co/sT7hRzM/20260428185521-33.png)
 
 在脚本中，使用on trigger state2D方法检测碰撞触发器
 ```c#
@@ -426,14 +426,14 @@ private void Start()
 
 1.受伤2种动画表现
 在animation中创建受伤与死亡的动画效果
-![[Pasted image 20260320111929.png]]
+![](https://i.ibb.co/xbjgWZK/20260428185521-34.png)
 由于在任何动作情况下，角色都可能受伤，因此在Layer创建新的单独层可以覆盖到上一层的各个动作；
-![[Pasted image 20260320112141.png|291]]
+![](https://i.ibb.co/PGbWLsRf/20260428185521-35.png)
 
 为给角色添加闪烁的受伤效果，在animation可以添加新的 property(性质)；修改如rgb值，并且在时间轴挑选时间点改动，过渡段就能创造出闪烁的效果
-![[Pasted image 20260320112731.png]]
+![](https://i.ibb.co/twq1n5mV/20260428185521-36.png)
 之后在animator中，重新在hurt layer创建并且标好条件
-![[Pasted image 20260320113643.png]]
+![](https://i.ibb.co/PskHqp9m/20260428185521-37.png)
 
 2.UnityEvent 使用方法
 创建trigger触发器的功能，在 PlayerAnimation.cs 中,加入代码
@@ -448,7 +448,7 @@ public void PlayHurt()
  public UnityEvent<Transform> OnTakeDamage;
 ```
 这样就能实现将各种想要实现的功能集成起来，只需要传入所需的参数
-![[Pasted image 20260320114803.png]]
+![](https://i.ibb.co/sJCjKScp/20260428185521-38.png)
 在代码中，执行unityevent需要使用固定的invoke方法，?. 能避免空值时候的错误，是一种固定写法。
 
 3.受伤和死亡的函数
@@ -464,7 +464,7 @@ public void GetHurt(Transform attacker)
 }
 ```
 同时在animator中也可以创建用于控制人物状态的代码
-![[Pasted image 20260320171222.png]]
+![](https://i.ibb.co/5xg4ZCz6/20260428185521-39.png)
 
 同样，人物死亡也有事件方法，即 public UnityEvent onDie ; 并且触发 onDie?.Invoke();
 在PlayerController.cs中，死亡即执行
@@ -478,29 +478,29 @@ public void PlayerDead()
 
 ### 2.7.2 三段攻击动画
 创建三段的攻击动画，为attack1、2、3；并且在animation中单独创建attack layer，权重也设置为1
-![[Pasted image 20260320171831.png]]
+![](https://i.ibb.co/v6GBYyFx/20260428185521-40.png)
 
 创建布尔值 isattack，和用于触发多段攻击的触发器attack；设置对应的条件
-![[Pasted image 20260320172102.png]]
+![](https://i.ibb.co/Z184pvPb/20260428185521-41.png)
 在inputsystem中也加入攻击相关的输入，同时在playercontroller.cs和playeranimation中添加对应的代码
-![[Pasted image 20260320173229.png]]
+![](https://i.ibb.co/GvQTFGMr/20260428185521-42.png)
 
 animator中，攻击退出后，将isattack也设置回去，也在动画状态上添加脚本
-![[Pasted image 20260320173714.png]]
+![](https://i.ibb.co/75M2hv6/20260428185521-43.png)
 
 ### 2.7.3 攻击效果实装
 在攻击动画中，出现剑影的动画片段实装攻击效果，单独在角色的下面创建子集gameobject，添加上碰撞体还有触发器
-![[Pasted image 20260320174619.png]]
+![](https://i.ibb.co/rfyXV3hv/20260428185521-44.png)
 
 添加多边形碰撞体
-![[Pasted image 20260320174731.png|465]]
+![](https://i.ibb.co/Kcsg4Sdz/20260428185521-45.png)
 ，并且勾选触发器
-![[Pasted image 20260320174718.png|475]]
+![](https://i.ibb.co/6G8700y/20260428185521-46.png)
 
 为防止攻击时的判定范围覆盖人物，伤到角色，在layers override中将人物本身进行排除；
-![[Pasted image 20260320181140.png]]
+![](https://i.ibb.co/Z6bS2pcC/20260428185521-47.png)
 同时，修改野猪也就是敌人身上碰撞体的优先级
-![[Pasted image 20260320191323.png|375]]
+![](https://i.ibb.co/R423y7nS/20260428185521-48.png)
 
 使用光滑材质会导致人物移动距离位移，需要修改材质，避免这种情况，重新创建不一样的物理材质并且在代码中加变量来控制材质
 ```c#
