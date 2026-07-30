@@ -1,5 +1,0 @@
-# Deployment Test 3
-
-Time: Thu Jul 30 18:17:58     2026
-Status: Testing with file in public/ directory
-This file should be copied to dist/ during build
