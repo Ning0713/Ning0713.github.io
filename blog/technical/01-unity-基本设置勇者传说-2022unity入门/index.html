@@ -1,0 +1,543 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>01 Unity 基本设置(勇者传说-2022Unity入门) | 不宁yasushi</title><meta name="description" content="通过M_studio的勇者传说学习Unity入门基础"><link rel="canonical" href="https://ning0713.top/blog/technical/01-unity-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E5%8B%87%E8%80%85%E4%BC%A0%E8%AF%B4-2022unity%E5%85%A5%E9%97%A8/"><meta name="generator" content="Astro v5.18.1"><script>
+      (() => {
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldUseDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+        document.documentElement.classList.toggle('dark', shouldUseDark);
+      })();
+    </script><link rel="stylesheet" href="/assets/category_.CvMugi8r.css">
+<style>.toc-panel[data-astro-cid-xvrfupwn]{padding-top:.15rem;font-family:Microsoft YaHei,微软雅黑,PingFang SC,Hiragino Sans GB,sans-serif}.toc-title[data-astro-cid-xvrfupwn]{margin:0 0 .95rem;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgb(var(--color-ink) / .86)}.toc-shell[data-astro-cid-xvrfupwn] .toc-list{margin:0;padding:0;list-style:none}.toc-shell[data-astro-cid-xvrfupwn] .toc-item+.toc-item{margin-top:.06rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-item>.toc-list{margin-top:.08rem;margin-left:.82rem;padding-left:.36rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-row{display:flex;align-items:center;gap:.22rem;min-width:0}.toc-shell[data-astro-cid-xvrfupwn] .toc-link{display:block;min-width:0;flex:1 1 auto;padding:.34rem .58rem;overflow:hidden;text-overflow:ellipsis;color:rgb(var(--color-muted));font-size:.8rem;line-height:1.3;font-weight:400;border-radius:9999px;transition:color .18s ease,background-color .18s ease,box-shadow .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:1.35rem;height:1.35rem;border:0;border-radius:9999px;color:rgb(var(--color-muted));background:transparent;cursor:pointer;transition:color .18s ease,background-color .18s ease,transform .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle:hover{color:rgb(var(--color-ink));background:rgb(var(--color-card) / .86)}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle-icon{width:0;height:0;border-top:.25rem solid transparent;border-bottom:.25rem solid transparent;border-left:.32rem solid currentColor;transform:translate(.04rem);transition:transform .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle[aria-expanded=true] .toc-toggle-icon{transform:translateY(.04rem) rotate(90deg)}.toc-shell[data-astro-cid-xvrfupwn] .toc-link:hover,.toc-shell[data-astro-cid-xvrfupwn] .toc-link[data-active=true]{color:rgb(var(--color-ink));background:rgb(var(--color-card) / .96);box-shadow:0 14px 34px -26px #0f172a52}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="1"]>.toc-row>.toc-link{font-size:.82rem;color:rgb(var(--color-ink) / .88)}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="2"]>.toc-row>.toc-link{font-size:.77rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="3"]>.toc-row>.toc-link,.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="4"]>.toc-row>.toc-link{font-size:.74rem;opacity:.92}
+.content-detail-title[data-astro-cid-scuu7fyy]{font-family:Avenir Next,Helvetica Neue,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif;letter-spacing:-.035em}.content-meta-pill[data-astro-cid-scuu7fyy]{display:inline-flex;align-items:center;min-height:2rem;border:1px solid rgb(var(--color-line) / .78);border-radius:9999px;background:rgb(var(--color-card) / .72);padding:.35rem .85rem;font-size:.78rem;line-height:1;color:rgb(var(--color-muted))}.article-with-hero[data-astro-cid-scuu7fyy]{margin-top:-.5rem}.article-hero[data-astro-cid-scuu7fyy]{position:relative;isolation:isolate;color:rgb(var(--color-ink))}.article-hero-image-frame[data-astro-cid-scuu7fyy]{position:relative;width:min(100%,65ch);margin-bottom:1.2rem;overflow:visible}.article-hero-cover[data-astro-cid-scuu7fyy],.article-hero-blur[data-astro-cid-scuu7fyy]{max-height:min(22rem,46vh);-o-object-fit:contain;object-fit:contain}.article-hero-cover[data-astro-cid-scuu7fyy]{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:1rem}.article-hero-blur[data-astro-cid-scuu7fyy]{position:absolute;inset-inline-start:0;top:0;z-index:0;width:100%;height:100%;border-radius:1.5rem;filter:blur(34px) saturate(1.18);opacity:.5;transform:translate(5.25rem,1.35rem) scale(1.02);transition:opacity .3s ease}.article-hero-meta[data-astro-cid-scuu7fyy]{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem 1.15rem;color:rgb(var(--color-muted));font-size:.78rem;line-height:1.5}.article-hero-meta-item[data-astro-cid-scuu7fyy]{display:inline-flex;align-items:center;gap:.4rem;min-width:0}.article-hero-icon[data-astro-cid-scuu7fyy]{width:1rem;height:1rem;flex:0 0 auto;opacity:.82}.article-hero-hash-icon[data-astro-cid-scuu7fyy]{width:1.04rem;height:1.04rem}.article-hero-update[data-astro-cid-scuu7fyy]{white-space:nowrap}.article-hero-tags[data-astro-cid-scuu7fyy]{flex-wrap:wrap}.article-hero-meta-link[data-astro-cid-scuu7fyy]{color:inherit;text-decoration:none}.article-hero-meta-link[data-astro-cid-scuu7fyy]:hover{color:rgb(var(--color-accent));text-decoration:underline;text-underline-offset:.22em}.article-hero-tag-separator[data-astro-cid-scuu7fyy]{opacity:.72}.article-hero-title[data-astro-cid-scuu7fyy]{margin-top:1.15rem;font-family:Avenir Next,Helvetica Neue,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif;font-size:1.65rem;font-weight:400;line-height:1.24;letter-spacing:0}.article-hero-description[data-astro-cid-scuu7fyy]{margin-top:.55rem;border-left:0;padding-left:0;color:rgb(var(--color-muted));font-size:.9rem;font-style:italic;line-height:1.65}.article-hero-description[data-astro-cid-scuu7fyy] q[data-astro-cid-scuu7fyy]{quotes:"“" "”" "‘" "’"}.article-hero-divider[data-astro-cid-scuu7fyy]{margin-top:.95rem;width:min(12rem,42%);border-top:1px solid rgb(var(--color-line) / .85)}@media(min-width:640px){.article-hero-title[data-astro-cid-scuu7fyy]{font-size:1.9rem}}@media(max-width:640px){.article-with-hero[data-astro-cid-scuu7fyy]{margin-top:-.25rem}.article-hero-image-frame[data-astro-cid-scuu7fyy]{width:100%;margin-bottom:.9rem}.article-hero-title[data-astro-cid-scuu7fyy]{font-size:1.72rem}.article-hero-meta[data-astro-cid-scuu7fyy]{gap:.45rem .9rem;font-size:.76rem}}
+</style></head> <body class="is-inner-page" data-astro-cid-37fxchfa> <div id="highlight-gradient" class="site-highlight-gradient" style="background-image: linear-gradient(#284892 0%, rgb(var(--color-paper) / 0.94) 95%, transparent 100%);" aria-hidden="true" data-astro-cid-37fxchfa></div> <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-site-header data-scrolled="false" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <div class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> <span class="font-serif" data-astro-cid-37fxchfa>不宁yasushi's Blog</span> </a> <p class="site-motto text-xs font-normal italic leading-7 text-muted sm:text-sm" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>
+C&apos;est une grande habilet&eacute; que de savoir cacher son habilet&eacute;.
+</p> </div> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="Primary navigation" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center rounded-full border border-line/80 site-blog-nav-active bg-line/52 text-ink" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link pl-3 pr-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Blog </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center px-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 text-ink transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="absolute right-0 z-20 mt-2 w-52 rounded-2xl border border-line/80 bg-paper/95 p-2 text-black shadow-card backdrop-blur dark:text-ink" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Technical </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Life and Talk </a><a href="/blog/category/journal" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Journal </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/projects" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Projects </a> </li><li data-astro-cid-37fxchfa> <a href="/academic" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Academic </a> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Links </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> About </a> </li> <li class="site-theme-toggle-slot" data-astro-cid-37fxchfa> <button type="button" data-theme-toggle class="theme-toggle-button" aria-label="Toggle color theme"> <span class="theme-toggle-kicker">Theme</span> <span class="theme-toggle-value" data-theme-label>Dark</span> </button> <script>
+  const root = document.documentElement;
+  const button = document.querySelector('[data-theme-toggle]');
+  const label = button?.querySelector('[data-theme-label]');
+
+  const syncThemeLabel = () => {
+    const isDark = root.classList.contains('dark');
+    if (label) {
+      label.textContent = isDark ? 'Light' : 'Dark';
+    }
+    button?.setAttribute('aria-pressed', String(isDark));
+  };
+
+  syncThemeLabel();
+
+  button?.addEventListener('click', () => {
+    const shouldUseDark = !root.classList.contains('dark');
+    root.classList.toggle('dark', shouldUseDark);
+    localStorage.setItem('theme', shouldUseDark ? 'dark' : 'light');
+    syncThemeLabel();
+  });
+</script> </li> </ul> </nav> </div> </div> </div> </header> <main class="flex-1" data-astro-cid-37fxchfa>  <article class="mx-auto w-full max-w-6xl article-with-hero" data-astro-cid-scuu7fyy> <div class="lg:grid lg:grid-cols-[minmax(0,44rem)_16rem] lg:gap-12" data-astro-cid-scuu7fyy> <div data-astro-cid-scuu7fyy> <header class="article-hero mb-6" data-astro-cid-scuu7fyy> <div class="article-hero-image-frame" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/NQbFKCd/20260428190838.png" alt="空洞骑士" class="article-hero-cover" loading="eager" decoding="async" fetchpriority="high" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/NQbFKCd/20260428190838.png" alt="" class="article-hero-blur" loading="eager" decoding="async" fetchpriority="high" aria-hidden="true" data-article-hero-blur data-astro-cid-scuu7fyy> </div> <div class="article-hero-meta" data-astro-cid-scuu7fyy> <time class="article-hero-meta-item" datetime="2025-10-31T00:00:00.000Z" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4M16 2v4M3.5 9.5h17M5.5 4h13A2.5 2.5 0 0 1 21 6.5v12A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5v-12A2.5 2.5 0 0 1 5.5 4Z" data-astro-cid-scuu7fyy></path> </svg> <span data-astro-cid-scuu7fyy>Oct 31, 2025</span> <span class="article-hero-update" data-astro-cid-scuu7fyy>
+/ Update Oct 31, 2025 </span> </time> <span class="article-hero-meta-item" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <circle cx="12" cy="12" r="9" data-astro-cid-scuu7fyy></circle> <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2" data-astro-cid-scuu7fyy></path> </svg> <span data-astro-cid-scuu7fyy>3 min read</span> </span> <span class="article-hero-meta-item" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 1 0 9 9 6 6 0 0 1-9-9Z" data-astro-cid-scuu7fyy></path> <path stroke-linecap="round" stroke-linejoin="round" d="M19 4v4M21 6h-4" data-astro-cid-scuu7fyy></path> </svg> <a href="https://wall.alphacoders.com/big.php?i=1361079" target="_blank" rel="noreferrer" class="article-hero-meta-link" data-astro-cid-scuu7fyy>
+Hero Image
+</a> </span> <span class="article-hero-meta-item article-hero-tags" data-astro-cid-scuu7fyy> <svg class="article-hero-icon article-hero-hash-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17" data-astro-cid-scuu7fyy></path> </svg>  <a href="/blog/tag/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E" class="article-hero-meta-link" data-astro-cid-scuu7fyy>游戏引擎</a> <span class="article-hero-tag-separator" data-astro-cid-scuu7fyy>/</span> <a href="/blog/tag/%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0" class="article-hero-meta-link" data-astro-cid-scuu7fyy>入门学习</a>  </span> </div> <h1 class="article-hero-title" data-astro-cid-scuu7fyy> 01 Unity 基本设置(勇者传说-2022Unity入门) </h1> <blockquote class="article-hero-description" data-astro-cid-scuu7fyy> <q data-astro-cid-scuu7fyy>通过M_studio的勇者传说学习Unity入门基础</q> </blockquote>  <div class="article-hero-divider" aria-hidden="true" data-astro-cid-scuu7fyy></div> </header> <div class="mb-10 lg:hidden" data-astro-cid-scuu7fyy> <nav class="toc-panel" data-toc aria-label="Contents" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>Contents</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#01-unity-基本设置" class="toc-link" data-toc-link data-toc-slug="01-unity-基本设置">
+              01 Unity 基本设置
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 01 Unity 基本设置" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="2">
+          <div class="toc-row">
+            <a href="#11-unity界面介绍" class="toc-link" data-toc-link data-toc-slug="11-unity界面介绍">
+              1.1 Unity界面介绍
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="2">
+          <div class="toc-row">
+            <a href="#12-素材导入" class="toc-link" data-toc-link data-toc-slug="12-素材导入">
+              1.2 素材导入
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#13-场景绘制和叠层设置" class="toc-link" data-toc-link data-toc-slug="13-场景绘制和叠层设置">
+              1.3 场景绘制和叠层设置
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 1.3 场景绘制和叠层设置" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#131-tile-palette面板" class="toc-link" data-toc-link data-toc-slug="131-tile-palette面板">
+              1.3.1 Tile Palette面板
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#132-图层" class="toc-link" data-toc-link data-toc-slug="132-图层">
+              1.3.2 图层
+            </a>
+            
+          </div>
+          
+        </li></ol>
+        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#14-有规则和动态瓦片" class="toc-link" data-toc-link data-toc-slug="14-有规则和动态瓦片">
+              1.4 有规则和动态瓦片
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 1.4 有规则和动态瓦片" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#141-规则瓦片" class="toc-link" data-toc-link data-toc-slug="141-规则瓦片">
+              1.4.1 规则瓦片
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#142-动态瓦片" class="toc-link" data-toc-link data-toc-slug="142-动态瓦片">
+              1.4.2 动态瓦片
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#143-精灵图集" class="toc-link" data-toc-link data-toc-slug="143-精灵图集">
+              1.4.3 精灵图集
+            </a>
+            
+          </div>
+          
+        </li></ol>
+        </li></ol>
+        </li></ol></div></nav><script>
+  (() => {
+    const tocNodes = document.querySelectorAll('[data-toc]');
+    for (const toc of tocNodes) {
+      if (!(toc instanceof HTMLElement)) {
+        continue;
+      }
+
+      const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
+      const toggleButtons = Array.from(toc.querySelectorAll('[data-toc-toggle]')).filter(
+        (button) => button instanceof HTMLButtonElement,
+      );
+
+      for (const button of toggleButtons) {
+        button.addEventListener('click', () => {
+          const branch = button.closest('[data-toc-branch]');
+          if (!(branch instanceof HTMLElement)) {
+            return;
+          }
+
+          const childList = Array.from(branch.children).find((child) =>
+            child instanceof HTMLOListElement && child.classList.contains('toc-children')
+          );
+
+          if (!(childList instanceof HTMLOListElement)) {
+            return;
+          }
+
+          const nextExpanded = button.getAttribute('aria-expanded') !== 'true';
+          button.setAttribute('aria-expanded', String(nextExpanded));
+          branch.dataset.collapsed = String(!nextExpanded);
+          childList.hidden = !nextExpanded;
+        });
+      }
+
+      if (links.length === 0) {
+        continue;
+      }
+
+      const pairs = links
+        .map((link) => {
+          const slug = link.dataset.tocSlug;
+          if (!slug) {
+            return null;
+          }
+
+          const target = document.getElementById(slug);
+          if (!(target instanceof HTMLElement)) {
+            return null;
+          }
+
+          return { link, target };
+        })
+        .filter(Boolean);
+
+      if (pairs.length === 0) {
+        continue;
+      }
+
+      const setActive = (slug) => {
+        for (const { link } of pairs) {
+          link.dataset.active = String(link.dataset.tocSlug === slug);
+        }
+      };
+
+      const visibleIds = new Set();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!(entry.target instanceof HTMLElement)) {
+              continue;
+            }
+
+            if (entry.isIntersecting) {
+              visibleIds.add(entry.target.id);
+            } else {
+              visibleIds.delete(entry.target.id);
+            }
+          }
+
+          const activePair =
+            pairs.find(({ target }) => visibleIds.has(target.id)) ??
+            pairs.find(({ target }) => target.getBoundingClientRect().top >= 0) ??
+            pairs[pairs.length - 1];
+
+          if (activePair) {
+            setActive(activePair.target.id);
+          }
+        },
+        {
+          rootMargin: '-16% 0px -66% 0px',
+          threshold: [0, 1],
+        },
+      );
+
+      for (const { target } of pairs) {
+        observer.observe(target);
+      }
+
+      setActive(pairs[0].target.id);
+    }
+  })();
+</script> </div> <div class="content-prose prose prose-slate max-w-none dark:prose-invert" data-astro-cid-scuu7fyy>  <p><a href="https://space.bilibili.com/370283072/lists/1187255?type=season">M_Studio的勇者传说-2022Unity入门</a> 主要是知识点整理笔记</p>
+<h1 id="01-unity-基本设置">01 Unity 基本设置</h1>
+<h2 id="11-unity界面介绍">1.1 Unity界面介绍</h2>
+<p>通过这个小图标可以开启/关闭 Gizmos的显示,下拉箭头可以调整Gizmos的相关参数.</p>
+<p><img src="https://i.ibb.co/KcJxY2G6/20260428183700.png" alt="">
+使创建物体起始坐标为(0,0,0)的设置.</p>
+<p><img src="https://i.ibb.co/vC9gmzDL/20260428183700-1.png" alt="">
+将游戏”测试运行”时候改变窗口颜色设置,这样可以提示自己游戏正在测试中,这时候修改游戏参数是没用的.</p>
+<h2 id="12-素材导入">1.2 素材导入</h2>
+<p>1.像素大小修改</p>
+<p>对不一样的像素大小设计的图片修改每个单元内像素的大小。
+<img src="https://i.ibb.co/21H7hpf2/20260428183700-2.png" alt="">
+“Pixels Per Unit”改为16;“Filter Mode”改为”Point(no filter)”;“Compression”改为”None”.</p>
+<p>﻿2.人物素材切片
+﻿
+打开Sprite Editor,Slice下的Type由”Automatic”改为”Grid By Cell Size”,Pivot改为”Bottom”,以将图片分切割成8X11的格子.点”应用”,然后你的图片就会按照上面的大小被分成若干sprite图片文件了.
+<img src="https://i.ibb.co/dszhySD4/20260428183700-3.png" alt=""></p>
+<h2 id="13-场景绘制和叠层设置">1.3 场景绘制和叠层设置</h2>
+<h3 id="131-tile-palette面板">1.3.1 Tile Palette面板</h3>
+<p><img src="https://i.ibb.co/ZzDgYpFb/20260428183700-4.png" alt="">
+打开瓦片调色盘 Window->2D->Tile Palette.
+Create一个新的Palette保存在Tile Map文件夹下.然后将之前切好的图片素材拖入到调色盘内,将新生成的瓦片存在Tiles文件夹下.</p>
+<p>从下图中添加Tilemap.
+<img src="https://i.ibb.co/PvvBCY3L/20260428183700-5.png" alt=""></p>
+<p>之后会生成一个Grid和一个TileMap,TileMap是Grid的子集.之后你可以在Grid的子集下不断创建TileMap.</p>
+<h3 id="132-图层">1.3.2 图层</h3>
+<p>调整Renderer下的Sorting Layer以调整图层的排序(与常规绘图软件不同的是Unity中的图层是越往下的图层越靠前)</p>
+<p>调整Renderer下的Ordering Layer可以调整本图层中的图片的排序.</p>
+<p>PS:前面两个杠可以手调图层顺序
+<img src="https://i.ibb.co/84dSpTQM/20260428183700-6.png" alt="">
+﻿
+创建并整理Grid下的7个TileMap.
+之后会发现可以在TilePalette界面选择对应的TileMap来进行绘制.
+<img src="https://i.ibb.co/7dxP53D5/20260428183700-7.png" alt=""></p>
+<p>另外将Focus On设置为Tilemap,这样预览界面就只会显示你正在绘制的Tilemap.
+<img src="https://i.ibb.co/S4K9RhMK/20260428183700-8.png" alt=""></p>
+<h2 id="14-有规则和动态瓦片">1.4 有规则和动态瓦片</h2>
+<h3 id="141-规则瓦片">1.4.1 规则瓦片</h3>
+<p>Rule Tile，可以制定带有规则的瓦片地图，便于模块化制作地图。
+<img src="https://i.ibb.co/XxvRwLX4/20260428183700-9.png" alt=""></p>
+<p>在上图位置创建Rule Tile.然后拖进palette即可.
+<img src="https://i.ibb.co/9kyJjYKs/20260428183700-10.png" alt="">
+关于Rule Tile的使用其实很简单，观察场景中每个瓦片与周围八格瓦片的规律,然后勾表示”有”,叉表示”无”。给rule tile每个瓦片加上其对应的”规律”即可。</p>
+<p>若存在一个位置,同时满足2个或以上瓦片的规律,则该位置unity会优先放置rule tile中位于上方的瓦片。</p>
+<h3 id="142-动态瓦片">1.4.2 动态瓦片</h3>
+<p>Animated Tile，动态瓦片，可以制作带有帧变化效果的瓦片地图。
+创建方式与rule tile相同.
+<img src="https://i.ibb.co/LdBbKb7C/20260428183700-11.png" alt="">
+可以在Animated Tile中为画出的瓦片产生动画效果
+<img src="https://i.ibb.co/35fMZymD/20260428183700-12.png" alt=""></p>
+<p>Tips:实际过程中由于对资产图片的分片，可能导致边缘划分的错误，出现瓦片间存在缝隙，露出背景的颜色，可以使用Sprite Atlas解决。</p>
+<h3 id="143-精灵图集">1.4.3 精灵图集</h3>
+<p>创建 Sprite Atlas（精灵图集）ps:在最后一章打包时会介绍，这里提前学了一下
+这个方法会强制 Unity 重新生成一张大图，并在每个小瓦片周围自动填充一圈颜色(Padding)，这样就算<strong>GPU</strong>读偏了一点点，读到的也是填充的颜色，而不是透明缝隙。</p>
+<ol>
+<li><strong>创建图集：</strong>
+<ul>
+<li>在 <strong>Project</strong> 窗口任意位置，右键点击 -> <strong>Create</strong> -> <strong>2D</strong> -> <strong>Sprite Atlas</strong>。</li>
+<li>命名为 <code>TileAtlas</code>。</li>
+</ul>
+</li>
+<li><strong>配置图集：</strong>
+<ul>
+<li>选中这个新文件，在右侧 <strong>Inspector</strong> 面板里设置：</li>
+<li><strong>Filter Mode</strong>: 改为 <strong>Point (no filter)</strong>。</li>
+<li><strong>Compression</strong>: 改为 <strong>None</strong>。</li>
+<li><strong>Objects for Packing</strong>: 点击列表右下角的 <code>+</code> 号，把贴图文件直接拖进去。</li>
+</ul>
+</li>
+<li><strong>生成：</strong>
+<ul>
+<li>点击最下方的 <strong>Pack Preview</strong> 按钮。</li>
+</ul>
+</li>
+<li><strong>不需要修改代码或场景：</strong>
+<ul>
+<li>Unity 会在后台自动用这个新图集替换你场景里的旧贴图。回到场景看一眼，缝隙应该消失了。
+<img src="https://i.ibb.co/FkHyV9jY/20260428183700-13.png" alt=""></li>
+</ul>
+</li>
+</ol>  </div> </div> <aside class="hidden lg:block lg:sticky lg:top-32 lg:self-start" data-astro-cid-scuu7fyy> <nav class="toc-panel" data-toc aria-label="Contents" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>Contents</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#01-unity-基本设置" class="toc-link" data-toc-link data-toc-slug="01-unity-基本设置">
+              01 Unity 基本设置
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 01 Unity 基本设置" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="2">
+          <div class="toc-row">
+            <a href="#11-unity界面介绍" class="toc-link" data-toc-link data-toc-slug="11-unity界面介绍">
+              1.1 Unity界面介绍
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="2">
+          <div class="toc-row">
+            <a href="#12-素材导入" class="toc-link" data-toc-link data-toc-slug="12-素材导入">
+              1.2 素材导入
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#13-场景绘制和叠层设置" class="toc-link" data-toc-link data-toc-slug="13-场景绘制和叠层设置">
+              1.3 场景绘制和叠层设置
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 1.3 场景绘制和叠层设置" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#131-tile-palette面板" class="toc-link" data-toc-link data-toc-slug="131-tile-palette面板">
+              1.3.1 Tile Palette面板
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#132-图层" class="toc-link" data-toc-link data-toc-slug="132-图层">
+              1.3.2 图层
+            </a>
+            
+          </div>
+          
+        </li></ol>
+        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
+          <div class="toc-row">
+            <a href="#14-有规则和动态瓦片" class="toc-link" data-toc-link data-toc-slug="14-有规则和动态瓦片">
+              1.4 有规则和动态瓦片
+            </a>
+            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 1.4 有规则和动态瓦片" aria-expanded="false">
+                    <span aria-hidden="true" class="toc-toggle-icon"></span>
+                  </button>
+          </div>
+          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#141-规则瓦片" class="toc-link" data-toc-link data-toc-slug="141-规则瓦片">
+              1.4.1 规则瓦片
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#142-动态瓦片" class="toc-link" data-toc-link data-toc-slug="142-动态瓦片">
+              1.4.2 动态瓦片
+            </a>
+            
+          </div>
+          
+        </li><li class="toc-item" data-depth="3">
+          <div class="toc-row">
+            <a href="#143-精灵图集" class="toc-link" data-toc-link data-toc-slug="143-精灵图集">
+              1.4.3 精灵图集
+            </a>
+            
+          </div>
+          
+        </li></ol>
+        </li></ol>
+        </li></ol></div></nav><script>
+  (() => {
+    const tocNodes = document.querySelectorAll('[data-toc]');
+    for (const toc of tocNodes) {
+      if (!(toc instanceof HTMLElement)) {
+        continue;
+      }
+
+      const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
+      const toggleButtons = Array.from(toc.querySelectorAll('[data-toc-toggle]')).filter(
+        (button) => button instanceof HTMLButtonElement,
+      );
+
+      for (const button of toggleButtons) {
+        button.addEventListener('click', () => {
+          const branch = button.closest('[data-toc-branch]');
+          if (!(branch instanceof HTMLElement)) {
+            return;
+          }
+
+          const childList = Array.from(branch.children).find((child) =>
+            child instanceof HTMLOListElement && child.classList.contains('toc-children')
+          );
+
+          if (!(childList instanceof HTMLOListElement)) {
+            return;
+          }
+
+          const nextExpanded = button.getAttribute('aria-expanded') !== 'true';
+          button.setAttribute('aria-expanded', String(nextExpanded));
+          branch.dataset.collapsed = String(!nextExpanded);
+          childList.hidden = !nextExpanded;
+        });
+      }
+
+      if (links.length === 0) {
+        continue;
+      }
+
+      const pairs = links
+        .map((link) => {
+          const slug = link.dataset.tocSlug;
+          if (!slug) {
+            return null;
+          }
+
+          const target = document.getElementById(slug);
+          if (!(target instanceof HTMLElement)) {
+            return null;
+          }
+
+          return { link, target };
+        })
+        .filter(Boolean);
+
+      if (pairs.length === 0) {
+        continue;
+      }
+
+      const setActive = (slug) => {
+        for (const { link } of pairs) {
+          link.dataset.active = String(link.dataset.tocSlug === slug);
+        }
+      };
+
+      const visibleIds = new Set();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!(entry.target instanceof HTMLElement)) {
+              continue;
+            }
+
+            if (entry.isIntersecting) {
+              visibleIds.add(entry.target.id);
+            } else {
+              visibleIds.delete(entry.target.id);
+            }
+          }
+
+          const activePair =
+            pairs.find(({ target }) => visibleIds.has(target.id)) ??
+            pairs.find(({ target }) => target.getBoundingClientRect().top >= 0) ??
+            pairs[pairs.length - 1];
+
+          if (activePair) {
+            setActive(activePair.target.id);
+          }
+        },
+        {
+          rootMargin: '-16% 0px -66% 0px',
+          threshold: [0, 1],
+        },
+      );
+
+      for (const { target } of pairs) {
+        observer.observe(target);
+      }
+
+      setActive(pairs[0].target.id);
+    }
+  })();
+</script> </aside> </div> </article>  </main> <footer class="mt-16 border-t border-line/80 pt-6 text-sm text-muted" data-astro-cid-37fxchfa> <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-astro-cid-37fxchfa> <p class="font-bold text-ink" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>Astro theme powered</p> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" aria-label="Ning0713 on GitHub" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line/80 text-ink transition hover:border-accent/50 hover:text-accent" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true" data-astro-cid-37fxchfa> <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.73-1.33-1.73-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.29 3.51.98.11-.76.42-1.29.77-1.59-2.67-.3-5.48-1.31-5.48-5.86 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.22a11.6 11.6 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.66.25 2.88.12 3.18.77.83 1.23 1.89 1.23 3.19 0 4.56-2.81 5.55-5.49 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z" data-astro-cid-37fxchfa></path> </svg> </a> </div> </footer> </div> <script>
+      (() => {
+        const header = document.querySelector('[data-site-header]');
+        if (!(header instanceof HTMLElement)) {
+          return;
+        }
+
+        const compactAt = 96;
+        const expandAt = 48;
+        let ticking = false;
+        let isCompact = false;
+
+        const getScrollY = () => window.scrollY || document.documentElement.scrollTop || 0;
+
+        const getNextState = () => {
+          if (isCompact) {
+            return getScrollY() > expandAt;
+          }
+
+          return getScrollY() > compactAt;
+        };
+
+        const syncHeaderState = () => {
+          const nextState = getNextState();
+          if (nextState === isCompact) {
+            return;
+          }
+
+          isCompact = nextState;
+          header.dataset.scrolled = String(nextState);
+        };
+
+        const requestSync = () => {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            syncHeaderState();
+            ticking = false;
+          });
+        };
+
+        isCompact = getScrollY() > compactAt;
+        header.dataset.scrolled = String(isCompact);
+        syncHeaderState();
+        window.addEventListener('scroll', requestSync, { passive: true });
+        window.addEventListener('resize', requestSync);
+      })();
+    </script>  </body> </html>  <script type="module">const n=document.querySelector("[data-article-hero-blur]");if(n){const e=window.innerHeight,o=[e/9,e*2/9,e*3/9];let t=!1;const i=()=>{const c=window.scrollY||document.documentElement.scrollTop||0;c>=o[2]?n.style.opacity="0.15":c>=o[1]?n.style.opacity="0.3":c>=o[0]?n.style.opacity="0.45":n.style.opacity="0.6",t=!1};window.addEventListener("scroll",()=>{t||(t=!0,window.requestAnimationFrame(i))},{passive:!0})}document.querySelectorAll(".content-prose pre").forEach(e=>{if(e.querySelector(".code-copy-button"))return;const o=e.querySelector("code");if(!o?.textContent?.trim())return;const t=document.createElement("button");t.type="button",t.className="code-copy-button",t.textContent="Copy",t.setAttribute("aria-label","Copy code"),t.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(o.textContent??""),t.textContent="Copied",window.setTimeout(()=>{t.textContent="Copy"},1600)}catch{t.textContent="Failed",window.setTimeout(()=>{t.textContent="Copy"},1600)}}),e.append(t)});</script>

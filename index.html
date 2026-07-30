@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>不宁yasushi</title><meta name="description" content="A minimal personal website built with Astro, MDX, and Tailwind CSS."><link rel="canonical" href="https://ning0713.top/"><meta name="generator" content="Astro v5.18.1"><script>
+      (() => {
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldUseDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+        document.documentElement.classList.toggle('dark', shouldUseDark);
+      })();
+    </script><link rel="stylesheet" href="/assets/category_.CvMugi8r.css"></head> <body class="is-home-page" data-astro-cid-37fxchfa>  <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-site-header data-scrolled="false" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <div class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> <span class="font-serif" data-astro-cid-37fxchfa>不宁yasushi's Blog</span> </a> <p class="site-motto text-xs font-normal italic leading-7 text-muted sm:text-sm" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>
+C&apos;est une grande habilet&eacute; que de savoir cacher son habilet&eacute;.
+</p> </div> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="Primary navigation" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center rounded-full border border-line/80" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link pl-3 pr-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Blog </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center px-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 text-ink transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="absolute right-0 z-20 mt-2 w-52 rounded-2xl border border-line/80 bg-paper/95 p-2 text-black shadow-card backdrop-blur dark:text-ink" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Technical </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Life and Talk </a><a href="/blog/category/journal" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Journal </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/projects" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Projects </a> </li><li data-astro-cid-37fxchfa> <a href="/academic" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Academic </a> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Links </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> About </a> </li> <li class="site-theme-toggle-slot" data-astro-cid-37fxchfa> <button type="button" data-theme-toggle class="theme-toggle-button" aria-label="Toggle color theme"> <span class="theme-toggle-kicker">Theme</span> <span class="theme-toggle-value" data-theme-label>Dark</span> </button> <script>
+  const root = document.documentElement;
+  const button = document.querySelector('[data-theme-toggle]');
+  const label = button?.querySelector('[data-theme-label]');
+
+  const syncThemeLabel = () => {
+    const isDark = root.classList.contains('dark');
+    if (label) {
+      label.textContent = isDark ? 'Light' : 'Dark';
+    }
+    button?.setAttribute('aria-pressed', String(isDark));
+  };
+
+  syncThemeLabel();
+
+  button?.addEventListener('click', () => {
+    const shouldUseDark = !root.classList.contains('dark');
+    root.classList.toggle('dark', shouldUseDark);
+    localStorage.setItem('theme', shouldUseDark ? 'dark' : 'light');
+    syncThemeLabel();
+  });
+</script> </li> </ul> </nav> </div> </div> </div> </header> <main class="flex-1" data-astro-cid-37fxchfa>  <section class="mx-auto w-full max-w-5xl space-y-14"> <section class="surface-card rounded-[2rem] border border-line/80 p-5 shadow-card sm:p-6 lg:ml-[12.5rem]"> <div class="grid gap-6 lg:grid-cols-[9rem_minmax(0,1fr)] lg:items-center"> <div class="overflow-hidden rounded-2xl border border-line/80 bg-paper/60 p-1 shadow-card"> <img src="/assets/千咲头像.AsCDccBw.jpg" alt="不宁yasushi avatar" class="aspect-square w-full rounded-xl object-cover" loading="eager"> </div> <div> <h1 class="text-2xl font-bold tracking-tight text-ink sm:text-3xl">不宁yasushi</h1> <div class="mt-5 flex flex-wrap gap-2.5"> <span class="inline-flex items-center gap-2 rounded-2xl border border-line/80 px-3.5 py-1.5 text-xs text-muted sm:text-sm"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-4 w-4" aria-hidden="true"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s6-5.33 6-11a6 6 0 1 0-12 0c0 5.67 6 11 6 11Z"></path> <circle cx="12" cy="10" r="2.5"></circle> </svg> <span>China, Nanjing</span> </span> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-2xl border border-line/80 px-3.5 py-1.5 text-xs text-muted hover:border-accent/50 hover:text-ink sm:text-sm"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true"> <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.73-1.33-1.73-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.29 3.51.98.11-.76.42-1.29.77-1.59-2.67-.3-5.48-1.31-5.48-5.86 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.22a11.6 11.6 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.66.25 2.88.12 3.18.77.83 1.23 1.89 1.23 3.19 0 4.56-2.81 5.55-5.49 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"></path> </svg> <span>Github</span> </a> <a href="https://www.zhihu.com/people/Ning0713" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-2xl border border-line/80 px-3.5 py-1.5 text-xs text-muted hover:border-accent/50 hover:text-ink sm:text-sm"> <img src="/assets/知乎.CBXQv2DR.svg" alt="" aria-hidden="true" class="h-4 w-4"> <span>Zhihu</span> </a> </div> </div> </div> </section> <section class="grid gap-6 lg:grid-cols-[11rem_minmax(0,1fr)]"> <h2 class="pt-2 text-2xl font-bold text-black dark:text-ink">About</h2> <div class="surface-card rounded-[2rem] border border-line/80 p-7 shadow-card"> <p class="profile-copy text-base text-black dark:text-ink">普通学生而已 /</p> <p class="profile-copy mt-7 text-sm leading-8 text-black dark:text-ink sm:text-base"> 来自南京信息工程大学计算机科学与技术专业，23级本科在读中。我的研究范围涉及移动系统安全、深度学习与图形学相关领域~ 梦想是成为出色的独立创作者和好的技术美术。 </p> <div class="mt-7 flex justify-end"> <a href="/about" class="rounded-2xl border border-line/80 px-5 py-2.5 text-xs text-muted hover:border-accent/50 hover:text-ink sm:text-sm">
+More about me
+</a> </div> </div> </section> <section class="grid gap-6 lg:grid-cols-[11rem_minmax(0,1fr)]"> <h2 class="pt-2 text-2xl font-bold text-black dark:text-ink">Education</h2> <div class="space-y-5"> <article class="surface-card rounded-[2rem] border border-line/80 p-7 shadow-card"> <h3 class="text-lg font-bold text-black dark:text-ink sm:text-xl">南京信息工程大学</h3> <p class="mt-3 text-sm font-normal text-black dark:text-ink sm:text-base">计算机科学与技术专业，本科</p> <p class="mt-2 text-xs font-normal italic text-black dark:text-ink sm:text-sm" style="font-family: 'Times New Roman', Times, serif;">
+Sep 2023 - Present
+</p> </article> </div> </section> <section class="grid gap-6 lg:grid-cols-[11rem_minmax(0,1fr)]"> <h2 class="pt-2 text-2xl font-bold text-black dark:text-ink">Statistics</h2> <div class="space-y-4"> <div class="grid gap-4 sm:grid-cols-3"> <article class="surface-card rounded-[1.75rem] border border-line/80 p-6 shadow-card"> <p class="text-xs text-black dark:text-ink sm:text-sm">Days Online</p> <p class="mt-4 text-2xl font-bold text-black dark:text-ink">121</p> </article> <article class="surface-card rounded-[1.75rem] border border-line/80 p-6 shadow-card"> <p class="text-xs text-black dark:text-ink sm:text-sm">Last Updated</p> <p class="mt-4 text-base font-bold text-black dark:text-ink sm:text-lg">Apr 6, 2026</p> </article> <article class="surface-card rounded-[1.75rem] border border-line/80 p-6 shadow-card"> <p class="text-xs text-black dark:text-ink sm:text-sm">Total Words</p> <p class="mt-4 text-2xl font-bold text-black dark:text-ink">22,205</p> </article> </div> <article class="surface-card flex items-center justify-between rounded-2xl border border-line/80 px-5 py-3.5 shadow-card"> <p class="text-sm font-normal text-black dark:text-ink sm:text-base">Total Posts</p> <p class="text-lg font-normal text-black dark:text-ink sm:text-xl">4</p> </article> </div> </section> <section class="w-full"> <article class="surface-card w-full rounded-[2rem] border border-line/80 p-6 shadow-card sm:p-7"> <div class="space-y-3"> <p class="text-base font-normal text-black dark:text-ink">
+GitHub contribution data is not configured yet.
+</p> <p class="text-sm font-normal leading-7 text-black/70 dark:text-ink/70"> Set GH_CONTRIBUTION_TOKEN in .env or GitHub Actions Secrets to load GitHub contributions. </p> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" class="inline-flex rounded-2xl border border-line/80 px-4 py-2 text-sm text-black transition hover:border-accent/50 hover:text-ink dark:text-ink">
+Visit GitHub Profile
+</a> </div> </article> </section> </section>  </main> <footer class="mt-16 border-t border-line/80 pt-6 text-sm text-muted" data-astro-cid-37fxchfa> <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-astro-cid-37fxchfa> <p class="font-bold text-ink" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>Astro theme powered</p> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" aria-label="Ning0713 on GitHub" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line/80 text-ink transition hover:border-accent/50 hover:text-accent" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true" data-astro-cid-37fxchfa> <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.73-1.33-1.73-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.29 3.51.98.11-.76.42-1.29.77-1.59-2.67-.3-5.48-1.31-5.48-5.86 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.22a11.6 11.6 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.66.25 2.88.12 3.18.77.83 1.23 1.89 1.23 3.19 0 4.56-2.81 5.55-5.49 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z" data-astro-cid-37fxchfa></path> </svg> </a> </div> </footer> </div> <script>
+      (() => {
+        const header = document.querySelector('[data-site-header]');
+        if (!(header instanceof HTMLElement)) {
+          return;
+        }
+
+        const compactAt = 96;
+        const expandAt = 48;
+        let ticking = false;
+        let isCompact = false;
+
+        const getScrollY = () => window.scrollY || document.documentElement.scrollTop || 0;
+
+        const getNextState = () => {
+          if (isCompact) {
+            return getScrollY() > expandAt;
+          }
+
+          return getScrollY() > compactAt;
+        };
+
+        const syncHeaderState = () => {
+          const nextState = getNextState();
+          if (nextState === isCompact) {
+            return;
+          }
+
+          isCompact = nextState;
+          header.dataset.scrolled = String(nextState);
+        };
+
+        const requestSync = () => {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            syncHeaderState();
+            ticking = false;
+          });
+        };
+
+        isCompact = getScrollY() > compactAt;
+        header.dataset.scrolled = String(isCompact);
+        syncHeaderState();
+        window.addEventListener('scroll', requestSync, { passive: true });
+        window.addEventListener('resize', requestSync);
+      })();
+    </script>  </body> </html>
