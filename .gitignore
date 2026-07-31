@@ -1,0 +1,17 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Build cache / intermediate output
+.astro/
+dist/
+node_modules/
+
+# Local tooling
+.claude/
+tmp/
+
+# OS noise
+Thumbs.db
+.DS_Store
