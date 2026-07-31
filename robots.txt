@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ning0713.top/sitemap-index.xml
