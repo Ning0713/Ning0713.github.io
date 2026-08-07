@@ -1,25 +1,610 @@
-<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi</title><meta name="description" content="通过M_studio的勇者传说学习Unity入门基础"><link rel="canonical" href="https://ning0713.top/blog/technical/02-player-%E5%88%9B%E5%BB%BA%E5%8B%87%E8%80%85%E4%BC%A0%E8%AF%B4-2022unity%E5%85%A5%E9%97%A8/"><link rel="alternate" type="application/rss+xml" title="不宁yasushi RSS Feed" href="/rss.xml"><meta name="generator" content="Astro v5.18.1"><!-- Open Graph --><meta property="og:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta property="og:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta property="og:url" content="https://ning0713.top/blog/technical/02-player-%E5%88%9B%E5%BB%BA%E5%8B%87%E8%80%85%E4%BC%A0%E8%AF%B4-2022unity%E5%85%A5%E9%97%A8/"><meta property="og:type" content="article"><meta property="og:site_name" content="不宁yasushi"><meta property="og:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta name="twitter:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta name="twitter:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><script>
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi</title><meta name="description" content="通过M_studio的勇者传说学习Unity入门基础"><link rel="canonical" href="https://ning0713.top/blog/unity-player/"><link rel="alternate" type="application/rss+xml" title="不宁yasushi RSS Feed" href="/rss.xml"><meta name="generator" content="Astro v5.18.1"><link rel="dns-prefetch" href="https://i.ibb.co"><link rel="preconnect" href="https://i.ibb.co"><!-- Open Graph --><meta property="og:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta property="og:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta property="og:url" content="https://ning0713.top/blog/unity-player/"><meta property="og:type" content="article"><meta property="og:site_name" content="不宁yasushi"><meta property="og:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta name="twitter:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta name="twitter:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><script>
       (() => {
         const storedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const shouldUseDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
         document.documentElement.classList.toggle('dark', shouldUseDark);
       })();
-    </script><link rel="stylesheet" href="/assets/category_.B7SGS6P_.css">
-<style>.toc-panel[data-astro-cid-xvrfupwn]{padding-top:.15rem;font-family:Microsoft YaHei,微软雅黑,PingFang SC,Hiragino Sans GB,sans-serif}.toc-title[data-astro-cid-xvrfupwn]{margin:0 0 .95rem;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgb(var(--color-ink) / .86)}.toc-shell[data-astro-cid-xvrfupwn] .toc-list{margin:0;padding:0;list-style:none}.toc-shell[data-astro-cid-xvrfupwn] .toc-item+.toc-item{margin-top:.06rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-item>.toc-list{margin-top:.08rem;margin-left:.82rem;padding-left:.36rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-row{display:flex;align-items:center;gap:.22rem;min-width:0}.toc-shell[data-astro-cid-xvrfupwn] .toc-link{display:block;min-width:0;flex:1 1 auto;padding:.34rem .58rem;overflow:hidden;text-overflow:ellipsis;color:rgb(var(--color-muted));font-size:.8rem;line-height:1.3;font-weight:400;border-radius:9999px;transition:color .18s ease,background-color .18s ease,box-shadow .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:1.35rem;height:1.35rem;border:0;border-radius:9999px;color:rgb(var(--color-muted));background:transparent;cursor:pointer;transition:color .18s ease,background-color .18s ease,transform .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle:hover{color:rgb(var(--color-ink));background:rgb(var(--color-card) / .86)}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle-icon{width:0;height:0;border-top:.25rem solid transparent;border-bottom:.25rem solid transparent;border-left:.32rem solid currentColor;transform:translate(.04rem);transition:transform .18s ease}.toc-shell[data-astro-cid-xvrfupwn] .toc-toggle[aria-expanded=true] .toc-toggle-icon{transform:translateY(.04rem) rotate(90deg)}.toc-shell[data-astro-cid-xvrfupwn] .toc-link:hover,.toc-shell[data-astro-cid-xvrfupwn] .toc-link[data-active=true]{color:rgb(var(--color-ink));background:rgb(var(--color-card) / .96);box-shadow:0 14px 34px -26px #0f172a52}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="1"]>.toc-row>.toc-link{font-size:.82rem;color:rgb(var(--color-ink) / .88)}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="2"]>.toc-row>.toc-link{font-size:.77rem}.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="3"]>.toc-row>.toc-link,.toc-shell[data-astro-cid-xvrfupwn] .toc-item[data-depth="4"]>.toc-row>.toc-link{font-size:.74rem;opacity:.92}
-.content-detail-title[data-astro-cid-scuu7fyy]{font-family:Avenir Next,Helvetica Neue,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif;letter-spacing:-.035em}.content-meta-pill[data-astro-cid-scuu7fyy]{display:inline-flex;align-items:center;min-height:2rem;border:1px solid rgb(var(--color-line) / .78);border-radius:9999px;background:rgb(var(--color-card) / .72);padding:.35rem .85rem;font-size:.78rem;line-height:1;color:rgb(var(--color-muted))}.article-with-hero[data-astro-cid-scuu7fyy]{margin-top:-.5rem}.article-hero[data-astro-cid-scuu7fyy]{position:relative;isolation:isolate;color:rgb(var(--color-ink))}.article-hero-image-frame[data-astro-cid-scuu7fyy]{position:relative;width:min(100%,65ch);margin-bottom:1.2rem;overflow:visible}.article-hero-cover[data-astro-cid-scuu7fyy],.article-hero-blur[data-astro-cid-scuu7fyy]{max-height:min(22rem,46vh);-o-object-fit:contain;object-fit:contain}.article-hero-cover[data-astro-cid-scuu7fyy]{position:relative;z-index:1;display:block;width:100%;height:auto;border-radius:1rem}.article-hero-blur[data-astro-cid-scuu7fyy]{position:absolute;inset-inline-start:0;top:0;z-index:0;width:100%;height:100%;border-radius:1.5rem;filter:blur(34px) saturate(1.18);opacity:.5;transform:translate(5.25rem,1.35rem) scale(1.02);transition:opacity .3s ease}.article-hero-meta[data-astro-cid-scuu7fyy]{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem 1.15rem;color:rgb(var(--color-muted));font-size:.78rem;line-height:1.5}.article-hero-meta-item[data-astro-cid-scuu7fyy]{display:inline-flex;align-items:center;gap:.4rem;min-width:0}.article-hero-icon[data-astro-cid-scuu7fyy]{width:1rem;height:1rem;flex:0 0 auto;opacity:.82}.article-hero-hash-icon[data-astro-cid-scuu7fyy]{width:1.04rem;height:1.04rem}.article-hero-update[data-astro-cid-scuu7fyy]{white-space:nowrap}.article-hero-tags[data-astro-cid-scuu7fyy]{flex-wrap:wrap}.article-hero-meta-link[data-astro-cid-scuu7fyy]{color:inherit;text-decoration:none}.article-hero-meta-link[data-astro-cid-scuu7fyy]:hover{color:rgb(var(--color-accent));text-decoration:underline;text-underline-offset:.22em}.article-hero-tag-separator[data-astro-cid-scuu7fyy]{opacity:.72}.article-hero-title[data-astro-cid-scuu7fyy]{margin-top:1.15rem;font-family:Avenir Next,Helvetica Neue,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif;font-size:1.65rem;font-weight:400;line-height:1.24;letter-spacing:0}.article-hero-description[data-astro-cid-scuu7fyy]{margin-top:.55rem;border-left:0;padding-left:0;color:rgb(var(--color-muted));font-size:.9rem;font-style:italic;line-height:1.65}.article-hero-description[data-astro-cid-scuu7fyy] q[data-astro-cid-scuu7fyy]{quotes:"“" "”" "‘" "’"}.article-hero-divider[data-astro-cid-scuu7fyy]{margin-top:.95rem;width:min(12rem,42%);border-top:1px solid rgb(var(--color-line) / .85)}@media(min-width:640px){.article-hero-title[data-astro-cid-scuu7fyy]{font-size:1.9rem}}@media(max-width:640px){.article-with-hero[data-astro-cid-scuu7fyy]{margin-top:-.25rem}.article-hero-image-frame[data-astro-cid-scuu7fyy]{width:100%;margin-bottom:.9rem}.article-hero-title[data-astro-cid-scuu7fyy]{font-size:1.72rem}.article-hero-meta[data-astro-cid-scuu7fyy]{gap:.45rem .9rem;font-size:.76rem}}
-</style></head> <body class="is-inner-page" data-astro-cid-37fxchfa> <div id="highlight-gradient" class="site-highlight-gradient" style="background-image: linear-gradient(#f389bc 0%, rgb(var(--color-paper) / 0.94) 95%, transparent 100%);" aria-hidden="true" data-astro-cid-37fxchfa></div> <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 pt-8 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-site-header data-scrolled="false" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <div class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> <span class="font-serif" data-astro-cid-37fxchfa>不宁yasushi's Blog</span> </a> <p class="site-motto text-xs font-normal italic leading-7 text-muted sm:text-sm" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>
-C&apos;est une grande habilet&eacute; que de savoir cacher son habilet&eacute;.
-</p> </div> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="Primary navigation" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center rounded-full border border-line/80 site-blog-nav-active bg-line/52 text-ink" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link pl-3 pr-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Blog </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center px-1.5 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 text-ink transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="absolute right-0 z-20 mt-2 w-52 rounded-2xl border border-line/80 bg-paper/95 p-2 text-black shadow-card backdrop-blur dark:text-ink" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Technical </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Life and Talk </a><a href="/blog/category/journal" class="site-blog-category-link block rounded-xl px-3 py-2 text-sm text-black hover:bg-line/60 hover:text-black dark:text-ink dark:hover:text-ink" data-astro-cid-37fxchfa> Journal </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/projects" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Projects </a> </li><li data-astro-cid-37fxchfa> <a href="/academic" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Academic </a> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> Links </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link rounded-full px-3 py-1.5 hover:text-ink" data-astro-cid-37fxchfa> About </a> </li> <li class="site-theme-toggle-slot" data-astro-cid-37fxchfa> <button type="button" data-theme-toggle class="theme-toggle-button" aria-label="Toggle color theme"> <span class="theme-toggle-kicker">Theme</span> <span class="theme-toggle-value" data-theme-label>Dark</span> </button> <script>
+    </script><link rel="stylesheet" href="/assets/slug_.DKoDKGXK.css">
+<link rel="stylesheet" href="/assets/category_.Rdq1NRyR.css">
+<link rel="stylesheet" href="/assets/slug_.Dt-bYO5j.css">
+<link rel="stylesheet" href="/assets/slug_.DTHVHQMV.css"><script type="module" src="/assets/page.D1uwR3nK.js"></script></head> <body class="is-inner-page is-article-page" data-astro-cid-37fxchfa> <div id="highlight-gradient" class="site-highlight-gradient" style="background-image: linear-gradient(#f389bc, transparent);" aria-hidden="true" data-astro-cid-37fxchfa></div> <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-show="true" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <p class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> 不宁yasushi's Blog
+</a> <span aria-hidden="true" data-astro-cid-37fxchfa>/</span> <span class="site-current-section" data-astro-cid-37fxchfa>文章</span> </p> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="主导航" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center site-blog-nav-active" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link" aria-current="page" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>01</span> <span class="site-nav-label" data-astro-cid-37fxchfa>文章</span> </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center" aria-label="展开文章分类" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="site-blog-category-menu absolute right-0 z-20 mt-2 w-44 border border-line/80 bg-paper/95 p-2 text-ink shadow-card backdrop-blur" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 技术 </a><a href="/blog/category/research-report" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 研究报告 </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 生活随笔 </a><a href="/blog/category/journal" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 月记 </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/projects" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>02</span> <span class="site-nav-label" data-astro-cid-37fxchfa>项目</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/academic" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>03</span> <span class="site-nav-label" data-astro-cid-37fxchfa>学术</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>04</span> <span class="site-nav-label" data-astro-cid-37fxchfa>友链</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>05</span> <span class="site-nav-label" data-astro-cid-37fxchfa>关于</span> </a> </li> </ul> </nav> <div class="site-header-controls" data-astro-cid-37fxchfa> <button type="button" class="site-search-toggle" data-search-open aria-label="搜索本站" aria-controls="site-search-dialog" aria-expanded="false" aria-keyshortcuts="Control+K Meta+K /" title="搜索" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> </button> <dialog id="site-search-dialog" class="site-search-dialog" data-search-dialog data-search-category-order="technical,research-report,life-and-talk,journal" data-search-navigation-order="/blog,/projects,/academic,/links,/about" aria-label="全站搜索" data-astro-cid-pkfvzmd6> <div class="site-search-panel" data-astro-cid-pkfvzmd6> <form class="site-search-form" data-search-form role="search" data-astro-cid-pkfvzmd6> <svg class="site-search-form-icon" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> <label class="sr-only" for="site-search-input" data-astro-cid-pkfvzmd6>搜索本站</label> <input id="site-search-input" data-search-input type="search" name="query" placeholder="搜索本站内容" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="site-search-results" aria-expanded="false" data-astro-cid-pkfvzmd6> <button type="button" class="site-search-close" data-search-close aria-label="关闭搜索" title="关闭" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <path d="m6 6 12 12M18 6 6 18" data-astro-cid-pkfvzmd6></path> </svg> </button> </form> <p class="site-search-status" data-search-status aria-live="polite" data-astro-cid-pkfvzmd6>输入关键词开始搜索</p> <ol id="site-search-results" class="site-search-results" data-search-results role="listbox" hidden data-astro-cid-pkfvzmd6></ol> <button type="button" class="site-search-load-more" data-search-load-more aria-label="加载更多搜索结果" hidden data-astro-cid-pkfvzmd6>
+加载更多结果
+</button> <footer class="site-search-help" aria-label="搜索快捷键" data-astro-cid-pkfvzmd6> <p data-astro-cid-pkfvzmd6><span class="site-search-key-group" data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>↑</kbd><kbd data-astro-cid-pkfvzmd6>↓</kbd></span> 选择</p> <p data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>Enter</kbd> 打开</p> <p data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>Esc</kbd> 关闭</p> </footer> </div> </dialog> <script>
+  (() => {
+    const openButton = document.querySelector('[data-search-open]');
+    const dialog = document.querySelector('[data-search-dialog]');
+    const closeButton = document.querySelector('[data-search-close]');
+    const form = document.querySelector('[data-search-form]');
+    const input = document.querySelector('[data-search-input]');
+    const status = document.querySelector('[data-search-status]');
+    const resultList = document.querySelector('[data-search-results]');
+    const loadMoreButton = document.querySelector('[data-search-load-more]');
+
+    if (
+      !(openButton instanceof HTMLButtonElement) ||
+      !(dialog instanceof HTMLDialogElement) ||
+      !(closeButton instanceof HTMLButtonElement) ||
+      !(form instanceof HTMLFormElement) ||
+      !(input instanceof HTMLInputElement) ||
+      !(status instanceof HTMLParagraphElement) ||
+      !(resultList instanceof HTMLOListElement) ||
+      !(loadMoreButton instanceof HTMLButtonElement) ||
+      dialog.dataset.searchReady === 'true'
+    ) {
+      return;
+    }
+
+    dialog.dataset.searchReady = 'true';
+
+    let pagefind = null;
+    let pagefindPromise = null;
+    let searchTimer = 0;
+    let searchSequence = 0;
+    let selectedIndex = -1;
+    let closeTimer = 0;
+    const pageSize = 5;
+    let allResults = [];
+    let visibleResultCount = pageSize;
+    let currentQuery = '';
+
+    const setStatus = (message, state = 'idle') => {
+      status.textContent = message;
+      status.dataset.state = state;
+    };
+
+    const categoryOrder = (dialog.dataset.searchCategoryOrder ?? '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean);
+    const categoryOrderIndex = new Map(categoryOrder.map((slug, index) => [slug, index]));
+    const navigationOrder = (dialog.dataset.searchNavigationOrder ?? '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean);
+
+    const getResultLinks = () =>
+      Array.from(resultList.querySelectorAll('[data-search-result], [data-search-sub-result]'));
+
+    const selectResult = (nextIndex) => {
+      const links = getResultLinks();
+      if (links.length === 0) {
+        selectedIndex = -1;
+        input.removeAttribute('aria-activedescendant');
+        return;
+      }
+
+      selectedIndex = ((nextIndex % links.length) + links.length) % links.length;
+      links.forEach((link, index) => {
+        const selected = index === selectedIndex;
+        link.dataset.selected = String(selected);
+        link.setAttribute('aria-selected', String(selected));
+      });
+
+      const selectedLink = links[selectedIndex];
+      input.setAttribute('aria-activedescendant', selectedLink.id);
+      selectedLink.scrollIntoView({ block: 'nearest' });
+    };
+
+    const selectLink = (link) => {
+      const index = getResultLinks().indexOf(link);
+      if (index >= 0) {
+        selectResult(index);
+      }
+    };
+
+    const normalizeSearchText = (value) =>
+      String(value ?? '')
+        .replace(/[\uFEFF\u200B\u200C\u200D\u2060]/gu, '')
+        .replace(/\u00a0/gu, ' ')
+        .replace(/\s+/gu, ' ');
+
+    // Pagefind indexes rendered HTML, but older indexes can still contain
+    // Markdown delimiters. Remove only formatting-only runs and keep normal
+    // apostrophes inside words such as "don't".
+    const cleanSearchText = (value) =>
+      normalizeSearchText(value)
+        .replace(/(^|\s)#{1,6}(?=\s)/gu, '$1')
+        // Inline-code delimiters are Markdown syntax, not searchable prose.
+        .replace(/`+/gu, '')
+        .replace(/(^|[\s([{])['’]{2,3}(?=\S)/gu, '$1')
+        .replace(/(\S)['’]{2,3}(?=$|[\s)\]}.,!?;:])/gu, '$1');
+
+    const normalizeResultTitle = (value) =>
+      cleanSearchText(value)
+        .replace(/^\s*#+\s*/, '')
+        .replace(/\s+\|\s+不宁yasushi$/, '')
+        .trim();
+
+    const getSearchTerms = (query) =>
+      Array.from(
+        new Set(
+          normalizeSearchText(query)
+            .toLocaleLowerCase()
+            .trim()
+            .split(/\s+/u)
+            .map((term) => term.replace(/^[`'"“”‘’]+|[`'"“”‘’]+$/gu, ''))
+            .filter((term) => /[\p{L}\p{N}_]/u.test(term))
+            .filter(Boolean),
+        ),
+      );
+
+    const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const appendHighlightedText = (target, text, terms) => {
+      const value = cleanSearchText(text);
+      if (terms.length === 0) {
+        target.textContent = value;
+        return;
+      }
+
+      const escapedTerms = terms
+        .slice()
+        .sort((a, b) => b.length - a.length)
+        .map(escapeRegExp);
+      const matcher = new RegExp(`(${escapedTerms.join('|')})`, 'giu');
+      const exactMatch = new RegExp(`^(?:${escapedTerms.join('|')})$`, 'iu');
+
+      for (const part of value.split(matcher)) {
+        if (!part) {
+          continue;
+        }
+
+        if (exactMatch.test(part)) {
+          const mark = document.createElement('mark');
+          mark.textContent = part;
+          target.append(mark);
+        } else {
+          target.append(document.createTextNode(part));
+        }
+      }
+    };
+
+    const appendSafeExcerpt = (target, excerpt) => {
+      const template = document.createElement('template');
+      template.innerHTML = excerpt;
+
+      const appendNode = (node, parent) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = cleanSearchText(node.textContent ?? '');
+          if (text) {
+            parent.append(document.createTextNode(text));
+          }
+          return;
+        }
+
+        if (!(node instanceof HTMLElement)) {
+          return;
+        }
+
+        if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)) {
+          return;
+        }
+
+        if (node.tagName === 'BR') {
+          parent.append(document.createTextNode(' '));
+          return;
+        }
+
+        const nextParent = node.tagName === 'MARK' ? document.createElement('mark') : parent;
+        if (nextParent !== parent) {
+          parent.append(nextParent);
+        }
+        node.childNodes.forEach((child) => appendNode(child, nextParent));
+      };
+
+      template.content.childNodes.forEach((node) => appendNode(node, target));
+    };
+
+    const normalizeResultUrl = (value) =>
+      String(value ?? '').replace(/([^/])\/(?=$|[?#])/u, '$1');
+
+    const getResultUrl = (result) =>
+      normalizeResultUrl(result?.meta?.url || result?.url || '#');
+
+    const getResultExcerpt = (result) => result?.excerpt || result?.plain_excerpt || '';
+
+    const getSearchPathname = (value) => {
+      try {
+        return new URL(value, window.location.origin).pathname.replace(/\/+$/u, '') || '/';
+      } catch {
+        return String(value ?? '').split(/[?#]/u)[0].replace(/\/+$/u, '') || '/';
+      }
+    };
+
+    const getSearchPageInfo = (result) => {
+      const pathname = getSearchPathname(getResultUrl(result));
+      const isHomePage = pathname === '/';
+      const isBlogFamily =
+        pathname === '/blog' ||
+        pathname.startsWith('/blog/') ||
+        pathname === '/archives' ||
+        pathname.startsWith('/archives/') ||
+        pathname === '/collection' ||
+        pathname.startsWith('/collection/');
+      const navigationIndex = isHomePage
+        ? -1
+        : isBlogFamily
+          ? navigationOrder.indexOf('/blog')
+          : navigationOrder.findIndex((href) => pathname === href || pathname.startsWith(`${href}/`));
+      const categoryPageMatch = pathname.match(/^\/blog\/category\/([^/]+)/u);
+      const articlePageMatch = pathname.match(/^\/blog\/([^/]+)\/.+$/u);
+      const categorySlug = categoryPageMatch?.[1] || articlePageMatch?.[1];
+      const categoryIndex = categorySlug ? categoryOrderIndex.get(categorySlug) : undefined;
+
+      return {
+        navigationIndex: navigationIndex >= 0 ? navigationIndex : navigationOrder.length,
+        categoryIndex: categoryIndex ?? categoryOrder.length,
+        // Deterministic fallback after Pagefind's relevance rank.
+        kind: !categoryPageMatch && categoryIndex !== undefined && articlePageMatch ? 0 : 1,
+      };
+    };
+
+    const sortSearchResults = (results) =>
+      results
+        .map((result, originalIndex) => ({
+          result,
+          info: getSearchPageInfo(result),
+          originalIndex,
+        }))
+        .filter((entry) => entry.info)
+        .sort((a, b) => {
+          // Pagefind returns results in descending relevance order. Keep that
+          // rank first so exact/title matches precede weaker excerpt matches.
+          const relevanceDifference = a.originalIndex - b.originalIndex;
+          if (relevanceDifference !== 0) {
+            return relevanceDifference;
+          }
+
+          const navigationDifference = a.info.navigationIndex - b.info.navigationIndex;
+          if (navigationDifference !== 0) {
+            return navigationDifference;
+          }
+
+          if (a.info.navigationIndex === navigationOrder.indexOf('/blog')) {
+            const categoryDifference = a.info.categoryIndex - b.info.categoryIndex;
+            if (categoryDifference !== 0) {
+              return categoryDifference;
+            }
+          }
+
+          const kindDifference = a.info.kind - b.info.kind;
+          return kindDifference || a.originalIndex - b.originalIndex;
+        })
+        .map((entry) => entry.result);
+
+    const getSubResults = (result) => {
+      const rawSubResults = Array.isArray(result?.sub_results) ? result.sub_results : [];
+      const parentUrl = getResultUrl(result);
+      const seenUrls = new Set([parentUrl]);
+      const subResults = rawSubResults
+        .filter((subResult) => subResult && typeof subResult === 'object')
+        .filter((subResult) => {
+          const url = normalizeResultUrl(subResult.url || '');
+          if (!url || seenUrls.has(url)) {
+            return false;
+          }
+          seenUrls.add(url);
+          return true;
+        });
+
+      // Pagefind includes the parent document as the first sub-result for
+      // some indexes. The remaining entries are the heading-level matches,
+      // ranked exactly like Axi's default UI (strongest matches first).
+      return subResults
+        .sort((a, b) => (b.locations?.length ?? 0) - (a.locations?.length ?? 0))
+        .slice(0, 3);
+    };
+
+    const updateLoadMore = () => {
+      const remaining = Math.max(0, allResults.length - visibleResultCount);
+      loadMoreButton.hidden = remaining === 0;
+      loadMoreButton.textContent = remaining > 0 ? `加载更多结果（还剩 ${remaining} 条）` : '加载更多结果';
+      loadMoreButton.setAttribute(
+        'aria-label',
+        remaining > 0 ? `加载更多搜索结果，还剩 ${remaining} 条` : '加载更多搜索结果',
+      );
+    };
+
+    const renderResults = (results, query = '', { preserveSelection = false } = {}) => {
+      const previousSelectedIndex = selectedIndex;
+      allResults = results;
+      currentQuery = query;
+      const visibleResults = results.slice(0, visibleResultCount);
+      resultList.replaceChildren();
+      selectedIndex = -1;
+      input.removeAttribute('aria-activedescendant');
+      input.setAttribute('aria-expanded', String(visibleResults.length > 0));
+      resultList.hidden = visibleResults.length === 0;
+      const terms = getSearchTerms(query);
+
+      visibleResults.forEach((result, index) => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        const title = document.createElement('span');
+        const excerpt = document.createElement('span');
+        const resultUrl = getResultUrl(result);
+        const rawTitle = normalizeResultTitle(result.meta?.title || result.title || resultUrl);
+
+        link.id = `site-search-result-${index}`;
+        link.href = resultUrl;
+        link.dataset.searchResult = '';
+        link.dataset.selected = 'false';
+        link.setAttribute('role', 'option');
+        link.setAttribute('aria-selected', 'false');
+        link.className = 'site-search-result-link';
+
+        title.className = 'site-search-result-title';
+        appendHighlightedText(title, rawTitle, terms);
+
+        excerpt.className = 'site-search-result-excerpt';
+        appendSafeExcerpt(excerpt, getResultExcerpt(result));
+
+        link.append(title, excerpt);
+        link.addEventListener('pointerenter', () => selectLink(link));
+        item.append(link);
+
+        const subResults = getSubResults(result);
+        if (subResults.length > 0) {
+          const nestedResults = document.createElement('div');
+          nestedResults.className = 'site-search-sub-results';
+
+          subResults.forEach((subResult, subIndex) => {
+            const subLink = document.createElement('a');
+            const subTitle = document.createElement('span');
+            const subExcerpt = document.createElement('span');
+            const subTitleText = normalizeResultTitle(subResult.title || '匹配段落');
+
+            subLink.href = normalizeResultUrl(subResult.url || resultUrl);
+            subLink.id = `site-search-sub-result-${index}-${subIndex}`;
+            subLink.className = 'site-search-sub-result-link';
+            subLink.setAttribute('aria-label', `${rawTitle}：${subTitleText}`);
+            subLink.dataset.searchSubResult = '';
+            subLink.dataset.selected = 'false';
+            subLink.setAttribute('role', 'option');
+            subLink.setAttribute('aria-selected', 'false');
+
+            subTitle.className = 'site-search-sub-result-title';
+            appendHighlightedText(subTitle, subTitleText, terms);
+            subExcerpt.className = 'site-search-sub-result-excerpt';
+            appendSafeExcerpt(subExcerpt, subResult.excerpt || subResult.plain_excerpt || '');
+
+            subLink.append(subTitle, subExcerpt);
+            subLink.addEventListener('pointerenter', () => {
+              selectResult(getResultLinks().indexOf(subLink));
+            });
+            nestedResults.append(subLink);
+          });
+
+          item.append(nestedResults);
+        }
+
+        resultList.append(item);
+      });
+
+      updateLoadMore();
+
+      if (visibleResults.length > 0) {
+        selectResult(preserveSelection ? previousSelectedIndex : 0);
+      }
+    };
+
+    const ensurePagefind = () => {
+      if (pagefind) {
+        return Promise.resolve(pagefind);
+      }
+
+      if (!pagefindPromise) {
+        setStatus('正在加载搜索索引...', 'loading');
+        pagefindPromise = import('/pagefind/pagefind.js')
+          .then(async (module) => {
+            if (typeof module.options === 'function') {
+              await module.options({ baseUrl: '/' });
+            }
+            pagefind = module;
+            return module;
+          })
+          .catch((error) => {
+            console.error('[search] Failed to load Pagefind', error);
+            pagefindPromise = null;
+            setStatus('搜索索引暂不可用，请稍后重试', 'error');
+            throw error;
+          });
+      }
+
+      return pagefindPromise;
+    };
+
+    const search = async () => {
+      const query = input.value.trim();
+      const sequence = ++searchSequence;
+
+      if (!query) {
+        renderResults([]);
+        setStatus('输入关键词开始搜索');
+        return;
+      }
+
+      if (getSearchTerms(query).length === 0) {
+        renderResults([]);
+        setStatus('请输入有效关键词', 'empty');
+        return;
+      }
+
+      try {
+        const searchApi = await ensurePagefind();
+        if (sequence !== searchSequence) {
+          return;
+        }
+
+        setStatus('正在搜索...', 'loading');
+        const response = await searchApi.search(query);
+        const indexedResults = await Promise.all(response.results.map((result) => result.data()));
+        const orderedResults = sortSearchResults(indexedResults);
+
+        if (sequence !== searchSequence) {
+          return;
+        }
+
+        visibleResultCount = pageSize;
+        renderResults(orderedResults, query);
+        setStatus(
+          orderedResults.length > 0 ? `找到 ${orderedResults.length} 条结果` : `没有找到“${query}”`,
+          orderedResults.length > 0 ? 'ready' : 'empty',
+        );
+      } catch {
+        if (sequence === searchSequence) {
+          renderResults([]);
+          setStatus('搜索索引暂不可用，请稍后重试', 'error');
+        }
+      }
+    };
+
+    const scheduleSearch = () => {
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(search, 120);
+    };
+
+    const resetSearch = () => {
+      searchSequence += 1;
+      window.clearTimeout(searchTimer);
+      input.value = '';
+      visibleResultCount = pageSize;
+      renderResults([]);
+      setStatus(pagefind ? '输入关键词开始搜索' : '正在加载搜索索引...', pagefind ? 'idle' : 'loading');
+    };
+
+    const openSearch = () => {
+      window.clearTimeout(closeTimer);
+      delete dialog.dataset.closing;
+      window.dispatchEvent(new CustomEvent('site-search:open'));
+
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+
+      openButton.setAttribute('aria-expanded', 'true');
+      document.documentElement.classList.add('search-dialog-open');
+      resetSearch();
+      input.focus({ preventScroll: true });
+
+      ensurePagefind()
+        .then(() => {
+          if (!input.value.trim()) {
+            setStatus('输入关键词开始搜索');
+          }
+        })
+        .catch(() => {});
+    };
+
+    const closeSearch = () => {
+      if (!dialog.open || dialog.dataset.closing === 'true') {
+        return;
+      }
+
+      dialog.dataset.closing = 'true';
+      closeTimer = window.setTimeout(() => {
+        dialog.close();
+        delete dialog.dataset.closing;
+      }, 150);
+    };
+
+    openButton.addEventListener('click', openSearch);
+    closeButton.addEventListener('click', closeSearch);
+    loadMoreButton.addEventListener('click', () => {
+      if (visibleResultCount >= allResults.length) {
+        return;
+      }
+
+      visibleResultCount = Math.min(allResults.length, visibleResultCount + pageSize);
+      renderResults(allResults, currentQuery, { preserveSelection: true });
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const links = getResultLinks();
+      const target = links[selectedIndex >= 0 ? selectedIndex : 0];
+      if (target instanceof HTMLAnchorElement) {
+        target.click();
+      }
+    });
+    input.addEventListener('input', scheduleSearch);
+    input.addEventListener('compositionend', scheduleSearch);
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        closeSearch();
+      }
+    });
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      closeSearch();
+    });
+    dialog.addEventListener('close', () => {
+      openButton.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('search-dialog-open');
+      input.setAttribute('aria-expanded', 'false');
+      openButton.focus({ preventScroll: true });
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.isComposing) {
+        return;
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeSearch();
+        return;
+      }
+
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        const links = getResultLinks();
+        if (links.length > 0) {
+          selectResult(event.key === 'ArrowDown' ? selectedIndex + 1 : selectedIndex - 1);
+        }
+        return;
+      }
+
+      if (event.key === 'Enter' && event.target === input) {
+        const links = getResultLinks();
+        const target = links[selectedIndex >= 0 ? selectedIndex : 0];
+        if (target instanceof HTMLAnchorElement) {
+          event.preventDefault();
+          target.click();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const target = event.target;
+      const isEditing =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        (target instanceof HTMLElement && target.isContentEditable);
+      const usesCommandShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k';
+      const usesSlashShortcut = event.key === '/' && !isEditing && !event.ctrlKey && !event.metaKey && !event.altKey;
+
+      if ((usesCommandShortcut || usesSlashShortcut) && !dialog.open) {
+        event.preventDefault();
+        openSearch();
+      }
+    });
+  })();
+</script>  <button type="button" data-theme-toggle class="theme-toggle-button" aria-label="切换到深色模式" title="切换到深色模式"> <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"> <path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z"></path> </svg> <span class="sr-only" data-theme-label>切换到深色模式</span> </button> <script>
   const root = document.documentElement;
   const button = document.querySelector('[data-theme-toggle]');
   const label = button?.querySelector('[data-theme-label]');
 
   const syncThemeLabel = () => {
     const isDark = root.classList.contains('dark');
+    const nextThemeLabel = isDark ? '切换到浅色模式' : '切换到深色模式';
     if (label) {
-      label.textContent = isDark ? 'Light' : 'Dark';
+      label.textContent = nextThemeLabel;
     }
+    button?.setAttribute('aria-label', nextThemeLabel);
+    button?.setAttribute('title', nextThemeLabel);
     button?.setAttribute('aria-pressed', String(isDark));
   };
 
@@ -31,299 +616,33 @@ C&apos;est une grande habilet&eacute; que de savoir cacher son habilet&eacute;.
     localStorage.setItem('theme', shouldUseDark ? 'dark' : 'light');
     syncThemeLabel();
   });
-</script> </li> </ul> </nav> </div> </div> </div> </header> <main class="flex-1" data-astro-cid-37fxchfa>  <article class="mx-auto w-full max-w-6xl article-with-hero" data-astro-cid-scuu7fyy> <div class="lg:grid lg:grid-cols-[minmax(0,44rem)_16rem] lg:gap-12" data-astro-cid-scuu7fyy> <div data-astro-cid-scuu7fyy> <header class="article-hero mb-6" data-astro-cid-scuu7fyy> <div class="article-hero-image-frame" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/tPc502kT/20260428152256.jpg" alt="绯雪" class="article-hero-cover" loading="eager" decoding="async" fetchpriority="high" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/tPc502kT/20260428152256.jpg" alt="" class="article-hero-blur" loading="eager" decoding="async" fetchpriority="high" aria-hidden="true" data-article-hero-blur data-astro-cid-scuu7fyy> </div> <div class="article-hero-meta" data-astro-cid-scuu7fyy> <time class="article-hero-meta-item" datetime="2026-02-01T00:00:00.000Z" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4M16 2v4M3.5 9.5h17M5.5 4h13A2.5 2.5 0 0 1 21 6.5v12A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5v-12A2.5 2.5 0 0 1 5.5 4Z" data-astro-cid-scuu7fyy></path> </svg> <span data-astro-cid-scuu7fyy>Feb 1, 2026</span> <span class="article-hero-update" data-astro-cid-scuu7fyy>
+</script> <button type="button" class="site-menu-toggle" data-menu-toggle aria-label="展开导航" aria-controls="site-mobile-nav" aria-expanded="false" data-astro-cid-37fxchfa> <svg class="site-menu-icon" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-37fxchfa> <path d="M4 7h16M4 12h16M4 17h16" data-astro-cid-37fxchfa></path> </svg> <svg class="site-close-icon" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-37fxchfa> <path d="m6 6 12 12M18 6 6 18" data-astro-cid-37fxchfa></path> </svg> </button> </div> </div> <nav id="site-mobile-nav" class="site-mobile-nav" aria-label="移动端导航" aria-hidden="true" data-astro-cid-37fxchfa> <ul data-astro-cid-37fxchfa> <li data-astro-cid-37fxchfa> <a href="/blog" tabindex="-1" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>01</span> <span class="site-nav-label" data-astro-cid-37fxchfa>文章</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/projects" tabindex="-1" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>02</span> <span class="site-nav-label" data-astro-cid-37fxchfa>项目</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/academic" tabindex="-1" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>03</span> <span class="site-nav-label" data-astro-cid-37fxchfa>学术</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/links" tabindex="-1" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>04</span> <span class="site-nav-label" data-astro-cid-37fxchfa>友链</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/about" tabindex="-1" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>05</span> <span class="site-nav-label" data-astro-cid-37fxchfa>关于</span> </a> </li> </ul> <div class="site-mobile-blog-categories" aria-label="文章分类" data-astro-cid-37fxchfa> <a href="/blog" tabindex="-1" data-astro-cid-37fxchfa>技术</a><a href="/blog/category/research-report" tabindex="-1" data-astro-cid-37fxchfa>研究报告</a><a href="/blog/category/life-and-talk" tabindex="-1" data-astro-cid-37fxchfa>生活随笔</a><a href="/blog/category/journal" tabindex="-1" data-astro-cid-37fxchfa>月记</a> </div> </nav> </div> </div> </header> <main id="site-page-content" class="flex-1" data-astro-cid-37fxchfa>  <article class="article-layout-shell mx-auto w-full article-with-hero" style="--article-highlight-color: #f389bc;" data-astro-cid-scuu7fyy> <div class="md:grid md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10" data-astro-cid-scuu7fyy> <div data-astro-cid-scuu7fyy> <header class="article-hero mb-6" data-astro-cid-scuu7fyy> <div class="article-hero-image-frame" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/tPc502kT/20260428152256.jpg" alt="绯雪" class="article-hero-cover" loading="eager" decoding="async" fetchpriority="high" data-astro-cid-scuu7fyy> <img src="https://i.ibb.co/tPc502kT/20260428152256.jpg" alt="" class="article-hero-blur" loading="lazy" decoding="async" fetchpriority="low" aria-hidden="true" data-article-hero-blur data-astro-cid-scuu7fyy> </div> <div class="article-hero-meta" data-astro-cid-scuu7fyy> <time class="article-hero-meta-item" datetime="2026-02-01T00:00:00.000Z" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v4M16 2v4M3.5 9.5h17M5.5 4h13A2.5 2.5 0 0 1 21 6.5v12A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5v-12A2.5 2.5 0 0 1 5.5 4Z" data-astro-cid-scuu7fyy></path> </svg> <span data-astro-cid-scuu7fyy>Feb 1, 2026</span> <span class="article-hero-update" data-astro-cid-scuu7fyy>
 / Update Feb 1, 2026 </span> </time> <span class="article-hero-meta-item" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <circle cx="12" cy="12" r="9" data-astro-cid-scuu7fyy></circle> <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2" data-astro-cid-scuu7fyy></path> </svg> <span data-astro-cid-scuu7fyy>6 min read</span> </span> <span class="article-hero-meta-item" data-astro-cid-scuu7fyy> <svg class="article-hero-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3a9 9 0 1 0 9 9 6 6 0 0 1-9-9Z" data-astro-cid-scuu7fyy></path> <path stroke-linecap="round" stroke-linejoin="round" d="M19 4v4M21 6h-4" data-astro-cid-scuu7fyy></path> </svg> <a href="https://www.pixiv.net/artworks/143864385" target="_blank" rel="noreferrer" class="article-hero-meta-link" data-astro-cid-scuu7fyy>
 Hero Image
-</a> </span> <span class="article-hero-meta-item article-hero-tags" data-astro-cid-scuu7fyy> <svg class="article-hero-icon article-hero-hash-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17" data-astro-cid-scuu7fyy></path> </svg>  <a href="/blog/tag/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E" class="article-hero-meta-link" data-astro-cid-scuu7fyy>游戏引擎</a> <span class="article-hero-tag-separator" data-astro-cid-scuu7fyy>/</span> <a href="/blog/tag/%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0" class="article-hero-meta-link" data-astro-cid-scuu7fyy>入门学习</a>  </span> </div> <h1 class="article-hero-title" data-astro-cid-scuu7fyy> 02 Player 创建(勇者传说-2022Unity入门) </h1> <blockquote class="article-hero-description" data-astro-cid-scuu7fyy> <q data-astro-cid-scuu7fyy>通过M_studio的勇者传说学习Unity入门基础</q> </blockquote>  <div class="article-hero-divider" aria-hidden="true" data-astro-cid-scuu7fyy></div> </header> <div class="mb-10 lg:hidden" data-astro-cid-scuu7fyy> <nav class="toc-panel" data-toc aria-label="Contents" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>Contents</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#02-player-创建" class="toc-link" data-toc-link data-toc-slug="02-player-创建">
-              02 Player 创建
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 02 Player 创建" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#21-设置人物与基本组件" class="toc-link" data-toc-link data-toc-slug="21-设置人物与基本组件">
-              2.1 设置人物与基本组件
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.1 设置人物与基本组件" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#211-人物组件的添加" class="toc-link" data-toc-link data-toc-slug="211-人物组件的添加">
-              2.1.1 人物组件的添加
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#212-平台组件的添加" class="toc-link" data-toc-link data-toc-slug="212-平台组件的添加">
-              2.1.2 平台组件的添加
-            </a>
-            
-          </div>
-          
-        </li></ol>
-        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#22-创建及配置新输入系统" class="toc-link" data-toc-link data-toc-slug="22-创建及配置新输入系统">
-              2.2 创建及配置新输入系统
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.2 创建及配置新输入系统" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#221-升级input-system" class="toc-link" data-toc-link data-toc-slug="221-升级input-system">
-              2.2.1 升级Input System
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#222-playercontroller脚本" class="toc-link" data-toc-link data-toc-slug="222-playercontroller脚本">
-              2.2.2 PlayerController脚本
-            </a>
-            
-          </div>
-          
-        </li></ol>
-        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#23-实现人物行为" class="toc-link" data-toc-link data-toc-slug="23-实现人物行为">
-              2.3 实现人物行为
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.3 实现人物行为" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#231-人物移动与翻转" class="toc-link" data-toc-link data-toc-slug="231-人物移动与翻转">
-              2.3.1 人物移动与翻转
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#232-人物跳跃" class="toc-link" data-toc-link data-toc-slug="232-人物跳跃">
-              2.3.2 人物跳跃
-            </a>
-            
-          </div>
-          
-        </li></ol>
-        </li><li class="toc-item" data-depth="2">
-          <div class="toc-row">
-            <a href="#24-环境物理检测" class="toc-link" data-toc-link data-toc-slug="24-环境物理检测">
-              2.4 环境物理检测
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#25-创建人物动画" class="toc-link" data-toc-link data-toc-slug="25-创建人物动画">
-              2.5 创建人物动画
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.5 创建人物动画" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#251-人物基本动画" class="toc-link" data-toc-link data-toc-slug="251-人物基本动画">
-              2.5.1 人物基本动画
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#252-跳跃动画" class="toc-link" data-toc-link data-toc-slug="252-跳跃动画">
-              2.5.2 跳跃动画
-            </a>
-            
-          </div>
-          
-        </li></ol>
-        </li><li class="toc-item" data-depth="2">
-          <div class="toc-row">
-            <a href="#26-人物属性与伤害计算" class="toc-link" data-toc-link data-toc-slug="26-人物属性与伤害计算">
-              2.6 人物属性与伤害计算
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
-          <div class="toc-row">
-            <a href="#27-角色动画逻辑实现与判定实装" class="toc-link" data-toc-link data-toc-slug="27-角色动画逻辑实现与判定实装">
-              2.7 角色动画逻辑实现与判定实装
-            </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.7 角色动画逻辑实现与判定实装" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
-          </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#271-受伤和死亡的逻辑和动画" class="toc-link" data-toc-link data-toc-slug="271-受伤和死亡的逻辑和动画">
-              2.7.1 受伤和死亡的逻辑和动画
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#272-三段攻击动画" class="toc-link" data-toc-link data-toc-slug="272-三段攻击动画">
-              2.7.2 三段攻击动画
-            </a>
-            
-          </div>
-          
-        </li><li class="toc-item" data-depth="3">
-          <div class="toc-row">
-            <a href="#273-攻击效果实装" class="toc-link" data-toc-link data-toc-slug="273-攻击效果实装">
-              2.7.3 攻击效果实装
-            </a>
-            
-          </div>
-          
-        </li></ol>
-        </li></ol>
-        </li></ol></div></nav><script>
-  (() => {
-    const tocNodes = document.querySelectorAll('[data-toc]');
-    for (const toc of tocNodes) {
-      if (!(toc instanceof HTMLElement)) {
-        continue;
-      }
-
-      const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
-      const toggleButtons = Array.from(toc.querySelectorAll('[data-toc-toggle]')).filter(
-        (button) => button instanceof HTMLButtonElement,
-      );
-
-      for (const button of toggleButtons) {
-        button.addEventListener('click', () => {
-          const branch = button.closest('[data-toc-branch]');
-          if (!(branch instanceof HTMLElement)) {
-            return;
-          }
-
-          const childList = Array.from(branch.children).find((child) =>
-            child instanceof HTMLOListElement && child.classList.contains('toc-children')
-          );
-
-          if (!(childList instanceof HTMLOListElement)) {
-            return;
-          }
-
-          const nextExpanded = button.getAttribute('aria-expanded') !== 'true';
-          button.setAttribute('aria-expanded', String(nextExpanded));
-          branch.dataset.collapsed = String(!nextExpanded);
-          childList.hidden = !nextExpanded;
-        });
-      }
-
-      if (links.length === 0) {
-        continue;
-      }
-
-      const pairs = links
-        .map((link) => {
-          const slug = link.dataset.tocSlug;
-          if (!slug) {
-            return null;
-          }
-
-          const target = document.getElementById(slug);
-          if (!(target instanceof HTMLElement)) {
-            return null;
-          }
-
-          return { link, target };
-        })
-        .filter(Boolean);
-
-      if (pairs.length === 0) {
-        continue;
-      }
-
-      const setActive = (slug) => {
-        for (const { link } of pairs) {
-          link.dataset.active = String(link.dataset.tocSlug === slug);
-        }
-      };
-
-      const visibleIds = new Set();
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (!(entry.target instanceof HTMLElement)) {
-              continue;
-            }
-
-            if (entry.isIntersecting) {
-              visibleIds.add(entry.target.id);
-            } else {
-              visibleIds.delete(entry.target.id);
-            }
-          }
-
-          const activePair =
-            pairs.find(({ target }) => visibleIds.has(target.id)) ??
-            pairs.find(({ target }) => target.getBoundingClientRect().top >= 0) ??
-            pairs[pairs.length - 1];
-
-          if (activePair) {
-            setActive(activePair.target.id);
-          }
-        },
-        {
-          rootMargin: '-16% 0px -66% 0px',
-          threshold: [0, 1],
-        },
-      );
-
-      for (const { target } of pairs) {
-        observer.observe(target);
-      }
-
-      setActive(pairs[0].target.id);
-    }
-  })();
-</script> </div> <div class="content-prose prose prose-slate max-w-none dark:prose-invert" data-astro-cid-scuu7fyy>  <p><a href="https://space.bilibili.com/370283072/lists/1187255?type=season">M_Studio的勇者传说-2022Unity入门</a> 主要是知识点整理笔记</p>
-<h1 id="02-player-创建">02 Player 创建</h1>
-<h2 id="21-设置人物与基本组件">2.1 设置人物与基本组件</h2>
-<h3 id="211-人物组件的添加">2.1.1 人物组件的添加</h3>
+</a> </span> <span class="article-hero-meta-item article-hero-tags" data-astro-cid-scuu7fyy> <svg class="article-hero-icon article-hero-hash-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" data-astro-cid-scuu7fyy> <path stroke-linecap="round" d="M10 3 8 21M16 3l-2 18M4 9h17M3 15h17" data-astro-cid-scuu7fyy></path> </svg>  <a href="/blog/tag/%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E" class="article-hero-meta-link" data-astro-cid-scuu7fyy>游戏引擎</a> <span class="article-hero-tag-separator" data-astro-cid-scuu7fyy>/</span> <a href="/blog/tag/%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0" class="article-hero-meta-link" data-astro-cid-scuu7fyy>入门学习</a>  </span> </div> <h1 class="article-hero-title" data-astro-cid-scuu7fyy> 02 Player 创建(勇者传说-2022Unity入门) </h1> <blockquote class="article-hero-description" data-astro-cid-scuu7fyy> <q data-astro-cid-scuu7fyy>通过M_studio的勇者传说学习Unity入门基础</q> </blockquote>  <div class="article-hero-divider" aria-hidden="true" data-astro-cid-scuu7fyy></div> </header> <div id="article-content" class="content-prose prose prose-slate max-w-none dark:prose-invert" data-astro-cid-scuu7fyy>  <p><a href="https://space.bilibili.com/370283072/lists/1187255?type=season">M_Studio的勇者传说-2022Unity入门</a> 主要是知识点整理笔记</p>
+<h1 id="02-player-创建">02 Player 创建<a class="heading-anchor" href="#02-player-创建" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h1>
+<h2 id="21-设置人物与基本组件">2.1 设置人物与基本组件<a class="heading-anchor" href="#21-设置人物与基本组件" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
+<h3 id="211-人物组件的添加">2.1.1 人物组件的添加<a class="heading-anchor" href="#211-人物组件的添加" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>给人物添加Rigidbody 2D(重力)和CapsuleCollider 2D(碰撞体积)组件.
 点击CapsuleCollider 2D组件下的”Edit Collider2D”编辑.按住Shift可以以中心为标准来调整碰撞箱的范围.</p>
 <p>调整Offset以调整人物碰撞箱锚点的位置.</p>
 <p>在Rigidbody下的Constrains里冻结z轴的旋转.
 Collision Detection设为continuous,以保证以后写代码方便进行探测.
-<img src="https://i.ibb.co/hFzbK2yL/20260428185521.png" alt=""></p>
-<h3 id="212-平台组件的添加">2.1.2 平台组件的添加</h3>
+<img src="https://i.ibb.co/hFzbK2yL/20260428185521.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h3 id="212-平台组件的添加">2.1.2 平台组件的添加<a class="heading-anchor" href="#212-平台组件的添加" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>给Platform添加Composite Collider 2D组件 (若Platform没有Rigidbody2D组件,unity会为你自动添加),使每一个瓦片的碰撞箱结合成一体,并将Rigidboay2D的Body Type设为Static来防止平台掉落。
-<img src="https://i.ibb.co/JW9NR1mt/20260428185521-1.png" alt=""></p>
-<h2 id="22-创建及配置新输入系统">2.2 创建及配置新输入系统</h2>
-<h3 id="221-升级input-system">2.2.1 升级Input System</h3>
+<img src="https://i.ibb.co/JW9NR1mt/20260428185521-1.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h2 id="22-创建及配置新输入系统">2.2 创建及配置新输入系统<a class="heading-anchor" href="#22-创建及配置新输入系统" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
+<h3 id="221-升级input-system">2.2.1 升级Input System<a class="heading-anchor" href="#221-升级input-system" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>Edit/Project Settings/Player/Other Settings
 修改如图所示两个选项
-<img src="https://i.ibb.co/ccL3vHxq/20260428185521-2.png" alt=""></p>
+<img src="https://i.ibb.co/ccL3vHxq/20260428185521-2.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>然后去PackageManager搜索input,下载如下package.
-<img src="https://i.ibb.co/hJRR6ZW9/20260428185521-3.png" alt=""></p>
-<p>为Player添加Player Input组件并创建Input Actions.创建完毕删掉Player Input组件。<img src="https://i.ibb.co/JwGP827G/20260428185521-4.png" alt="">
+<img src="https://i.ibb.co/hJRR6ZW9/20260428185521-3.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<p>为Player添加Player Input组件并创建Input Actions.创建完毕删掉Player Input组件。<img src="https://i.ibb.co/JwGP827G/20260428185521-4.png" alt="" class="zoomable" loading="lazy" decoding="async">
 在PlayerInputControl中勾选如图所示方框,然后点击Apply.就会生成同名C#脚本.
-<img src="https://i.ibb.co/9Hv4M7MG/20260428185521-5.png" alt=""></p>
-<h3 id="222-playercontroller脚本">2.2.2 PlayerController脚本</h3>
+<img src="https://i.ibb.co/9Hv4M7MG/20260428185521-5.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h3 id="222-playercontroller脚本">2.2.2 PlayerController脚本<a class="heading-anchor" href="#222-playercontroller脚本" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">using</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> JetBrains</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Annotations</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">using</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> System</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Collections</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">using</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> System</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Collections</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Generic</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
@@ -359,10 +678,10 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    {</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">        inputDirection </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> inputControl.GamePlay.Move.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">ReadValue</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Vector2</span><span style="color:#24292E;--shiki-dark:#E1E4E8">>();</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span></code></pre>
-<h2 id="23-实现人物行为">2.3 实现人物行为</h2>
-<h3 id="231-人物移动与翻转">2.3.1 人物移动与翻转</h3>
+<h2 id="23-实现人物行为">2.3 实现人物行为<a class="heading-anchor" href="#23-实现人物行为" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
+<h3 id="231-人物移动与翻转">2.3.1 人物移动与翻转<a class="heading-anchor" href="#231-人物移动与翻转" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>使用速度来驱动物体，创建变量speed并输入值
-<img src="https://i.ibb.co/fzDThGKG/20260428185521-6.png" alt=""></p>
+<img src="https://i.ibb.co/fzDThGKG/20260428185521-6.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>在FixedUpdate() (持续性的按键情况，而如jump则是当作触发性的事件，减少性能开销) 中执行函数Move()，修改刚体速度，获取刚体组件</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583"> private</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> FixedUpdate</span><span style="color:#24292E;--shiki-dark:#E1E4E8">()</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
@@ -377,9 +696,9 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <p>在Unity中如何实现人物的左右移动和反转，包括使用transform组件和sprite renderer组件(只改变图层，不涉及刚体和碰撞体积)两种方法。</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>transform.localScale</span></span></code></pre>
 <p>使用localScale的方法需要注意人物图片的锚点位置和localScale的数值。</p>
-<h3 id="232-人物跳跃">2.3.2 人物跳跃</h3>
+<h3 id="232-人物跳跃">2.3.2 人物跳跃<a class="heading-anchor" href="#232-人物跳跃" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>实现人物跳跃，编辑按键，添加跳跃方法
-<img src="https://i.ibb.co/5h4gPch9/20260428185521-7.png" alt=""></p>
+<img src="https://i.ibb.co/5h4gPch9/20260428185521-7.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>施加力，纵轴跳跃，编写跳跃代码，注意按键状态和执行时机</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> float</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> JumpForce</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
 <span class="line"></span>
@@ -398,18 +717,18 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"></span></code></pre>
 <p>将跳跃函数放在Awake()中执行，即给Jump.started注册一个jump事件函数,并且使用force mode的瞬时力方法实现跳跃</p>
 <p>修改gravity scale为4，测试舒适的手感
-<img src="https://i.ibb.co/HLDvKPYp/20260428185521-8.png" alt=""></p>
-<h2 id="24-环境物理检测">2.4 环境物理检测</h2>
+<img src="https://i.ibb.co/HLDvKPYp/20260428185521-8.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h2 id="24-环境物理检测">2.4 环境物理检测<a class="heading-anchor" href="#24-环境物理检测" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
 <p>实现人物跳跃的连续动作，以及如何检测人物周围的物理环境，包括地面和墙面等。同时，还介绍了如何写物理检查代码。</p>
 <p>创建一个通用脚本，检测周围的物理环境
-<img src="https://i.ibb.co/Lz4SgvQB/20260428185521-9.png" alt=""></p>
+<img src="https://i.ibb.co/Lz4SgvQB/20260428185521-9.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>使用2D物理检测方法实现物理检测，通过使用overlap circle方法，圆形检测范围判断碰撞箱之间是否接触，赋值给变量。</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> check</span><span style="color:#24292E;--shiki-dark:#E1E4E8">()</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">   isGround </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Physics2D.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">OverlapCircle</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Vector2</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)transform.position </span><span style="color:#D73A49;--shiki-dark:#F97583">+</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> transform.localScale</span><span style="color:#D73A49;--shiki-dark:#F97583">*</span><span style="color:#24292E;--shiki-dark:#E1E4E8">bottomOffset, checkRadius, groundLayer);</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
 <p>其中设置选取合适的layer
-<img src="https://i.ibb.co/gM6cWMxJ/20260428185521-10.png" alt=""></p>
+<img src="https://i.ibb.co/gM6cWMxJ/20260428185521-10.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>选择人物脚底中心点作为坐标点，并设置检测范围，通过创建变量来访问组件，限制跳跃次数。</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">private</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> jump</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#6F42C1;--shiki-dark:#B392F0">InputAction</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">CallbackContext</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> context</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
@@ -422,28 +741,28 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    Gizmos.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">DrawWireSphere</span><span style="color:#24292E;--shiki-dark:#E1E4E8">((</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Vector2</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)transform.position </span><span style="color:#D73A49;--shiki-dark:#F97583">+</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> transform.localScale</span><span style="color:#D73A49;--shiki-dark:#F97583">*</span><span style="color:#24292E;--shiki-dark:#E1E4E8">bottomOffset, checkRadius);</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-<p><img src="https://i.ibb.co/WNZbdHtF/20260428185521-11.png" alt=""><img src="https://i.ibb.co/JRBFfphF/20260428185521-12.png" alt=""></p>
+<p><img src="https://i.ibb.co/WNZbdHtF/20260428185521-11.png" alt="" class="zoomable" loading="lazy" decoding="async"><img src="https://i.ibb.co/JRBFfphF/20260428185521-12.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>创建物理材质和避免人物粘在墙上。
-<img src="https://i.ibb.co/B2nW8Nh4/20260428185521-13.png" alt=""></p>
-<h2 id="25-创建人物动画">2.5 创建人物动画</h2>
-<h3 id="251-人物基本动画">2.5.1 人物基本动画</h3>
+<img src="https://i.ibb.co/B2nW8Nh4/20260428185521-13.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h2 id="25-创建人物动画">2.5 创建人物动画<a class="heading-anchor" href="#25-创建人物动画" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
+<h3 id="251-人物基本动画">2.5.1 人物基本动画<a class="heading-anchor" href="#251-人物基本动画" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>制作人物的动画，也就是制作帧动画。创建新的文件夹保存所有的动画和动画控制器，给它起名叫做animations
-<img src="https://i.ibb.co/ync0PW9M/20260428185521-14.png" alt="">
+<img src="https://i.ibb.co/ync0PW9M/20260428185521-14.png" alt="" class="zoomable" loading="lazy" decoding="async">
 创建animator控制器，并打开界面
-<img src="https://i.ibb.co/Jw3YLpwX/20260428185521-15.png" alt=""></p>
+<img src="https://i.ibb.co/Jw3YLpwX/20260428185521-15.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>将人物动画并添加到animator中，并且调整采样率和播放速度
-<img src="https://i.ibb.co/ynmdx791/20260428185521-16.png" alt="">
+<img src="https://i.ibb.co/ynmdx791/20260428185521-16.png" alt="" class="zoomable" loading="lazy" decoding="async">
 在这里可以显示采样率，并且改为帧显示。</p>
 <p>创建人物跑动动画并设置播放状态
-<img src="https://i.ibb.co/8ngS9jWX/20260428185521-17.png" alt=""></p>
+<img src="https://i.ibb.co/8ngS9jWX/20260428185521-17.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>在animator中可以连接各个animation，并且设置不同的条件进行状态切换
-<img src="https://i.ibb.co/HT0zt2HF/20260428185521-18.png" alt="">
+<img src="https://i.ibb.co/HT0zt2HF/20260428185521-18.png" alt="" class="zoomable" loading="lazy" decoding="async">
 而使用exit time实现动画切换，不需要任何条件
-<img src="https://i.ibb.co/845Sc3B0/20260428185521-19.png" alt="">
+<img src="https://i.ibb.co/845Sc3B0/20260428185521-19.png" alt="" class="zoomable" loading="lazy" decoding="async">
 在parameters创建条件，以速度条件来切换跑步动画，
-<img src="https://i.ibb.co/WWPt8YVM/20260428185521-20.png" alt=""><img src="https://i.ibb.co/6Rn5n6Vf/20260428185521-21.png" alt="">
+<img src="https://i.ibb.co/WWPt8YVM/20260428185521-20.png" alt="" class="zoomable" loading="lazy" decoding="async"><img src="https://i.ibb.co/6Rn5n6Vf/20260428185521-21.png" alt="" class="zoomable" loading="lazy" decoding="async">
 创建新的C#脚本 PlayerAnimation，获得animator组件的使用权，控制人物动画切换
-<img src="https://i.ibb.co/N2w1wqzz/20260428185521-22.png" alt=""></p>
+<img src="https://i.ibb.co/N2w1wqzz/20260428185521-22.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>区分animator和animation的概念，要在脚本中获取animator的组件权限，要创建变量，animator的变量命名为animal缩写。</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">private</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Animator</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> anim</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">private</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> Rigidbody2D</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> rb</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
@@ -469,15 +788,15 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">     anim.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">SetFloat</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"velocityX"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">, Mathf.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Abs</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(rb.velocity.x));  </span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8"> }</span></span></code></pre>
 <p>完成绑定和相互的操作
-<img src="https://i.ibb.co/GhYjY75/20260428185521-23.png" alt=""></p>
+<img src="https://i.ibb.co/GhYjY75/20260428185521-23.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>可以创建走路和跑步的动画，通过条件切换实现
-<img src="https://i.ibb.co/yBb8cW9V/20260428185521-24.png" alt=""></p>
-<h3 id="252-跳跃动画">2.5.2 跳跃动画</h3>
+<img src="https://i.ibb.co/yBb8cW9V/20260428185521-24.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h3 id="252-跳跃动画">2.5.2 跳跃动画<a class="heading-anchor" href="#252-跳跃动画" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>使用Blend tree混合来创建多个阶段的动画
-<img src="https://i.ibb.co/cS6zmyq6/20260428185521-25.png" alt=""></p>
+<img src="https://i.ibb.co/cS6zmyq6/20260428185521-25.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>在动画制作中使用float值和列表来添加动画片段和控制其转换速度，创建一个新的float值，名为velocityY。</p>
 <p>跳跃的状态转换通过 velocityY 切换
-<img src="https://i.ibb.co/DDLc135r/20260428185521-26.png" alt="">
+<img src="https://i.ibb.co/DDLc135r/20260428185521-26.png" alt="" class="zoomable" loading="lazy" decoding="async">
 使用代码填入控制动画的切换条件变量</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> class</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> PlayerAnimation</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> : </span><span style="color:#6F42C1;--shiki-dark:#B392F0">MonoBehaviour</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
@@ -502,21 +821,21 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
 <p>并且设置animator中的转换过程，其中land可以设置为有速度就强制停止，避免细节落地后的蹲起的时候在跑步。
-<img src="https://i.ibb.co/4ZyJNLm7/20260428185521-27.png" alt=""></p>
-<h2 id="26-人物属性与伤害计算">2.6 人物属性与伤害计算</h2>
+<img src="https://i.ibb.co/4ZyJNLm7/20260428185521-27.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h2 id="26-人物属性与伤害计算">2.6 人物属性与伤害计算<a class="heading-anchor" href="#26-人物属性与伤害计算" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
 <p>添加敌人，即野猪的不同状态
-<img src="https://i.ibb.co/KxJrhdPc/20260428185521-28.png" alt="">
+<img src="https://i.ibb.co/KxJrhdPc/20260428185521-28.png" alt="" class="zoomable" loading="lazy" decoding="async">
 调整野猪的Sorting Layer和Layer，使其与玩家在同一层中,但是优先级小于player</p>
 <p>Sorting Layer
-<img src="https://i.ibb.co/BVbs1FpR/20260428185521-29.png" alt=""></p>
+<img src="https://i.ibb.co/BVbs1FpR/20260428185521-29.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>Layer
-<img src="https://i.ibb.co/JjRtqNt3/20260428185521-30.png" alt=""></p>
+<img src="https://i.ibb.co/JjRtqNt3/20260428185521-30.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>设置触发器，实现野猪和玩家互相穿越和穿过过程中发生事情的具体逻辑，即通过触发器检测实现攻击和伤害判定。
-<img src="https://i.ibb.co/C5zrGxhh/20260428185521-31.png" alt="">\</p>
+<img src="https://i.ibb.co/C5zrGxhh/20260428185521-31.png" alt="" class="zoomable" loading="lazy" decoding="async">\</p>
 <p>给野猪设置两个不同的碰撞体，一个是矩形，一个是胶囊形，调整胶囊大小和方向。
-<img src="https://i.ibb.co/tMbLtBhJ/20260428185521-32.png" alt=""></p>
+<img src="https://i.ibb.co/tMbLtBhJ/20260428185521-32.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>同时添加碰撞剔除层，将角色之间的碰撞取消，避免堵塞。
-<img src="https://i.ibb.co/sT7hRzM/20260428185521-33.png" alt=""></p>
+<img src="https://i.ibb.co/sT7hRzM/20260428185521-33.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>在脚本中，使用on trigger state2D方法检测碰撞触发器</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583"> private</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> OnTriggerStay2D</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Collider2D</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> collision</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
@@ -619,17 +938,17 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">            invulnerableCounter </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> invulnerableDuration;</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">        }</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    }</span></span></code></pre>
-<h2 id="27-角色动画逻辑实现与判定实装">2.7 角色动画逻辑实现与判定实装</h2>
-<h3 id="271-受伤和死亡的逻辑和动画">2.7.1 受伤和死亡的逻辑和动画</h3>
+<h2 id="27-角色动画逻辑实现与判定实装">2.7 角色动画逻辑实现与判定实装<a class="heading-anchor" href="#27-角色动画逻辑实现与判定实装" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
+<h3 id="271-受伤和死亡的逻辑和动画">2.7.1 受伤和死亡的逻辑和动画<a class="heading-anchor" href="#271-受伤和死亡的逻辑和动画" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>1.受伤2种动画表现
 在animation中创建受伤与死亡的动画效果
-<img src="https://i.ibb.co/xbjgWZK/20260428185521-34.png" alt="">
+<img src="https://i.ibb.co/xbjgWZK/20260428185521-34.png" alt="" class="zoomable" loading="lazy" decoding="async">
 由于在任何动作情况下，角色都可能受伤，因此在Layer创建新的单独层可以覆盖到上一层的各个动作；
-<img src="https://i.ibb.co/PGbWLsRf/20260428185521-35.png" alt=""></p>
+<img src="https://i.ibb.co/PGbWLsRf/20260428185521-35.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>为给角色添加闪烁的受伤效果，在animation可以添加新的 property(性质)；修改如rgb值，并且在时间轴挑选时间点改动，过渡段就能创造出闪烁的效果
-<img src="https://i.ibb.co/twq1n5mV/20260428185521-36.png" alt="">
+<img src="https://i.ibb.co/twq1n5mV/20260428185521-36.png" alt="" class="zoomable" loading="lazy" decoding="async">
 之后在animator中，重新在hurt layer创建并且标好条件
-<img src="https://i.ibb.co/PskHqp9m/20260428185521-37.png" alt=""></p>
+<img src="https://i.ibb.co/PskHqp9m/20260428185521-37.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>2.UnityEvent 使用方法
 创建trigger触发器的功能，在 PlayerAnimation.cs 中,加入代码</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> PlayHurt</span><span style="color:#24292E;--shiki-dark:#E1E4E8">()</span></span>
@@ -639,7 +958,7 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <p>在character.cs中，使用unityevent的方法</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583"> public</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> UnityEvent</span><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Transform</span><span style="color:#24292E;--shiki-dark:#E1E4E8">> </span><span style="color:#6F42C1;--shiki-dark:#B392F0">OnTakeDamage</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span></code></pre>
 <p>这样就能实现将各种想要实现的功能集成起来，只需要传入所需的参数
-<img src="https://i.ibb.co/sJCjKScp/20260428185521-38.png" alt="">
+<img src="https://i.ibb.co/sJCjKScp/20260428185521-38.png" alt="" class="zoomable" loading="lazy" decoding="async">
 在代码中，执行unityevent需要使用固定的invoke方法，?. 能避免空值时候的错误，是一种固定写法。</p>
 <p>3.受伤和死亡的函数
 为了实现受伤就会反弹的效果，需要在PlayerController.cs中实现函数功能</p>
@@ -652,7 +971,7 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
 <p>同时在animator中也可以创建用于控制人物状态的代码
-<img src="https://i.ibb.co/5xg4ZCz6/20260428185521-39.png" alt=""></p>
+<img src="https://i.ibb.co/5xg4ZCz6/20260428185521-39.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>同样，人物死亡也有事件方法，即 public UnityEvent onDie ; 并且触发 onDie?.Invoke();
 在PlayerController.cs中，死亡即执行</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> PlayerDead</span><span style="color:#24292E;--shiki-dark:#E1E4E8">()</span></span>
@@ -660,26 +979,26 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    isDead </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> true</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    inputControl.GamePlay.</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Disable</span><span style="color:#24292E;--shiki-dark:#E1E4E8">();</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
-<h3 id="272-三段攻击动画">2.7.2 三段攻击动画</h3>
+<h3 id="272-三段攻击动画">2.7.2 三段攻击动画<a class="heading-anchor" href="#272-三段攻击动画" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>创建三段的攻击动画，为attack1、2、3；并且在animation中单独创建attack layer，权重也设置为1
-<img src="https://i.ibb.co/v6GBYyFx/20260428185521-40.png" alt=""></p>
+<img src="https://i.ibb.co/v6GBYyFx/20260428185521-40.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>创建布尔值 isattack，和用于触发多段攻击的触发器attack；设置对应的条件
-<img src="https://i.ibb.co/Z184pvPb/20260428185521-41.png" alt="">
+<img src="https://i.ibb.co/Z184pvPb/20260428185521-41.png" alt="" class="zoomable" loading="lazy" decoding="async">
 在inputsystem中也加入攻击相关的输入，同时在playercontroller.cs和playeranimation中添加对应的代码
-<img src="https://i.ibb.co/GvQTFGMr/20260428185521-42.png" alt=""></p>
+<img src="https://i.ibb.co/GvQTFGMr/20260428185521-42.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>animator中，攻击退出后，将isattack也设置回去，也在动画状态上添加脚本
-<img src="https://i.ibb.co/75M2hv6/20260428185521-43.png" alt=""></p>
-<h3 id="273-攻击效果实装">2.7.3 攻击效果实装</h3>
+<img src="https://i.ibb.co/75M2hv6/20260428185521-43.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<h3 id="273-攻击效果实装">2.7.3 攻击效果实装<a class="heading-anchor" href="#273-攻击效果实装" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h3>
 <p>在攻击动画中，出现剑影的动画片段实装攻击效果，单独在角色的下面创建子集gameobject，添加上碰撞体还有触发器
-<img src="https://i.ibb.co/rfyXV3hv/20260428185521-44.png" alt=""></p>
+<img src="https://i.ibb.co/rfyXV3hv/20260428185521-44.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>添加多边形碰撞体
-<img src="https://i.ibb.co/Kcsg4Sdz/20260428185521-45.png" alt="">
+<img src="https://i.ibb.co/Kcsg4Sdz/20260428185521-45.png" alt="" class="zoomable" loading="lazy" decoding="async">
 ，并且勾选触发器
-<img src="https://i.ibb.co/6G8700y/20260428185521-46.png" alt=""></p>
+<img src="https://i.ibb.co/6G8700y/20260428185521-46.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>为防止攻击时的判定范围覆盖人物，伤到角色，在layers override中将人物本身进行排除；
-<img src="https://i.ibb.co/Z6bS2pcC/20260428185521-47.png" alt="">
+<img src="https://i.ibb.co/Z6bS2pcC/20260428185521-47.png" alt="" class="zoomable" loading="lazy" decoding="async">
 同时，修改野猪也就是敌人身上碰撞体的优先级
-<img src="https://i.ibb.co/R423y7nS/20260428185521-48.png" alt=""></p>
+<img src="https://i.ibb.co/R423y7nS/20260428185521-48.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p>使用光滑材质会导致人物移动距离位移，需要修改材质，避免这种情况，重新创建不一样的物理材质并且在代码中加变量来控制材质</p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">[</span><span style="color:#6F42C1;--shiki-dark:#B392F0">Header</span><span style="color:#24292E;--shiki-dark:#E1E4E8">(</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"物理材质"</span><span style="color:#24292E;--shiki-dark:#E1E4E8">)]</span></span>
 <span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> PhysicsMaterial2D</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> normal</span><span style="color:#24292E;--shiki-dark:#E1E4E8">;</span></span>
@@ -694,27 +1013,103 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
 <span class="line"><span style="color:#D73A49;--shiki-dark:#F97583">public</span><span style="color:#D73A49;--shiki-dark:#F97583"> void</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> CheckState</span><span style="color:#24292E;--shiki-dark:#E1E4E8">()</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">{</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">    coll.sharedMaterial </span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> physicsCheck.isGround </span><span style="color:#D73A49;--shiki-dark:#F97583">?</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> normal </span><span style="color:#D73A49;--shiki-dark:#F97583">:</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> wall;</span></span>
-<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>  </div> </div> <aside class="hidden lg:block lg:sticky lg:top-32 lg:self-start" data-astro-cid-scuu7fyy> <nav class="toc-panel" data-toc aria-label="Contents" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>Contents</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>   </div> <div class="article-bottom-stack" data-astro-cid-7jjqptxk> <section class="article-copyright" data-article-copyright aria-label="文章版权与分享" data-astro-cid-a3evcjeq> <div class="article-copyright-card" data-astro-cid-a3evcjeq> <svg class="article-copyright-watermark" viewBox="0 0 120 120" fill="none" aria-hidden="true" data-astro-cid-a3evcjeq> <circle class="article-copyright-watermark-ring" cx="60" cy="60" r="47" data-astro-cid-a3evcjeq></circle> <text class="article-copyright-watermark-glyph" x="60" y="75" text-anchor="middle" data-astro-cid-a3evcjeq>CC</text> </svg> <div class="article-copyright-heading" data-astro-cid-a3evcjeq> <p class="article-copyright-title" data-astro-cid-a3evcjeq>02 Player 创建(勇者传说-2022Unity入门)</p> <a href="https://ning0713.top/blog/unity-player/" class="article-copyright-url" data-astro-cid-a3evcjeq>https://ning0713.top/blog/unity-player/</a> </div> <dl class="article-copyright-meta" data-astro-cid-a3evcjeq> <div data-astro-cid-a3evcjeq> <dt data-astro-cid-a3evcjeq>Author</dt> <dd data-astro-cid-a3evcjeq>不宁yasushi</dd> </div> <div data-astro-cid-a3evcjeq> <dt data-astro-cid-a3evcjeq>Published at</dt> <dd data-astro-cid-a3evcjeq>Feb 1, 2026</dd> </div> <div data-astro-cid-a3evcjeq> <dt data-astro-cid-a3evcjeq>Copyright</dt> <dd data-astro-cid-a3evcjeq> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noreferrer" class="article-license-link" data-license="CC BY-NC-SA 4.0" data-astro-cid-a3evcjeq> <svg class="article-license-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-a3evcjeq> <circle class="article-license-ring" cx="12" cy="12" r="9.25" data-astro-cid-a3evcjeq></circle> <text class="article-license-glyph" x="12" y="14.65" text-anchor="middle" data-astro-cid-a3evcjeq>CC</text> </svg> <span class="article-license-label" data-astro-cid-a3evcjeq>CC BY-NC-SA 4.0</span> </a> </dd> </div> </dl> <div class="article-share-row" data-astro-cid-a3evcjeq> <div class="article-share-actions" aria-label="分享文章" data-astro-cid-a3evcjeq> <button type="button" class="article-share-button" data-copy-article-link data-copy-url="https://ning0713.top/blog/unity-player/" data-tooltip="复制链接" aria-label="复制文章链接" title="复制文章链接" data-astro-cid-a3evcjeq> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-a3evcjeq> <path d="M10.2 13.8a4 4 0 0 0 5.7 0l2.3-2.3a4 4 0 0 0-5.7-5.7l-1.3 1.3" data-astro-cid-a3evcjeq></path> <path d="M13.8 10.2a4 4 0 0 0-5.7 0l-2.3 2.3a4 4 0 0 0 5.7 5.7l1.3-1.3" data-astro-cid-a3evcjeq></path> </svg> </button> <button type="button" class="article-share-button" data-toggle-article-qr data-tooltip="二维码" aria-label="显示文章二维码" title="显示文章二维码" aria-expanded="false" data-astro-cid-a3evcjeq> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-a3evcjeq> <rect x="3.5" y="3.5" width="6.3" height="6.3" rx="0.6" data-astro-cid-a3evcjeq></rect> <rect x="14.2" y="3.5" width="6.3" height="6.3" rx="0.6" data-astro-cid-a3evcjeq></rect> <rect x="3.5" y="14.2" width="6.3" height="6.3" rx="0.6" data-astro-cid-a3evcjeq></rect> <path d="M14.2 14.2h2.4v2.4h-2.4zM18.1 14.2h2.4v6.3h-6.3v-2.4M14.2 18.1h2.4" data-astro-cid-a3evcjeq></path> </svg> </button> <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fning0713.top%2Fblog%2Funity-player%2F&title=02%20Player%20%E5%88%9B%E5%BB%BA(%E5%8B%87%E8%80%85%E4%BC%A0%E8%AF%B4-2022Unity%E5%85%A5%E9%97%A8)%20%7C%20%E4%B8%8D%E5%AE%81yasushi&pic=https%3A%2F%2Fi.ibb.co%2FtPc502kT%2F20260428152256.jpg" target="_blank" rel="noreferrer" class="article-share-button article-share-button--weibo" data-tooltip="微博" aria-label="分享到微博" title="分享到微博" data-astro-cid-a3evcjeq> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-astro-cid-a3evcjeq> <path d="M20.8 11.4c-.6-1.8-2.7-2.4-4.5-1.9.1-.4.2-.9.1-1.3-.2-1.2-1.4-1.7-2.6-1.1-1.2.6-2.1 1.8-2.8 2.9-1.4-.3-2.9-.2-4.2.4-2.8 1.2-4.2 3.8-3 5.9 1.3 2.3 5 3 8.2 1.7 2.4-1 4.1-2.8 4.4-4.6 1.7.4 3.7-.4 4.4-2Zm-9.2 5c-2.1.8-4.5.3-5.3-1.1-.8-1.4.4-3 2.5-3.8s4.4-.4 5.2 1c.8 1.3-.3 3-2.4 3.9Zm-1.1-1.2c-.6.5-1.5.5-1.9 0-.5-.5-.3-1.2.3-1.7.7-.4 1.5-.4 1.9.1.4.4.3 1.1-.3 1.6Zm7-9.8a.8.8 0 0 1 .9-.6c2.6.4 4.5 2.6 4.2 5.1a.8.8 0 1 1-1.6-.2c.2-1.7-1.1-3.2-2.9-3.5a.8.8 0 0 1-.6-.8Zm.3 2.5a.7.7 0 0 1 .8-.6c1.3.2 2.2 1.3 2 2.6a.7.7 0 1 1-1.4-.2c.1-.5-.3-1-.9-1.1a.7.7 0 0 1-.5-.7Z" data-astro-cid-a3evcjeq></path> </svg> </a> <a href="https://x.com/intent/tweet?text=02%20Player%20%E5%88%9B%E5%BB%BA(%E5%8B%87%E8%80%85%E4%BC%A0%E8%AF%B4-2022Unity%E5%85%A5%E9%97%A8)%20%7C%20%E4%B8%8D%E5%AE%81yasushi&url=https%3A%2F%2Fning0713.top%2Fblog%2Funity-player%2F" target="_blank" rel="noreferrer" class="article-share-button article-share-button-x" data-tooltip="X" aria-label="分享到 X" title="分享到 X" data-astro-cid-a3evcjeq> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-astro-cid-a3evcjeq> <path d="M18.9 2H22l-6.8 7.8L23.2 22H17l-4.9-6.4L6.5 22H3.4l7.2-8.2L.8 2h6.4l4.4 5.8L18.9 2Zm-1.1 17.8h1.7L6.2 4H4.4l13.4 15.8Z" data-astro-cid-a3evcjeq></path> </svg> </a> </div> <span class="article-share-status" data-article-share-status role="status" aria-live="polite" data-astro-cid-a3evcjeq></span> </div> <div class="article-qr-panel" data-article-qr-panel hidden data-astro-cid-a3evcjeq> <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&data=https%3A%2F%2Fning0713.top%2Fblog%2Funity-player%2F" width="160" height="160" loading="lazy" decoding="async" alt="当前文章链接二维码" data-astro-cid-a3evcjeq> <span data-astro-cid-a3evcjeq>Scan to open</span> </div> </div> </section> <script>
+  (() => {
+    document.querySelectorAll('[data-article-copyright]').forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.ready === 'true') {
+        return;
+      }
+
+      root.dataset.ready = 'true';
+      const copyButton = root.querySelector('[data-copy-article-link]');
+      const qrButton = root.querySelector('[data-toggle-article-qr]');
+      const qrPanel = root.querySelector('[data-article-qr-panel]');
+      const status = root.querySelector('[data-article-share-status]');
+      let statusTimer = 0;
+
+      const showStatus = (message) => {
+        if (!(status instanceof HTMLElement)) {
+          return;
+        }
+
+        window.clearTimeout(statusTimer);
+        status.textContent = message;
+        statusTimer = window.setTimeout(() => {
+          status.textContent = '';
+        }, 1800);
+      };
+
+      const copyText = async (value) => {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(value);
+          return;
+        }
+
+        const field = document.createElement('textarea');
+        field.value = value;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.append(field);
+        field.select();
+        const execCopy = Reflect.get(document, 'execCommand');
+        const copied = typeof execCopy === 'function' ? execCopy.call(document, 'copy') : false;
+        field.remove();
+
+        if (!copied) {
+          throw new Error('copy failed');
+        }
+      };
+
+      if (copyButton instanceof HTMLButtonElement) {
+        copyButton.addEventListener('click', async () => {
+          try {
+            await copyText(copyButton.dataset.copyUrl || window.location.href);
+            copyButton.dataset.copied = 'true';
+            showStatus('链接已复制');
+            window.setTimeout(() => {
+              copyButton.dataset.copied = 'false';
+            }, 1200);
+          } catch {
+            showStatus('复制失败');
+          }
+        });
+      }
+
+      if (
+        qrButton instanceof HTMLButtonElement &&
+        qrPanel instanceof HTMLElement
+      ) {
+        qrButton.addEventListener('click', () => {
+          const expanded = qrButton.getAttribute('aria-expanded') !== 'true';
+          qrButton.setAttribute('aria-expanded', String(expanded));
+          qrButton.setAttribute('aria-label', expanded ? '隐藏文章二维码' : '显示文章二维码');
+          qrButton.setAttribute('title', expanded ? '隐藏文章二维码' : '显示文章二维码');
+          qrPanel.hidden = !expanded;
+        });
+      }
+    });
+  })();
+</script>  <nav class="article-post-navigation" aria-label="上一篇与下一篇文章" data-astro-cid-nnxgeytw><span class="article-post-navigation-side" data-astro-cid-nnxgeytw><a href="/blog/transformer-architecture" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-previous" aria-label="上一篇：Happy-LLM 章节疑难点(1) Transformer 架构" data-astro-cid-nnxgeytw><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Previous</small><strong data-astro-cid-nnxgeytw>Happy-LLM 章节疑难点(1) Transformer 架构</strong></span></a></span><span class="article-post-navigation-side article-post-navigation-side-next" data-astro-cid-nnxgeytw><a href="/blog/unity-basics" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-next" aria-label="下一篇：01 Unity 基本设置(勇者传说-2022Unity入门)" data-astro-cid-nnxgeytw><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Next</small><strong data-astro-cid-nnxgeytw>01 Unity 基本设置(勇者传说-2022Unity入门)</strong></span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg></a></span></nav> <section class="article-comments" aria-labelledby="article-comments-title" data-astro-cid-qdzwzgpn><div class="article-comments-heading" data-astro-cid-qdzwzgpn><h2 id="article-comments-title" data-astro-cid-qdzwzgpn>COMMENTS</h2><span aria-hidden="true" data-astro-cid-qdzwzgpn></span></div><div class="article-comments-unavailable" data-astro-cid-qdzwzgpn><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-qdzwzgpn><path d="M7 18.5 3.5 21l1-4.2A8.5 8.5 0 1 1 7 18.5Z" data-astro-cid-qdzwzgpn></path><path d="M8 10h8M8 14h5" data-astro-cid-qdzwzgpn></path></svg><p data-astro-cid-qdzwzgpn>评论区暂未启用</p></div></section> </div> </div> <aside class="article-toc-sidebar hidden md:block md:sticky md:self-start" data-astro-cid-scuu7fyy> <nav class="toc-panel toc-panel--article" data-toc data-toc-variant="article" aria-label="TABLE OF CONTENTS" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>TABLE OF CONTENTS</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#02-player-创建" class="toc-link" data-toc-link data-toc-slug="02-player-创建">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#02-player-创建" class="toc-link" data-level="2" data-toc-link data-toc-slug="02-player-创建">
               02 Player 创建
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 02 Player 创建" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#21-设置人物与基本组件" class="toc-link" data-toc-link data-toc-slug="21-设置人物与基本组件">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#21-设置人物与基本组件" class="toc-link" data-level="3" data-toc-link data-toc-slug="21-设置人物与基本组件">
               2.1 设置人物与基本组件
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.1 设置人物与基本组件" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#211-人物组件的添加" class="toc-link" data-toc-link data-toc-slug="211-人物组件的添加">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#211-人物组件的添加" class="toc-link" data-level="4" data-toc-link data-toc-slug="211-人物组件的添加">
               2.1.1 人物组件的添加
             </a>
             
@@ -722,7 +1117,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#212-平台组件的添加" class="toc-link" data-toc-link data-toc-slug="212-平台组件的添加">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#212-平台组件的添加" class="toc-link" data-level="4" data-toc-link data-toc-slug="212-平台组件的添加">
               2.1.2 平台组件的添加
             </a>
             
@@ -731,16 +1127,16 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
         </li></ol>
         </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#22-创建及配置新输入系统" class="toc-link" data-toc-link data-toc-slug="22-创建及配置新输入系统">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#22-创建及配置新输入系统" class="toc-link" data-level="3" data-toc-link data-toc-slug="22-创建及配置新输入系统">
               2.2 创建及配置新输入系统
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.2 创建及配置新输入系统" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#221-升级input-system" class="toc-link" data-toc-link data-toc-slug="221-升级input-system">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#221-升级input-system" class="toc-link" data-level="4" data-toc-link data-toc-slug="221-升级input-system">
               2.2.1 升级Input System
             </a>
             
@@ -748,7 +1144,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#222-playercontroller脚本" class="toc-link" data-toc-link data-toc-slug="222-playercontroller脚本">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#222-playercontroller脚本" class="toc-link" data-level="4" data-toc-link data-toc-slug="222-playercontroller脚本">
               2.2.2 PlayerController脚本
             </a>
             
@@ -757,16 +1154,16 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
         </li></ol>
         </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#23-实现人物行为" class="toc-link" data-toc-link data-toc-slug="23-实现人物行为">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#23-实现人物行为" class="toc-link" data-level="3" data-toc-link data-toc-slug="23-实现人物行为">
               2.3 实现人物行为
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.3 实现人物行为" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#231-人物移动与翻转" class="toc-link" data-toc-link data-toc-slug="231-人物移动与翻转">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#231-人物移动与翻转" class="toc-link" data-level="4" data-toc-link data-toc-slug="231-人物移动与翻转">
               2.3.1 人物移动与翻转
             </a>
             
@@ -774,7 +1171,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#232-人物跳跃" class="toc-link" data-toc-link data-toc-slug="232-人物跳跃">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#232-人物跳跃" class="toc-link" data-level="4" data-toc-link data-toc-slug="232-人物跳跃">
               2.3.2 人物跳跃
             </a>
             
@@ -783,7 +1181,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
         </li></ol>
         </li><li class="toc-item" data-depth="2">
           <div class="toc-row">
-            <a href="#24-环境物理检测" class="toc-link" data-toc-link data-toc-slug="24-环境物理检测">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#24-环境物理检测" class="toc-link" data-level="3" data-toc-link data-toc-slug="24-环境物理检测">
               2.4 环境物理检测
             </a>
             
@@ -791,16 +1190,16 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#25-创建人物动画" class="toc-link" data-toc-link data-toc-slug="25-创建人物动画">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#25-创建人物动画" class="toc-link" data-level="3" data-toc-link data-toc-slug="25-创建人物动画">
               2.5 创建人物动画
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.5 创建人物动画" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#251-人物基本动画" class="toc-link" data-toc-link data-toc-slug="251-人物基本动画">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#251-人物基本动画" class="toc-link" data-level="4" data-toc-link data-toc-slug="251-人物基本动画">
               2.5.1 人物基本动画
             </a>
             
@@ -808,7 +1207,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#252-跳跃动画" class="toc-link" data-toc-link data-toc-slug="252-跳跃动画">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#252-跳跃动画" class="toc-link" data-level="4" data-toc-link data-toc-slug="252-跳跃动画">
               2.5.2 跳跃动画
             </a>
             
@@ -817,7 +1217,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
         </li></ol>
         </li><li class="toc-item" data-depth="2">
           <div class="toc-row">
-            <a href="#26-人物属性与伤害计算" class="toc-link" data-toc-link data-toc-slug="26-人物属性与伤害计算">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#26-人物属性与伤害计算" class="toc-link" data-level="3" data-toc-link data-toc-slug="26-人物属性与伤害计算">
               2.6 人物属性与伤害计算
             </a>
             
@@ -825,16 +1226,16 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="2" data-toc-branch data-collapsed="true">
           <div class="toc-row">
-            <a href="#27-角色动画逻辑实现与判定实装" class="toc-link" data-toc-link data-toc-slug="27-角色动画逻辑实现与判定实装">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#27-角色动画逻辑实现与判定实装" class="toc-link" data-level="3" data-toc-link data-toc-slug="27-角色动画逻辑实现与判定实装">
               2.7 角色动画逻辑实现与判定实装
             </a>
-            <button class="toc-toggle" type="button" data-toc-toggle aria-label="Toggle 2.7 角色动画逻辑实现与判定实装" aria-expanded="false">
-                    <span aria-hidden="true" class="toc-toggle-icon"></span>
-                  </button>
+            
           </div>
-          <ol class="toc-list toc-children" hidden><li class="toc-item" data-depth="3">
+          <ol class="toc-list toc-children"><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#271-受伤和死亡的逻辑和动画" class="toc-link" data-toc-link data-toc-slug="271-受伤和死亡的逻辑和动画">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#271-受伤和死亡的逻辑和动画" class="toc-link" data-level="4" data-toc-link data-toc-slug="271-受伤和死亡的逻辑和动画">
               2.7.1 受伤和死亡的逻辑和动画
             </a>
             
@@ -842,7 +1243,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#272-三段攻击动画" class="toc-link" data-toc-link data-toc-slug="272-三段攻击动画">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#272-三段攻击动画" class="toc-link" data-level="4" data-toc-link data-toc-slug="272-三段攻击动画">
               2.7.2 三段攻击动画
             </a>
             
@@ -850,7 +1252,8 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
           
         </li><li class="toc-item" data-depth="3">
           <div class="toc-row">
-            <a href="#273-攻击效果实装" class="toc-link" data-toc-link data-toc-slug="273-攻击效果实装">
+            <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
+            <a href="#273-攻击效果实装" class="toc-link" data-level="4" data-toc-link data-toc-slug="273-攻击效果实装">
               2.7.3 攻击效果实装
             </a>
             
@@ -865,6 +1268,11 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
       if (!(toc instanceof HTMLElement)) {
         continue;
       }
+
+      if (toc.dataset.tocReady === 'true') {
+        continue;
+      }
+      toc.dataset.tocReady = 'true';
 
       const links = Array.from(toc.querySelectorAll('[data-toc-link]')).filter((link) => link instanceof HTMLAnchorElement);
       const toggleButtons = Array.from(toc.querySelectorAll('[data-toc-toggle]')).filter(
@@ -917,6 +1325,66 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
         continue;
       }
 
+      if (toc.dataset.tocVariant === 'article') {
+        const content = document.getElementById('article-content');
+        if (!(content instanceof HTMLElement)) {
+          continue;
+        }
+
+        const updateReadingProgress = () => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+          const viewportHeight = window.innerHeight;
+          const contentTop = content.getBoundingClientRect().top + scrollTop;
+          const contentBottom = contentTop + content.offsetHeight;
+          const states = pairs.map(({ link, target }, index) => {
+            const headingTop = target.getBoundingClientRect().top + scrollTop;
+            const nextTarget = pairs[index + 1]?.target;
+            const nextHeadingTop = nextTarget
+              ? nextTarget.getBoundingClientRect().top + scrollTop
+              : contentBottom;
+            const rangeStart = headingTop - scrollTop;
+            const rangeEnd = nextHeadingTop - scrollTop - target.offsetHeight;
+            const progress = Math.max(
+              0,
+              Math.min(1, (viewportHeight - rangeStart) / Math.max(rangeEnd - rangeStart, 1)),
+            );
+            const inView = rangeStart < viewportHeight && rangeEnd > 0;
+
+            return { inView, link, progress };
+          });
+
+          states.forEach(({ inView, link, progress }, index) => {
+            const progressBar = link.previousElementSibling;
+            link.dataset.active = String(inView);
+            link.dataset.activeStart = String(inView && !states[index - 1]?.inView);
+            link.dataset.activeEnd = String(inView && !states[index + 1]?.inView);
+
+            if (progressBar instanceof HTMLElement && progressBar.matches('[data-toc-progress]')) {
+              progressBar.dataset.active = String(inView);
+              progressBar.dataset.read = String(!inView && progress >= 1);
+              progressBar.style.height = `${progress * 90}%`;
+            }
+          });
+        };
+
+        let updateFrame = 0;
+        const scheduleReadingProgress = () => {
+          if (updateFrame) {
+            return;
+          }
+
+          updateFrame = window.requestAnimationFrame(() => {
+            updateFrame = 0;
+            updateReadingProgress();
+          });
+        };
+
+        updateReadingProgress();
+        window.addEventListener('scroll', scheduleReadingProgress, { passive: true });
+        window.addEventListener('resize', scheduleReadingProgress, { passive: true });
+        continue;
+      }
+
       const setActive = (slug) => {
         for (const { link } of pairs) {
           link.dataset.active = String(link.dataset.tocSlug === slug);
@@ -960,54 +1428,159 @@ Collision Detection设为continuous,以保证以后写代码方便进行探测.
       setActive(pairs[0].target.id);
     }
   })();
-</script> </aside> </div> </article>  </main> <footer class="mt-16 border-t border-line/80 pt-6 text-sm text-muted" data-astro-cid-37fxchfa> <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-astro-cid-37fxchfa> <p class="font-bold text-ink" style="font-family: 'Times New Roman', Times, serif;" data-astro-cid-37fxchfa>Astro theme powered</p> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" aria-label="Ning0713 on GitHub" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line/80 text-ink transition hover:border-accent/50 hover:text-accent" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true" data-astro-cid-37fxchfa> <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.73-1.33-1.73-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.29 3.51.98.11-.76.42-1.29.77-1.59-2.67-.3-5.48-1.31-5.48-5.86 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.22a11.6 11.6 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.66.25 2.88.12 3.18.77.83 1.23 1.89 1.23 3.19 0 4.56-2.81 5.55-5.49 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z" data-astro-cid-37fxchfa></path> </svg> </a> </div> </footer> </div> <script>
+</script> </aside> </div> </article> <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script> <script>(function(){const selector = ".content-prose .zoomable";
+const background = "rgb(var(--color-paper) / 0.8)";
+
+  if (typeof mediumZoom !== 'undefined') {
+    mediumZoom(selector, { background })
+  }
+})();</script>   </main> <footer class="mt-16 border-t border-line/80 pt-6 text-sm text-muted" data-astro-cid-37fxchfa> <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-between" data-astro-cid-37fxchfa> <div class="flex flex-col items-center gap-1 sm:flex-row sm:gap-4" data-astro-cid-37fxchfa> <span data-astro-cid-37fxchfa>© 2026 不宁</span> <span class="site-footer-brand font-bold text-ink" data-astro-cid-37fxchfa>Astro theme powered</span> </div> <div class="flex items-center gap-4" data-astro-cid-37fxchfa> <a href="https://github.com/Ning0713" target="_blank" rel="noreferrer" aria-label="Ning0713 on GitHub" title="GitHub" class="inline-flex h-6 w-6 items-center justify-center text-ink transition hover:text-accent" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true" data-astro-cid-37fxchfa> <path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.73-1.33-1.73-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.22 1.84 1.22 1.08 1.82 2.82 1.29 3.51.98.11-.76.42-1.29.77-1.59-2.67-.3-5.48-1.31-5.48-5.86 0-1.3.47-2.36 1.23-3.19-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.22a11.6 11.6 0 0 1 6 0c2.28-1.54 3.29-1.22 3.29-1.22.66 1.66.25 2.88.12 3.18.77.83 1.23 1.89 1.23 3.19 0 4.56-2.81 5.55-5.49 5.85.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z" data-astro-cid-37fxchfa></path> </svg> </a> <a href="/rss.xml" aria-label="RSS Feed" title="RSS" class="inline-flex h-6 w-6 items-center justify-center text-ink transition hover:text-accent" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5" aria-hidden="true" data-astro-cid-37fxchfa> <circle cx="5" cy="19" r="1.25" fill="currentColor" stroke="none" data-astro-cid-37fxchfa></circle> <path stroke-linecap="round" d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16" data-astro-cid-37fxchfa></path> </svg> </a> </div> </div> </footer> </div> <button type="button" class="site-back-to-top" data-back-to-top data-show="false" data-ended="false" aria-label="返回页面顶部" title="返回顶部" data-astro-cid-wlspcwf4> <span class="site-back-to-top-progress" aria-hidden="true" data-astro-cid-wlspcwf4> <span data-scroll-percent data-astro-cid-wlspcwf4>0</span><span class="site-back-to-top-percent" data-astro-cid-wlspcwf4>%</span> </span> <svg class="site-back-to-top-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-wlspcwf4> <path d="m6 14 6-6 6 6" data-astro-cid-wlspcwf4></path> </svg> </button> <script>
+  (() => {
+    const button = document.querySelector('[data-back-to-top]');
+    const percentElement = document.querySelector('[data-scroll-percent]');
+    const content = document.querySelector('#site-page-content');
+
+    if (
+      !(button instanceof HTMLButtonElement) ||
+      !(percentElement instanceof HTMLSpanElement) ||
+      !(content instanceof HTMLElement) ||
+      button.dataset.ready === 'true'
+    ) {
+      return;
+    }
+
+    button.dataset.ready = 'true';
+
+    let contentTop = 0;
+    let contentHeight = 0;
+    let frame = 0;
+
+    const getScrollTop = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    const recalculateMetrics = () => {
+      const scrollTop = getScrollTop();
+      const rect = content.getBoundingClientRect();
+      contentTop = rect.top + scrollTop;
+      contentHeight = Math.max(content.scrollHeight, rect.height);
+    };
+
+    const calculateProgress = () => {
+      const scrollTop = getScrollTop();
+      const viewportHeight = document.documentElement.clientHeight || window.innerHeight;
+      const scrollableHeight = Math.max(contentHeight - viewportHeight, 1);
+      const progress = Math.round(((scrollTop - contentTop) / scrollableHeight) * 100);
+      return Math.max(0, Math.min(100, progress));
+    };
+
+    const sync = () => {
+      const scrollTop = getScrollTop();
+      const progress = calculateProgress();
+      percentElement.textContent = String(progress);
+      button.dataset.show = String(scrollTop > Math.max(20, contentTop - 24));
+      button.dataset.ended = String(progress >= 100);
+      frame = 0;
+    };
+
+    const scheduleSync = () => {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(sync);
+      }
+    };
+
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    recalculateMetrics();
+    sync();
+
+    window.addEventListener('scroll', scheduleSync, { passive: true });
+    window.addEventListener(
+      'resize',
+      () => {
+        recalculateMetrics();
+        scheduleSync();
+      },
+      { passive: true },
+    );
+
+    content.querySelectorAll('img').forEach((image) => {
+      image.addEventListener('load', () => {
+        recalculateMetrics();
+        scheduleSync();
+      });
+      image.addEventListener('error', () => {
+        recalculateMetrics();
+        scheduleSync();
+      });
+    });
+  })();
+</script>  <script>
       (() => {
-        const header = document.querySelector('[data-site-header]');
-        if (!(header instanceof HTMLElement)) {
+        const header = document.querySelector('.site-header');
+        const menuToggle = document.querySelector('[data-menu-toggle]');
+        const mobileNav = document.getElementById('site-mobile-nav');
+
+        if (
+          !(header instanceof HTMLElement) ||
+          !(menuToggle instanceof HTMLButtonElement) ||
+          !(mobileNav instanceof HTMLElement)
+        ) {
           return;
         }
 
-        const compactAt = 96;
-        const expandAt = 48;
-        let ticking = false;
-        let isCompact = false;
+        let previousScrollY = window.scrollY;
+        let scrollFrame = 0;
 
-        const getScrollY = () => window.scrollY || document.documentElement.scrollTop || 0;
-
-        const getNextState = () => {
-          if (isCompact) {
-            return getScrollY() > expandAt;
-          }
-
-          return getScrollY() > compactAt;
+        const syncHeaderWithScroll = () => {
+          const currentScrollY = window.scrollY;
+          header.classList.toggle('not-top', currentScrollY > 20);
+          header.dataset.show = String(currentScrollY < 600 || currentScrollY < previousScrollY);
+          previousScrollY = currentScrollY;
+          scrollFrame = 0;
         };
 
-        const syncHeaderState = () => {
-          const nextState = getNextState();
-          if (nextState === isCompact) {
-            return;
-          }
+        header.classList.toggle('not-top', previousScrollY > 20);
 
-          isCompact = nextState;
-          header.dataset.scrolled = String(nextState);
-        };
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (scrollFrame === 0) {
+              scrollFrame = window.requestAnimationFrame(syncHeaderWithScroll);
+            }
+          },
+          { passive: true },
+        );
 
-        const requestSync = () => {
-          if (ticking) {
-            return;
-          }
-
-          ticking = true;
-          window.requestAnimationFrame(() => {
-            syncHeaderState();
-            ticking = false;
+        const setMenuOpen = (open) => {
+          menuToggle.setAttribute('aria-expanded', String(open));
+          menuToggle.setAttribute('aria-label', open ? '收起导航' : '展开导航');
+          header.classList.toggle('is-menu-open', open);
+          mobileNav.classList.toggle('is-open', open);
+          mobileNav.setAttribute('aria-hidden', String(!open));
+          mobileNav.querySelectorAll('a').forEach((link) => {
+            link.tabIndex = open ? 0 : -1;
           });
         };
 
-        isCompact = getScrollY() > compactAt;
-        header.dataset.scrolled = String(isCompact);
-        syncHeaderState();
-        window.addEventListener('scroll', requestSync, { passive: true });
-        window.addEventListener('resize', requestSync);
+        menuToggle.addEventListener('click', () => {
+          setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+        });
+
+        window.addEventListener('site-search:open', () => {
+          setMenuOpen(false);
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            setMenuOpen(false);
+          }
+        });
+
+        window.matchMedia('(min-width: 921px)').addEventListener('change', (event) => {
+          if (event.matches) {
+            setMenuOpen(false);
+          }
+        });
       })();
-    </script>  </body> </html>  <script type="module">const n=document.querySelector("[data-article-hero-blur]");if(n){const e=window.innerHeight,o=[e/9,e*2/9,e*3/9];let t=!1;const i=()=>{const c=window.scrollY||document.documentElement.scrollTop||0;c>=o[2]?n.style.opacity="0.15":c>=o[1]?n.style.opacity="0.3":c>=o[0]?n.style.opacity="0.45":n.style.opacity="0.6",t=!1};window.addEventListener("scroll",()=>{t||(t=!0,window.requestAnimationFrame(i))},{passive:!0})}document.querySelectorAll(".content-prose pre").forEach(e=>{if(e.querySelector(".code-copy-button"))return;const o=e.querySelector("code");if(!o?.textContent?.trim())return;const t=document.createElement("button");t.type="button",t.className="code-copy-button",t.textContent="Copy",t.setAttribute("aria-label","Copy code"),t.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(o.textContent??""),t.textContent="Copied",window.setTimeout(()=>{t.textContent="Copy"},1600)}catch{t.textContent="Failed",window.setTimeout(()=>{t.textContent="Copy"},1600)}}),e.append(t)});</script>
+    </script>  </body> </html>  <script type="module">const n=document.querySelector("[data-article-hero-blur]");if(n){const e=window.innerHeight,o=[e/9,e*2/9,e*3/9];let t=!1;const i=()=>{const c=window.scrollY||document.documentElement.scrollTop||0;c>=o[2]?n.style.opacity="0.15":c>=o[1]?n.style.opacity="0.3":c>=o[0]?n.style.opacity="0.45":n.style.opacity="0.6",t=!1};window.addEventListener("scroll",()=>{t||(t=!0,window.requestAnimationFrame(i))},{passive:!0})}document.querySelectorAll(".content-prose pre").forEach(e=>{if(e.querySelector(".code-copy-button"))return;const o=e.querySelector("code");if(!o?.textContent?.trim())return;const t=document.createElement("button");t.type="button",t.className="code-copy-button",t.textContent="Copy",t.setAttribute("aria-label","Copy code"),t.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(o.textContent??""),t.textContent="Copied",window.setTimeout(()=>{t.textContent="Copy"},1600)}catch{t.textContent="Failed",window.setTimeout(()=>{t.textContent="Copy"},1600)}}),e.append(t)});</script> 
