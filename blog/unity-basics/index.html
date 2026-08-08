@@ -776,7 +776,79 @@ Create一个新的Palette保存在Tile Map文件夹下.然后将之前切好的�
       }
     });
   })();
-</script>  <nav class="article-post-navigation" aria-label="上一篇与下一篇文章" data-astro-cid-nnxgeytw><span class="article-post-navigation-side" data-astro-cid-nnxgeytw><a href="/blog/unity-player" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-previous" aria-label="上一篇：02 Player 创建(勇者传说-2022Unity入门)" data-astro-cid-nnxgeytw><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Previous</small><strong data-astro-cid-nnxgeytw>02 Player 创建(勇者传说-2022Unity入门)</strong></span></a></span><span class="article-post-navigation-side article-post-navigation-side-next" data-astro-cid-nnxgeytw></span></nav> <section class="article-comments" aria-labelledby="article-comments-title" data-astro-cid-qdzwzgpn><div class="article-comments-heading" data-astro-cid-qdzwzgpn><h2 id="article-comments-title" data-astro-cid-qdzwzgpn>COMMENTS</h2><span aria-hidden="true" data-astro-cid-qdzwzgpn></span></div><div class="article-comments-unavailable" data-astro-cid-qdzwzgpn><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-qdzwzgpn><path d="M7 18.5 3.5 21l1-4.2A8.5 8.5 0 1 1 7 18.5Z" data-astro-cid-qdzwzgpn></path><path d="M8 10h8M8 14h5" data-astro-cid-qdzwzgpn></path></svg><p data-astro-cid-qdzwzgpn>评论区暂未启用</p></div></section> </div> </div> <aside class="article-toc-sidebar hidden md:block md:sticky md:self-start" data-astro-cid-scuu7fyy> <nav class="toc-panel toc-panel--article" data-toc data-toc-variant="article" aria-label="TABLE OF CONTENTS" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>TABLE OF CONTENTS</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
+</script>  <nav class="article-post-navigation" aria-label="上一篇与下一篇文章" data-astro-cid-nnxgeytw><span class="article-post-navigation-side" data-astro-cid-nnxgeytw><a href="/blog/unity-player" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-previous" aria-label="上一篇：02 Player 创建(勇者传说-2022Unity入门)" data-astro-cid-nnxgeytw><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Previous</small><strong data-astro-cid-nnxgeytw>02 Player 创建(勇者传说-2022Unity入门)</strong></span></a></span><span class="article-post-navigation-side article-post-navigation-side-next" data-astro-cid-nnxgeytw></span></nav> <section class="article-comments" aria-labelledby="article-comments-title" data-astro-cid-qdzwzgpn><div class="article-comments-heading" data-astro-cid-qdzwzgpn><h2 id="article-comments-title" data-astro-cid-qdzwzgpn>COMMENTS</h2><span aria-hidden="true" data-astro-cid-qdzwzgpn></span></div><div class="article-giscus-host" data-giscus-host data-repo="Ning0713/Ning0713.github.io" data-repo-id="R_kgDOSLrCWw" data-category="General" data-category-id="DIC_kwDOSLrCW84DC6T6" data-mapping="pathname" data-lang="zh-CN" data-astro-cid-qdzwzgpn><p class="article-comments-loading" data-astro-cid-qdzwzgpn>评论区加载中...</p></div></section><script>
+    (() => {
+      document.querySelectorAll('[data-giscus-host]').forEach((host) => {
+        if (!(host instanceof HTMLElement) || host.dataset.ready === 'true') {
+          return;
+        }
+
+        host.dataset.ready = 'true';
+        let loaded = false;
+
+        const getTheme = () => document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        const syncTheme = () => {
+          const frame = host.querySelector('iframe.giscus-frame');
+          if (!(frame instanceof HTMLIFrameElement)) {
+            return;
+          }
+
+          frame.contentWindow?.postMessage(
+            { giscus: { setConfig: { theme: getTheme() } } },
+            'https://giscus.app',
+          );
+        };
+
+        const loadGiscus = () => {
+          if (loaded) {
+            return;
+          }
+
+          loaded = true;
+          host.querySelector('.article-comments-loading')?.remove();
+          const script = document.createElement('script');
+          script.src = 'https://giscus.app/client.js';
+          script.async = true;
+          script.crossOrigin = 'anonymous';
+          script.dataset.repo = host.dataset.repo || '';
+          script.dataset.repoId = host.dataset.repoId || '';
+          script.dataset.category = host.dataset.category || '';
+          script.dataset.categoryId = host.dataset.categoryId || '';
+          script.dataset.mapping = host.dataset.mapping || 'pathname';
+          script.dataset.strict = '0';
+          script.dataset.reactionsEnabled = '1';
+          script.dataset.emitMetadata = '0';
+          script.dataset.inputPosition = 'top';
+          script.dataset.theme = getTheme();
+          script.dataset.lang = host.dataset.lang || 'zh-CN';
+          script.dataset.loading = 'lazy';
+          host.append(script);
+        };
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              if (!entries.some((entry) => entry.isIntersecting)) {
+                return;
+              }
+
+              observer.disconnect();
+              loadGiscus();
+            },
+            { rootMargin: '320px 0px' },
+          );
+          observer.observe(host);
+        } else {
+          loadGiscus();
+        }
+
+        const themeObserver = new MutationObserver(syncTheme);
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        const frameObserver = new MutationObserver(syncTheme);
+        frameObserver.observe(host, { childList: true, subtree: true });
+      });
+    })();
+  </script> </div> </div> <aside class="article-toc-sidebar hidden md:block md:sticky md:self-start" data-astro-cid-scuu7fyy> <nav class="toc-panel toc-panel--article" data-toc data-toc-variant="article" aria-label="TABLE OF CONTENTS" data-astro-cid-xvrfupwn><p class="toc-title" data-astro-cid-xvrfupwn>TABLE OF CONTENTS</p><div class="toc-shell" data-astro-cid-xvrfupwn><ol class="toc-list"><li class="toc-item" data-depth="1" data-toc-branch data-collapsed="true">
           <div class="toc-row">
             <span class="toc-progress" data-toc-progress aria-hidden="true"></span>
             <a href="#01-unity-基本设置" class="toc-link" data-level="2" data-toc-link data-toc-slug="01-unity-基本设置">
