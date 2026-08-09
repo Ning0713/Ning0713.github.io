@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi</title><meta name="description" content="通过M_studio的勇者传说学习Unity入门基础"><link rel="canonical" href="https://ning0713.top/blog/unity-player/"><link rel="alternate" type="application/rss+xml" title="不宁yasushi RSS Feed" href="/rss.xml"><meta name="generator" content="Astro v5.18.1"><link rel="dns-prefetch" href="https://i.ibb.co"><link rel="preconnect" href="https://i.ibb.co"><!-- Open Graph --><meta property="og:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta property="og:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta property="og:url" content="https://ning0713.top/blog/unity-player/"><meta property="og:type" content="article"><meta property="og:site_name" content="不宁yasushi"><meta property="og:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta name="twitter:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta name="twitter:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><script>
+<!DOCTYPE html><html lang="zh-CN" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi</title><meta name="description" content="通过M_studio的勇者传说学习Unity入门基础"><link rel="canonical" href="https://ning0713.top/blog/unity-player/"><link rel="alternate" type="application/rss+xml" title="不宁yasushi RSS Feed" href="/rss.xml"><link rel="icon" type="image/png" sizes="850x850" href="/brand/hemia-ashi.png"><meta name="generator" content="Astro v5.18.1"><link rel="dns-prefetch" href="https://i.ibb.co"><link rel="preconnect" href="https://i.ibb.co"><!-- Open Graph --><meta property="og:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta property="og:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta property="og:url" content="https://ning0713.top/blog/unity-player/"><meta property="og:type" content="article"><meta property="og:site_name" content="不宁yasushi"><meta property="og:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="02 Player 创建(勇者传说-2022Unity入门) | 不宁yasushi"><meta name="twitter:description" content="通过M_studio的勇者传说学习Unity入门基础"><meta name="twitter:image" content="https://i.ibb.co/tPc502kT/20260428152256.jpg"><script>
       (() => {
         const storedTheme = localStorage.getItem('theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -6,11 +6,180 @@
         document.documentElement.classList.toggle('dark', shouldUseDark);
       })();
     </script><link rel="stylesheet" href="/assets/slug_.8ehrMZzU.css">
-<link rel="stylesheet" href="/assets/category_.DlP3NNwK.css">
+<link rel="stylesheet" href="/assets/category_.ACK4rnvu.css">
 <style>.article-comments[data-astro-cid-qdzwzgpn]{margin-top:3.25rem;font-family:"Century Gothic",var(--font-site-sans)}.article-comments-heading[data-astro-cid-qdzwzgpn]{display:flex;margin-bottom:1.2rem;align-items:center;gap:.8rem}.article-comments-heading[data-astro-cid-qdzwzgpn] h2[data-astro-cid-qdzwzgpn]{margin:0;color:rgb(var(--color-ink));font-family:inherit;font-size:1rem;font-weight:600;letter-spacing:0}.article-comments-heading[data-astro-cid-qdzwzgpn] span[data-astro-cid-qdzwzgpn]{height:1px;flex:1 1 auto;background:rgb(var(--color-line) / .78)}.article-giscus-host[data-astro-cid-qdzwzgpn]{min-height:15rem;overflow:hidden;border-radius:.75rem}.article-giscus-host[data-astro-cid-qdzwzgpn] .giscus,.article-giscus-host[data-astro-cid-qdzwzgpn] .giscus-frame{width:100%}.article-comments-loading[data-astro-cid-qdzwzgpn],.article-comments-unavailable[data-astro-cid-qdzwzgpn]{margin:0;color:rgb(var(--color-muted));font-size:.82rem}.article-comments-loading[data-astro-cid-qdzwzgpn]{padding:1.25rem 0}.article-comments-unavailable[data-astro-cid-qdzwzgpn]{display:flex;min-height:8rem;align-items:center;justify-content:center;gap:.65rem;border:1px dashed rgb(var(--color-line) / .9);border-radius:.75rem;background:rgb(var(--color-card) / .36)}.article-comments-unavailable[data-astro-cid-qdzwzgpn] svg[data-astro-cid-qdzwzgpn]{width:1.25rem;height:1.25rem;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7}.article-comments-unavailable[data-astro-cid-qdzwzgpn] p[data-astro-cid-qdzwzgpn]{margin:0}@media(max-width:639px){.article-comments[data-astro-cid-qdzwzgpn]{margin-top:2.75rem}}
 </style>
-<link rel="stylesheet" href="/assets/slug_.DlwsEc2P.css"><script type="module" src="/assets/page.D1uwR3nK.js"></script></head> <body class="is-inner-page is-article-page" data-astro-cid-37fxchfa> <div id="highlight-gradient" class="site-highlight-gradient" style="background-image: linear-gradient(#f389bc, transparent);" aria-hidden="true" data-astro-cid-37fxchfa></div> <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-show="true" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <p class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> 不宁yasushi's Blog
-</a> <span aria-hidden="true" data-astro-cid-37fxchfa>/</span> <span class="site-current-section" data-astro-cid-37fxchfa>文章</span> </p> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="主导航" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center site-blog-nav-active" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link" aria-current="page" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>01</span> <span class="site-nav-label" data-astro-cid-37fxchfa>文章</span> </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center" aria-label="展开文章分类" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="site-blog-category-menu absolute right-0 z-20 mt-2 w-44 border border-line/80 bg-paper/95 p-2 text-ink shadow-card backdrop-blur" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 技术 </a><a href="/blog/category/research-report" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 研究报告 </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 生活随笔 </a><a href="/blog/category/journal" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 月记 </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>02</span> <span class="site-nav-label" data-astro-cid-37fxchfa>友链</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>03</span> <span class="site-nav-label" data-astro-cid-37fxchfa>关于</span> </a> </li> </ul> </nav> <div class="site-header-controls" data-astro-cid-37fxchfa> <button type="button" class="site-search-toggle" data-search-open aria-label="搜索本站" aria-controls="site-search-dialog" aria-expanded="false" aria-keyshortcuts="Control+K Meta+K /" title="搜索" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> </button> <dialog id="site-search-dialog" class="site-search-dialog" data-search-dialog data-search-category-order="technical,research-report,life-and-talk,journal" data-search-navigation-order="/blog,/links,/about" aria-label="全站搜索" data-astro-cid-pkfvzmd6> <div class="site-search-panel" data-astro-cid-pkfvzmd6> <form class="site-search-form" data-search-form role="search" data-astro-cid-pkfvzmd6> <svg class="site-search-form-icon" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> <label class="sr-only" for="site-search-input" data-astro-cid-pkfvzmd6>搜索本站</label> <input id="site-search-input" data-search-input type="search" name="query" placeholder="搜索本站内容" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="site-search-results" aria-expanded="false" data-astro-cid-pkfvzmd6> <button type="button" class="site-search-close" data-search-close aria-label="关闭搜索" title="关闭" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <path d="m6 6 12 12M18 6 6 18" data-astro-cid-pkfvzmd6></path> </svg> </button> </form> <p class="site-search-status" data-search-status aria-live="polite" data-astro-cid-pkfvzmd6>输入关键词开始搜索</p> <ol id="site-search-results" class="site-search-results" data-search-results role="listbox" hidden data-astro-cid-pkfvzmd6></ol> <button type="button" class="site-search-load-more" data-search-load-more aria-label="加载更多搜索结果" hidden data-astro-cid-pkfvzmd6>
+<link rel="stylesheet" href="/assets/slug_.DlwsEc2P.css"><script type="module" src="/assets/page.D1uwR3nK.js"></script></head> <body class="is-inner-page is-article-page" data-astro-cid-37fxchfa> <div id="highlight-gradient" class="site-highlight-gradient" style="background-image: linear-gradient(#f389bc, transparent);" aria-hidden="true" data-astro-cid-37fxchfa></div> <canvas class="click-particles" data-click-particles aria-hidden="true" data-astro-cid-2j5yi4zz></canvas>  <script>
+  (() => {
+    const setup = () => {
+      const canvas = document.querySelector('[data-click-particles]');
+      if (!(canvas instanceof HTMLCanvasElement)) return;
+
+      const context = canvas.getContext('2d', { alpha: true });
+      if (!context) return;
+
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const particles = [];
+      const rings = [];
+      const maxParticles = 150;
+      let width = 0;
+      let height = 0;
+      let devicePixelRatio = 1;
+      let animationFrame = 0;
+      let lastFrame = 0;
+
+      const getColor = (variable, fallback) => {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        return value ? `rgb(${value} / 0.86)` : fallback;
+      };
+
+      const colors = () => [
+        getColor('--color-ink', '#1f2937'),
+        getColor('--color-accent', '#0891b2'),
+        '#d946ef',
+        '#f59e0b',
+        '#ef4444',
+      ];
+
+      const resize = () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        devicePixelRatio = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+        canvas.width = Math.round(width * devicePixelRatio);
+        canvas.height = Math.round(height * devicePixelRatio);
+        context.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      };
+
+      const stopAnimation = () => {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+        }
+        context.clearRect(0, 0, width, height);
+        particles.length = 0;
+        rings.length = 0;
+      };
+
+      const draw = (timestamp) => {
+        const elapsed = Math.min(34, timestamp - (lastFrame || timestamp));
+        lastFrame = timestamp;
+        context.clearRect(0, 0, width, height);
+
+        for (let index = particles.length - 1; index >= 0; index -= 1) {
+          const particle = particles[index];
+          particle.age += elapsed;
+          if (particle.age >= particle.life) {
+            particles.splice(index, 1);
+            continue;
+          }
+
+          const progress = particle.age / particle.life;
+          particle.x += particle.velocityX * (elapsed / 16);
+          particle.y += particle.velocityY * (elapsed / 16);
+          particle.velocityX *= 0.985;
+          particle.velocityY = particle.velocityY * 0.985 + 0.012 * (elapsed / 16);
+
+          context.globalAlpha = Math.max(0, 1 - progress) * 0.92;
+          context.fillStyle = particle.color;
+          context.beginPath();
+          context.arc(
+            particle.x,
+            particle.y,
+            Math.max(0.5, particle.radius * (1 - progress * 0.35)),
+            0,
+            Math.PI * 2,
+          );
+          context.fill();
+        }
+
+        for (let index = rings.length - 1; index >= 0; index -= 1) {
+          const ring = rings[index];
+          ring.age += elapsed;
+          if (ring.age >= ring.life) {
+            rings.splice(index, 1);
+            continue;
+          }
+
+          const progress = ring.age / ring.life;
+          context.globalAlpha = (1 - progress) * 0.3;
+          context.strokeStyle = ring.color;
+          context.lineWidth = 1;
+          context.beginPath();
+          context.arc(ring.x, ring.y, ring.radius + progress * ring.maxRadius, 0, Math.PI * 2);
+          context.stroke();
+        }
+
+        context.globalAlpha = 1;
+        if (particles.length || rings.length) {
+          animationFrame = window.requestAnimationFrame(draw);
+        } else {
+          animationFrame = 0;
+          lastFrame = 0;
+        }
+      };
+
+      const startAnimation = () => {
+        if (!animationFrame) {
+          animationFrame = window.requestAnimationFrame(draw);
+        }
+      };
+
+      const burst = (x, y) => {
+        if (mediaQuery.matches) return;
+
+        const palette = colors();
+        const count = 9;
+        for (let index = 0; index < count; index += 1) {
+          const angle = (Math.PI * 2 * index) / count + (Math.random() - 0.5) * 0.28;
+          const speed = 1.15 + Math.random() * 1.9;
+          particles.push({
+            x,
+            y,
+            velocityX: Math.cos(angle) * speed,
+            velocityY: Math.sin(angle) * speed,
+            radius: 1 + Math.random() * 1.35,
+            life: 440 + Math.random() * 280,
+            age: 0,
+            color: palette[index % palette.length],
+          });
+        }
+
+        if (particles.length > maxParticles) {
+          particles.splice(0, particles.length - maxParticles);
+        }
+
+        rings.push({
+          x,
+          y,
+          radius: 3,
+          maxRadius: 17 + Math.random() * 8,
+          life: 330,
+          age: 0,
+          color: palette[1],
+        });
+        startAnimation();
+      };
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      window.addEventListener('pointerdown', (event) => {
+        if (event instanceof PointerEvent && event.pointerType === 'mouse' && event.button !== 0) return;
+        burst(event.clientX, event.clientY);
+      }, { passive: true });
+
+      const handleMotionPreference = () => {
+        if (mediaQuery.matches) stopAnimation();
+      };
+      mediaQuery.addEventListener('change', handleMotionPreference);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup, { once: true });
+    } else {
+      setup();
+    }
+  })();
+</script> <div class="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col px-6 pb-16 sm:px-8 lg:px-10" data-astro-cid-37fxchfa> <header class="site-header" data-show="true" data-astro-cid-37fxchfa> <div class="site-header-shell" data-astro-cid-37fxchfa> <div class="site-header-row" data-astro-cid-37fxchfa> <p class="site-brand" data-astro-cid-37fxchfa> <a href="/" class="site-brand-link" data-astro-cid-37fxchfa> <img src="/brand/hemia-ashi.png" width="864" height="777" alt="" aria-hidden="true" class="site-brand-avatar" loading="eager" decoding="async" data-astro-cid-37fxchfa> <span class="site-brand-text" data-astro-cid-37fxchfa>不宁yasushi's Blog</span> </a> <span aria-hidden="true" data-astro-cid-37fxchfa>/</span> <span class="site-current-section" data-astro-cid-37fxchfa>文章</span> </p> <div class="site-header-actions" data-astro-cid-37fxchfa> <nav aria-label="主导航" class="site-primary-nav" data-astro-cid-37fxchfa> <ul class="site-primary-nav-list" data-astro-cid-37fxchfa> <li class="relative" data-astro-cid-37fxchfa> <div class="site-blog-nav-wrap inline-flex items-center site-blog-nav-active" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-link" aria-current="page" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>01</span> <span class="site-nav-label" data-astro-cid-37fxchfa>文章</span> </a> <details class="blog-nav-dropdown group relative" data-astro-cid-37fxchfa> <summary class="site-blog-summary blog-nav-summary inline-flex items-center justify-center" aria-label="展开文章分类" data-astro-cid-37fxchfa> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="site-blog-chevron h-4 w-4 transition group-open:rotate-180" aria-hidden="true" data-astro-cid-37fxchfa> <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.168l3.71-3.938a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" data-astro-cid-37fxchfa></path> </svg> </summary> <div class="site-blog-category-menu absolute right-0 z-20 mt-2 w-44 border border-line/80 bg-paper/95 p-2 text-ink shadow-card backdrop-blur" data-astro-cid-37fxchfa> <a href="/blog" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 技术 </a><a href="/blog/category/research-report" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 研究报告 </a><a href="/blog/category/life-and-talk" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 生活随笔 </a><a href="/blog/category/journal" class="site-blog-category-link block px-3 py-2 text-sm" data-astro-cid-37fxchfa> 月记 </a> </div> </details> </div> </li><li data-astro-cid-37fxchfa> <a href="/links" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>02</span> <span class="site-nav-label" data-astro-cid-37fxchfa>友链</span> </a> </li><li data-astro-cid-37fxchfa> <a href="/about" class="site-nav-link" data-astro-cid-37fxchfa> <span class="site-nav-index" aria-hidden="true" data-astro-cid-37fxchfa>03</span> <span class="site-nav-label" data-astro-cid-37fxchfa>关于</span> </a> </li> </ul> </nav> <div class="site-header-controls" data-astro-cid-37fxchfa> <button type="button" class="site-search-toggle" data-search-open aria-label="搜索本站" aria-controls="site-search-dialog" aria-expanded="false" aria-keyshortcuts="Control+K Meta+K /" title="搜索" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> </button> <dialog id="site-search-dialog" class="site-search-dialog" data-search-dialog data-search-category-order="technical,research-report,life-and-talk,journal" data-search-navigation-order="/blog,/links,/about" aria-label="全站搜索" data-astro-cid-pkfvzmd6> <div class="site-search-panel" data-astro-cid-pkfvzmd6> <form class="site-search-form" data-search-form role="search" data-astro-cid-pkfvzmd6> <svg class="site-search-form-icon" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <circle cx="11" cy="11" r="6.5" data-astro-cid-pkfvzmd6></circle> <path d="m16 16 4 4" data-astro-cid-pkfvzmd6></path> </svg> <label class="sr-only" for="site-search-input" data-astro-cid-pkfvzmd6>搜索本站</label> <input id="site-search-input" data-search-input type="search" name="query" placeholder="搜索本站内容" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-controls="site-search-results" aria-expanded="false" data-astro-cid-pkfvzmd6> <button type="button" class="site-search-close" data-search-close aria-label="关闭搜索" title="关闭" data-astro-cid-pkfvzmd6> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-pkfvzmd6> <path d="m6 6 12 12M18 6 6 18" data-astro-cid-pkfvzmd6></path> </svg> </button> </form> <p class="site-search-status" data-search-status aria-live="polite" data-astro-cid-pkfvzmd6>输入关键词开始搜索</p> <ol id="site-search-results" class="site-search-results" data-search-results role="listbox" hidden data-astro-cid-pkfvzmd6></ol> <button type="button" class="site-search-load-more" data-search-load-more aria-label="加载更多搜索结果" hidden data-astro-cid-pkfvzmd6>
 加载更多结果
 </button> <footer class="site-search-help" aria-label="搜索快捷键" data-astro-cid-pkfvzmd6> <p data-astro-cid-pkfvzmd6><span class="site-search-key-group" data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>↑</kbd><kbd data-astro-cid-pkfvzmd6>↓</kbd></span> 选择</p> <p data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>Enter</kbd> 打开</p> <p data-astro-cid-pkfvzmd6><kbd data-astro-cid-pkfvzmd6>Esc</kbd> 关闭</p> </footer> </div> </dialog> <script>
   (() => {
