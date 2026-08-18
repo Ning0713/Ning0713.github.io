@@ -864,10 +864,10 @@ Hero Image
 <p><strong>为什么用 BEV 空间？</strong> BEV 提供统一域，把”几何不足的图像特征”和”缺语义的 LiDAR 特征”在统一域互补融合；且 BEV 规则网格便于接各种 task head。</p>
 <p><strong>为什么不用 CNN 融合（如 BEVFusion）？</strong> CNN 融合（concat+conv）在大规模 corruption 下表征能力有限，且因 weight-sharing 无法处理缺失模态。</p>
 <p>CNN 融合与 BEV-Evolving Decoder 对比的是“多模态 BEV 特征的融合方式”，两种融合流程如下：</p>
-<p><strong>BEVFusion:</strong>
-Camera → Camera BEV ┐
-├→ 拼接 + CNN → 融合 BEV → 任务头
-LiDAR  → LiDAR BEV  ┘</p>
+<p><strong>BEVFusion:</strong></p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>  Camera → Camera BEV ┐</span></span>
+<span class="line"><span>                      ├→ 拼接 + CNN → 融合 BEV → 任务头</span></span>
+<span class="line"><span>  LiDAR  → LiDAR BEV  ┘</span></span></code></pre>
 <p>BEVFusion 一类方法通常采用：</p>
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">[</mo><msub><mi>B</mi><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">d</mi></mrow></msub><mi mathvariant="normal">CNN</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi mathvariant="normal">Concat</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mi>B</mi><mi>c</mi></msub><mo separator="true">,</mo><msub><mi>B</mi><mi>l</mi></msub><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">  [
   B_{\mathrm{fused}}
@@ -886,12 +886,12 @@ LiDAR  → LiDAR BEV  ┘</p>
 </ul>
 <p>这种方法的核心是：先将两种模态的 BEV 特征拼接，再通过 CNN 生成统一的融合特征。</p>
 <p><strong>MetaBEV:</strong></p>
-<p>Camera → Bc ┐
-├→ meta-BEV queries + BEV-Evolving Decoder
-LiDAR  → Bl ┘                                       ↓
-meta-BEV
-↓
-任务头</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>  Camera → Bc ┐</span></span>
+<span class="line"><span>              ├→ meta-BEV queries + BEV-Evolving Decoder</span></span>
+<span class="line"><span>  LiDAR  → Bl ┘                                       ↓</span></span>
+<span class="line"><span>                                meta-BEV</span></span>
+<span class="line"><span>                                   ↓</span></span>
+<span class="line"><span>                                 任务头</span></span></code></pre>
 <p>MetaBEV 不直接拼接 (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">B_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>) 和 (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>l</mi></msub></mrow><annotation encoding="application/x-tex">B_l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>)，而是引入一组可学习的 meta-BEV queries。</p>
 <p>这些 queries 在 BEV-Evolving Decoder 中，通过模态专属的可变形交叉注意力，分别从相机和 LiDAR 的 BEV 特征中提取信息。经过多层解码器迭代后，queries 逐渐“演化”为融合后的 meta-BEV 表示，因此该模块被称为 BEV-Evolving Decoder。</p>
 <p><strong>模块对应关系:</strong></p>
@@ -925,7 +925,7 @@ meta-BEV
 </blockquote>
 <h2 id="34-bev-evolving-decoder核心创新">3.4 BEV-Evolving Decoder（核心创新）<a class="heading-anchor" href="#34-bev-evolving-decoder核心创新" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
 <blockquote>
-<p>有关 Deformable Attention ，可以单独阅读Deformable DETR原论文</p>
+<p>有关 Deformable Attention ，可以单独阅读 <a href="https://arxiv.org/abs/2010.04159">Deformable DETR</a> 原论文</p>
 </blockquote>
 <p>整体模块说明：
 <img src="https://i.ibb.co/qMymxgKP/20260723202253.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
@@ -1434,7 +1434,7 @@ b_{m,q},p_q,B_m
 <hr>
 <h2 id="iii--关键实验结果">(III)  关键实验结果<a class="heading-anchor" href="#iii--关键实验结果" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
 <p>完整模态性能（Table 1）
-<img src="https://i.ibb.co/ymRKFSjB/20260817171537.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
+<img src="https://i.ibb.co/n831zn8L/20260818112718.png" alt="" class="zoomable" loading="lazy" decoding="async"></p>
 <p><strong>3D 检测</strong>：MetaBEV-T 全模态 mAP 68.0 / NDS 71.5（BEVFusion 68.5/71.4，基本持平）。使用 CenterPoint 头的 MetaBEV-C 在 camera-only 下为 60.4 NDS。</p>
 <p><strong>BEV 地图分割（论文当时的关键 SOTA）</strong>：</p>
 
@@ -1698,7 +1698,7 @@ b_{m,q},p_q,B_m
       }
     });
   })();
-</script>  <nav class="article-post-navigation" aria-label="上一篇与下一篇文章" data-astro-cid-nnxgeytw><span class="article-post-navigation-side" data-astro-cid-nnxgeytw></span><span class="article-post-navigation-side article-post-navigation-side-next" data-astro-cid-nnxgeytw><a href="/blog/paper-reading-arxiv-2205-14951" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-next" aria-label="下一篇：论文阅读：Benchmarking the Robustness of LiDAR-Camera Fusion for 3D Object Detection" data-astro-cid-nnxgeytw><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Next</small><strong data-astro-cid-nnxgeytw>论文阅读：Benchmarking the Robustness of LiDAR-Camera Fusion for 3D Object Detection</strong></span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg></a></span></nav> <section id="comments" class="article-comments" aria-labelledby="article-comments-title" data-astro-cid-qdzwzgpn><div class="article-comments-heading" data-astro-cid-qdzwzgpn><h2 id="article-comments-title" data-astro-cid-qdzwzgpn>COMMENTS</h2><span aria-hidden="true" data-astro-cid-qdzwzgpn></span></div><div class="article-giscus-host" data-giscus-host data-repo="Ning0713/Ning0713.github.io" data-repo-id="R_kgDOSLrCWw" data-category="General" data-category-id="DIC_kwDOSLrCW84DC6T6" data-mapping="pathname" data-lang="zh-CN" data-astro-cid-qdzwzgpn><p class="article-comments-loading" data-astro-cid-qdzwzgpn>评论区加载中...</p></div></section><script>
+</script>  <nav class="article-post-navigation" aria-label="上一篇与下一篇文章" data-astro-cid-nnxgeytw><span class="article-post-navigation-side" data-astro-cid-nnxgeytw></span><span class="article-post-navigation-side article-post-navigation-side-next" data-astro-cid-nnxgeytw><a href="/blog/paper-reading-arxiv-2205-14951" data-astro-prefetch class="article-post-navigation-link article-post-navigation-link-next" aria-label="下一篇：论文阅读--Benchmarking the Robustness of LiDAR-Camera Fusion for 3D Object Detection" data-astro-cid-nnxgeytw><span data-astro-cid-nnxgeytw><small data-astro-cid-nnxgeytw>Next</small><strong data-astro-cid-nnxgeytw>论文阅读--Benchmarking the Robustness of LiDAR-Camera Fusion for 3D Object Detection</strong></span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" data-astro-cid-nnxgeytw><line x1="5" y1="12" x2="19" y2="12" data-astro-cid-nnxgeytw></line><polyline points="12 5 19 12 12 19" data-astro-cid-nnxgeytw></polyline></svg></a></span></nav> <section id="comments" class="article-comments" aria-labelledby="article-comments-title" data-astro-cid-qdzwzgpn><div class="article-comments-heading" data-astro-cid-qdzwzgpn><h2 id="article-comments-title" data-astro-cid-qdzwzgpn>COMMENTS</h2><span aria-hidden="true" data-astro-cid-qdzwzgpn></span></div><div class="article-giscus-host" data-giscus-host data-repo="Ning0713/Ning0713.github.io" data-repo-id="R_kgDOSLrCWw" data-category="General" data-category-id="DIC_kwDOSLrCW84DC6T6" data-mapping="pathname" data-lang="zh-CN" data-astro-cid-qdzwzgpn><p class="article-comments-loading" data-astro-cid-qdzwzgpn>评论区加载中...</p></div></section><script>
     (() => {
       if (!window.__ningGiscusCommentCountListener) {
         window.__ningGiscusCommentCountListener = true;
