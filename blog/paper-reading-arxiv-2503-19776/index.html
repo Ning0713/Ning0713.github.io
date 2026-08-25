@@ -1173,7 +1173,7 @@ e^{-1.2} &#x26; e^{2.4} &#x26; e^{0.3}
 
 
 <table><thead><tr><th>配置</th><th align="right">Clean mAP/NDS</th><th align="right">鲁棒性比例 R mAP/NDS</th></tr></thead><tbody><tr><td>ME + AQR（全局注意力，无 LAM）</td><td align="right">71.0/73.6</td><td align="right">74.1/83.2</td></tr><tr><td>ME + AQR + LAM</td><td align="right">71.2/73.6</td><td align="right">80.5/86.2</td></tr></tbody></table>
-<p><img src="https://i.ibb.co/B2YBdzPc/20260824191258.png" alt="Local Attention Mask 对 MoME 鲁棒性的影响" class="zoomable" loading="lazy" decoding="async"></p>
+<p><img src="https://i.ibb.co/bjgHx2c6/20260826011113.png" alt="Local Attention Mask 对 MoME 鲁棒性的影响" class="zoomable" loading="lazy" decoding="async"></p>
 <p>加入 LAM 后，Clean 性能基本不变，而 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span> 的 mAP/NDS 分别提高 6.4/3.0 个百分点，说明提升主要来自故障场景下更合适的局部路由。</p>
 <p>补充材料进一步比较 AQR 内部的特征提取方法。在 Limited FOV 场景中：</p>
 
