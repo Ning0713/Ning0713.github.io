@@ -811,7 +811,7 @@ Hero Image
   </p>
   <div class="paper-overview-content">
     <p class="paper-overview-image-wrap">
-      <img class="paper-overview-image zoomable" src="https://i.ibb.co/FL7zxkT7/20260824194814.png" alt="MoME 多模态专家融合架构图" loading="eager" decoding="async">
+      <img class="paper-overview-image zoomable" src="https://i.ibb.co/hQYhtqT/20260902185611.png" alt="MoME 多模态专家融合架构图" loading="eager" decoding="async">
     </p>
     <p>本文提出 MoME（Multi-Modal Expert Fusion），以<strong>三条共享权重的 Camera、LiDAR 与 LiDAR-Camera 专家解码路径</strong>解耦模态依赖，再由<strong>Adaptive Query Router（AQR）</strong>根据 query 附近的局部特征进行硬路由。两阶段训练使用样本级传感器状态标签监督路由，在 nuScenes-R 多种传感器失效和 nuScenes-C 极端天气下提升鲁棒性；完整模型相对 CMT 的<strong>推理延迟仅增加 4ms</strong>。</p>
   </div>
@@ -850,7 +850,7 @@ MetaBEV、UniBEV、CMT、RobBEV 等虽缓解了传感器失效影响，但<stron
 <hr>
 <h1 id="3-方法详解">3. 方法详解<a class="heading-anchor" href="#3-方法详解" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h1>
 <h2 id="31-整体架构">3.1 整体架构<a class="heading-anchor" href="#31-整体架构" aria-label="跳转到此标题" data-pagefind-ignore="">#</a></h2>
-<p><img src="https://i.ibb.co/FL7zxkT7/20260824194814.png" alt="MoME 三条模态专家解码路径的整体架构" class="zoomable" loading="lazy" decoding="async"></p>
+<p><img src="https://i.ibb.co/hQYhtqT/20260902185611.png" alt="MoME 三条模态专家解码路径的整体架构" class="zoomable" loading="lazy" decoding="async"></p>
 <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>LiDAR Points Pl ──VoxelNet──▶ 体素化+3D稀疏卷积 ──投影到BEV+2D卷积──▶ LiDAR BEV 特征 Fl</span></span>
 <span class="line"><span>Multi-view Images ──VoVNet──▶ 2D多视角相机特征 Fc</span></span>
 <span class="line"><span>        ↓ Fl, Fc 展平拼接</span></span>
@@ -1303,7 +1303,7 @@ e^{-1.2} &#x26; e^{2.4} &#x26; e^{0.3}
 <li>雨天：MoME 72.2 mAP / 74.8 NDS（CMT 70.5/73.7）。</li>
 <li>夜间：MoME 43.0 mAP / 46.6 NDS（与 CMT 持平略优）。</li>
 </ul>
-<p><img src="https://i.ibb.co/jPhs7rxZ/20260824192000.png" alt="nuScenes 验证集雨天与夜间场景的性能对比" class="zoomable" loading="lazy" decoding="async"></p>
+<p><img src="https://i.ibb.co/wx1z7Tm/20260902185958.png" alt="nuScenes 验证集雨天与夜间场景的性能对比" class="zoomable" loading="lazy" decoding="async"></p>
 <p><strong>nuScenes-C 雾/雪/阳光（Table 3）</strong>：</p>
 <ul>
 <li>MoME 在雾/雪/阳光下分别比 CMT +1.6/+0.9/+1.6 mAP（雾 67.9、雪 63.5、阳光 65.2）。</li>
